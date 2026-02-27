@@ -216,7 +216,7 @@ comparisons, and exam caveats.
 Topics covered:
 - Domain 1 (25–30%): Identity, Governance & Monitoring
 - Domain 2 (25–30%): Data Storage Solutions
-- Domain 3 (10–15%): Business Continuity
+- Domain 3 (15–20%): Business Continuity
 - Domain 4 (30–35%): Infrastructure Solutions (compute, networking, migrations)
 - Azure Well-Architected Framework & Cloud Adoption Framework
 - Quick Reference Cheatsheet with SLA tables and exam traps
