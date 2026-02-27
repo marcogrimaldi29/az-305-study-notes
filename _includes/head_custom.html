@@ -1,12 +1,12 @@
 <!-- _includes/head_custom.html -->
 <!-- Injected into every page <head> by Just the Docs -->
 
-<!-- ── Open Graph / Social sharing meta ──────────────── -->
+<!-- ── Open Graph / Social sharing meta ─────────────────── -->
 <meta property="og:site_name" content="{{ site.title }}">
 {% if page.title %}
-  <meta property="og:title"   content="{{ page.title }} | {{ site.title }}">
+  <meta property="og:title" content="{{ page.title }} | {{ site.title }}">
 {% else %}
-  <meta property="og:title"   content="{{ site.title }}">
+  <meta property="og:title" content="{{ site.title }}">
 {% endif %}
 {% if page.description %}
   <meta property="og:description" content="{{ page.description }}">
@@ -14,81 +14,163 @@
   <meta property="og:description" content="{{ site.description }}">
 {% endif %}
 <meta property="og:type" content="website">
-{% if page.url %}
-  <meta property="og:url" content="{{ site.url }}{{ site.baseurl }}{{ page.url }}">
-{% endif %}
-
-<!-- Twitter Card -->
 <meta name="twitter:card"        content="summary">
 <meta name="twitter:title"       content="{{ page.title | default: site.title }}">
 <meta name="twitter:description" content="{{ page.description | default: site.description }}">
-
-<!-- Canonical back-link to personal site -->
 <link rel="author" href="{{ site.personal_site_url }}">
 
-<!-- ── Mermaid.js initialisation ─────────────────────── -->
-<!-- Just the Docs loads mermaid.js when mermaid: true is set in front matter.
-     This block adds a custom init config for better rendering in dark mode. -->
-{% if page.mermaid %}
-<script>
-  // Run after Mermaid is loaded by Just the Docs
-  document.addEventListener("DOMContentLoaded", function () {
-    if (typeof mermaid !== "undefined") {
-      mermaid.initialize({
-        startOnLoad:   true,
-        theme:         "dark",
-        themeVariables: {
-          primaryColor:        "#1a73e8",
-          primaryTextColor:    "#e8eaed",
-          primaryBorderColor:  "#5f6368",
-          lineColor:           "#8ab4f8",
-          secondaryColor:      "#202124",
-          tertiaryColor:       "#3c4043",
-          background:          "#202124",
-          mainBkg:             "#2d2f31",
-          nodeBorder:          "#5f6368",
-          clusterBkg:          "#292b2d",
-          titleColor:          "#e8eaed",
-          edgeLabelBackground: "#3c4043",
-          fontFamily:          "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
-        },
-        flowchart: {
-          curve:           "basis",
-          htmlLabels:      true,
-          diagramPadding:  16
-        },
-        pie: {
-          textPosition: 0.75
-        }
-      });
-    }
-  });
-</script>
-{% endif %}
-
-<!-- ── Subtle branding footer badge ──────────────────── -->
+<!-- ── Study-optimised custom styles ────────────────────── -->
 <style>
-  /* Author badge shown at bottom of sidebar */
-  .site-footer {
-    border-top: 1px solid var(--border-color);
-    padding-top: 0.75rem;
+  /* ── Exam Caveat callout ─────────────────────────────── */
+  blockquote strong:first-child,
+  blockquote p:first-child strong:first-child {
+    display: inline-block;
   }
-  /* Exam warning callout boxes */
-  .highlight-box {
-    border-left: 4px solid #f4b400;
-    background: rgba(244, 180, 0, 0.07);
-    padding: 0.5rem 1rem;
-    margin: 1rem 0;
-    border-radius: 0 4px 4px 0;
+
+  /* Coloured left-border callout shorthand via blockquote */
+  .warning-box {
+    border-left: 4px solid #f28b82;
+    background:  rgba(242, 139, 130, 0.08);
+    padding:     0.6rem 1rem;
+    margin:      1rem 0;
+    border-radius: 0 6px 6px 0;
   }
-  /* Responsive table overflow */
-  table {
-    display: block;
+
+  /* ── Tables ─────────────────────────────────────────── */
+  /* Make all tables scroll horizontally on small screens  */
+  .main-content table {
+    display:   block;
+    width:     100%;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .main-content table th {
+    background: var(--sidebar-color);
+    position:   sticky;
+    top:        0;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    padding: 0.55rem 0.8rem;
     white-space: nowrap;
   }
-  table td, table th {
-    white-space: normal;
-    min-width: 90px;
+
+  .main-content table td {
+    padding:    0.45rem 0.8rem;
+    min-width:  80px;
+    line-height: 1.4;
+  }
+
+  /* Zebra striping */
+  .main-content table tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .main-content table tbody tr:hover {
+    background: rgba(26, 115, 232, 0.08);
+  }
+
+  /* ── Mermaid diagrams ────────────────────────────────── */
+  .main-content .mermaid {
+    margin:        1.5rem auto;
+    padding:       1rem;
+    background:    rgba(30, 30, 30, 0.5);
+    border:        1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    overflow-x:    auto;
+    text-align:    center;
+  }
+
+  /* ── Code blocks ─────────────────────────────────────── */
+  .main-content .highlight {
+    border-radius: 6px;
+    font-size:     0.82rem;
+  }
+
+  .main-content code {
+    font-size: 0.84em;
+    padding:   0.15em 0.4em;
+    border-radius: 4px;
+  }
+
+  /* ── SLA badges ─────────────────────────────────────── */
+  /* Bold SLA percentages stand out in tables */
+  .main-content table td strong {
+    color: #8ab4f8;
+  }
+
+  /* ── Domain weight badges in nav ─────────────────────── */
+  .nav-list-item .nav-list-link::after {
+    font-size: 0.72em;
+    opacity:   0.6;
+  }
+
+  /* ── Headings spacing ───────────────────────────────── */
+  .main-content h2 {
+    margin-top:    2rem;
+    padding-top:   0.5rem;
+    border-top:    1px solid rgba(255,255,255,0.07);
+  }
+
+  .main-content h3 {
+    margin-top: 1.5rem;
+    color:      #8ab4f8;
+  }
+
+  /* ── Scenario quick-reference tables ────────────────── */
+  /* Give the last col (answer) a slightly different weight */
+  .main-content table td:last-child {
+    font-weight: 500;
+  }
+
+  /* ── Exam-caveats blockquote styling ─────────────────── */
+  .main-content blockquote {
+    border-left:  4px solid #f4b400;
+    background:   rgba(244, 180, 0, 0.06);
+    padding:      0.6rem 1rem;
+    border-radius: 0 6px 6px 0;
+    font-size:    0.92rem;
+  }
+
+  .main-content blockquote p {
+    margin: 0;
+  }
+
+  /* ── Page breadcrumb / domain weight tag ─────────────── */
+  .domain-badge {
+    display:        inline-block;
+    background:     #1a73e8;
+    color:          #fff;
+    font-size:      0.75rem;
+    font-weight:    700;
+    padding:        0.2rem 0.6rem;
+    border-radius:  20px;
+    margin-left:    0.5rem;
+    vertical-align: middle;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── Print styles ────────────────────────────────────── */
+  @media print {
+    .side-bar, .site-header, .site-footer,
+    .main-header, #back-to-top { display: none !important; }
+    .main-content-wrap { max-width: 100% !important; }
+    .main-content { font-size: 10pt; }
+    .mermaid svg  { max-width: 100%; }
+    table         { font-size: 8pt; }
+  }
+
+  /* ── Responsive tweaks ───────────────────────────────── */
+  @media (max-width: 800px) {
+    .main-content table {
+      font-size: 0.78rem;
+    }
+    .main-content table td,
+    .main-content table th {
+      padding: 0.35rem 0.5rem;
+      min-width: 60px;
+    }
   }
 </style>

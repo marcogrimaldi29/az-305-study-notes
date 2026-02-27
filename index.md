@@ -10,7 +10,7 @@ mermaid: true
 # 📘 AZ-305 Study Notes
 {: .no_toc }
 
-**Microsoft Azure Solutions Architect Expert — EU Edition**
+**Microsoft Azure Solutions Architect Expert**
 {: .fs-5 .fw-300 }
 
 [Start Studying →](#-exam-overview){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }

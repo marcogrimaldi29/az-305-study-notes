@@ -47,16 +47,33 @@ mindmap
 ### Key Metrics — Definitions
 
 ```mermaid
-timeline
-    title RPO and RTO Visualised
-    section Incident
-        Failure occurs : Data loss begins
-    section RPO Window
-        RPO : Maximum acceptable data loss (time)
-        Last backup/replica : Oldest data you can tolerate losing
-    section Outage Window
-        RTO : Maximum acceptable downtime
-        Recovery : System restored and operational
+graph LR
+    subgraph BEFORE["⏪ Before Incident"]
+        BACKUP["💾 Last backup\nor replica sync"]
+    end
+
+    subgraph INCIDENT["💥 Incident Occurs"]
+        FAIL["❌ Service\nFails"]
+    end
+
+    subgraph WINDOW_RPO["📊 RPO Window"]
+        RPO_NOTE["Data written between\nlast backup and failure\n= LOST DATA\n⟵ RPO measures this gap ⟶"]
+    end
+
+    subgraph RECOVERY["🔧 Recovery Phase"]
+        DETECT["Detect\nincident"]
+        RESTORE["Restore\nservice"]
+        ONLINE["✅ Service\nback online"]
+    end
+
+    subgraph WINDOW_RTO["📊 RTO Window"]
+        RTO_NOTE["Time from failure\nto full recovery\n= DOWNTIME\n⟵ RTO measures this gap ⟶"]
+    end
+
+    BACKUP -->|"time passes"| FAIL
+    FAIL --> DETECT --> RESTORE --> ONLINE
+    BACKUP -.->|"RPO gap"| RPO_NOTE
+    FAIL -.->|"RTO gap"| RTO_NOTE
 ```
 
 | Metric | Full Name | Question it Answers | Lower = ? |

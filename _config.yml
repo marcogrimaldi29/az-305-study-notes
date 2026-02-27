@@ -1,9 +1,12 @@
 ##############################################################
 # AZ-305 Study Notes — GitHub Pages Configuration
-# Theme: Just the Docs (https://just-the-docs.com)
+# Theme: Just the Docs (direct gem, NOT remote_theme)
 ##############################################################
 
-remote_theme: just-the-docs/just-the-docs@v0.10.0
+# FIX: Use `theme` (resolved from Gemfile) instead of `remote_theme`.
+# remote_theme requires the jekyll-remote-theme plugin which was missing,
+# causing Jekyll to skip theme loading entirely → no CSS → bare HTML.
+theme: just-the-docs
 
 # ── Site identity ─────────────────────────────────────────
 title: "AZ-305 Study Notes"
@@ -15,10 +18,7 @@ description: >
 author: "Marco Grimaldi"
 tagline: "Azure Solutions Architect Expert — Exam Prep"
 
-# ── URLs (update YOUR_GITHUB_USERNAME before deploying) ───
-# Example: if repo is github.com/marco/az-305-study-notes
-#   url:     "https://marco.github.io"
-#   baseurl: "/az-305-study-notes"
+# ── URLs ──────────────────────────────────────────────────
 url:     "https://marcogrimaldi29.com"
 baseurl: "/az-305-study-notes"
 
@@ -27,7 +27,6 @@ personal_site_url:   "https://marcogrimaldi29.com"
 personal_site_label: "marcogrimaldi29.com"
 
 # ── GitHub repo (for "Edit this page" links) ──────────────
-# Update YOUR_GITHUB_USERNAME
 gh_edit_link:         true
 gh_edit_link_text:    "Edit this page on GitHub ✏️"
 gh_edit_repository:   "https://github.com/marcogrimaldi29/az-305-study-notes"
@@ -35,29 +34,28 @@ gh_edit_branch:       "main"
 gh_edit_view_mode:    "edit"
 
 # ── Just the Docs theme settings ──────────────────────────
-color_scheme: dark   # options: light | dark
+color_scheme: dark
 
-# Logo (optional — place a file at assets/images/logo.png)
-logo: "/assets/images/logo-sunrise-domain.jpg"
+logo: "/az-305-study-notes/assets/images/logo-sunrise-domain.jpg"
 
 # Search
 search_enabled: true
 search:
-  heading_level:       2
-  previews:            3
+  heading_level:        2
+  previews:             3
   preview_words_before: 5
   preview_words_after:  10
-  rel_url:             true
-  button:              false
+  rel_url:              true
+  button:               false
 
 # Navigation
-nav_sort: order           # sort by nav_order in front matter
+nav_sort: order
 nav_external_links:
   - title: "🏠 marcogrimaldi29.com"
     url:   "https://marcogrimaldi29.com"
   - title: "📄 Official AZ-305 Exam"
     url:   "https://learn.microsoft.com/en-us/credentials/certifications/exams/az-305/"
-  - title: "📚 Microsoft's AZ-305 Certification Learning Paths"
+  - title: "📚 Microsoft Learn Path"
     url:   "https://learn.microsoft.com/en-us/credentials/certifications/azure-solutions-architect/"
 
 # Back to top button
@@ -68,7 +66,7 @@ back_to_top_text: "Back to top ↑"
 aux_links:
   "🏠 My Blog":
     - "https://marcogrimaldi29.com"
-  "📋 AZ-305 Exam Page":
+  "📋 AZ-305 Exam":
     - "https://learn.microsoft.com/en-us/credentials/certifications/exams/az-305/"
 
 aux_links_new_tab: true
@@ -80,12 +78,13 @@ footer_content: >
   <a href="https://marcogrimaldi29.com" target="_blank">marcogrimaldi29.com</a>
   &nbsp;·&nbsp;
   Based on <a href="https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305" target="_blank">Microsoft Learn AZ-305 Study Guide</a>
-  (Oct 2024 revision).
-  Not affiliated with or endorsed by Microsoft.
+  (Oct 2024). Not affiliated with Microsoft.
 
 # ── Mermaid diagram support ───────────────────────────────
+# Just the Docs handles Mermaid loading automatically when `mermaid: true`
+# is set in a page's front matter. Do NOT also call mermaid.initialize()
+# in head_custom.html — that causes a double-init race that breaks diagrams.
 mermaid:
-  # Uses mermaid.js CDN — no local installation needed
   version: "10.9.0"
 
 # ── Callout boxes ─────────────────────────────────────────
@@ -111,10 +110,11 @@ last_edit_timestamp:  true
 last_edit_time_format: "%d %b %Y"
 
 # ── Plugins ───────────────────────────────────────────────
+# FIX: Removed jekyll-github-metadata — it hits the GitHub API during CI
+# without a token, causing build timeouts and failures.
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
-  - jekyll-github-metadata
 
 # ── Jekyll build settings ─────────────────────────────────
 markdown:     kramdown
@@ -140,3 +140,4 @@ exclude:
   - node_modules
   - SETUP.md
   - "*.sh"
+  - ".git"
