@@ -14,12 +14,12 @@ mermaid: true
 {: .fs-5 .fw-300 }
 
 [Start Studying →](#-exam-overview){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
-[View on GitHub](https://github.com/marcogrimaldi29/az-305-study-notes){: .btn .fs-5 .mb-4 .mb-md-0 }
+[View on GitHub](https://github.com/marcogrimaldi29/az-305-study-notes){: .btn .fs-5 .mb-4 .mb-md-0 target="_blank" }
 
 ---
 
-> 🏠 These notes are maintained by **[Marco Grimaldi](https://www.linkedin.com/in/marco-grimaldi29/)** — Cloud Consultant & Language Trainer.
-> Find more certification guides, study tips, and tech content at **[marcogrimaldi29.com](https://marcogrimaldi29.com)**.
+> 🏠 These notes are maintained by **[Marco Grimaldi](https://www.linkedin.com/in/marco-grimaldi29/){:target="_blank"}** and based on the official Microsoft documentation.
+> Find more certification guides, study tips, and tech content at **[marcogrimaldi29.com](https://marcogrimaldi29.com){:target="_blank"}**.
 
 ---
 
@@ -41,9 +41,9 @@ mermaid: true
 ```mermaid
 pie title AZ-305 — Official Exam Domain Weights
     "Design Infrastructure Solutions (30–35%)" : 32
-    "Design Identity, Governance & Monitoring (25–30%)" : 27
-    "Design Data Storage Solutions (25–30%)" : 22
-    "Design Business Continuity Solutions (15–20%)" : 17
+    "Design Identity, Governance & Monitoring (25–30%)" : 25
+    "Design Data Storage Solutions (25–30%)" : 25
+    "Design Business Continuity Solutions (15–20%)" : 18
 ```
 
 | # | Domain | Weight | Key Focus Areas |
@@ -136,23 +136,23 @@ flowchart LR
 
 | Resource | Link |
 |----------|------|
-| 🎓 Microsoft Learn Path | [AZ-305 Prerequisites](https://learn.microsoft.com/en-us/training/paths/microsoft-azure-architect-design-prerequisites/) |
-| 📋 Skills Measured Guide | [Official Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305) |
-| 🧪 Free Practice Assessment | [Practice Test](https://learn.microsoft.com/en-us/credentials/certifications/exams/az-305/practice/assessment?assessment-type=practice&assessmentId=15) |
-| 🏗️ Architecture Center | [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/) |
-| 💶 EU Exam Booking | [Pearson VUE Microsoft](https://home.pearsonvue.com/microsoft) |
+| 🎓 Microsoft Certification Path | [AZ-305 Learning Paths](https://learn.microsoft.com/en-us/credentials/certifications/azure-solutions-architect/){:target="_blank"} |
+| 📋 Skills Measured Guide | [Official Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305){:target="_blank"} |
+| 🧪 Free Practice Assessment | [Practice Test](https://learn.microsoft.com/en-us/credentials/certifications/exams/az-305/practice/assessment?assessment-type=practice&assessmentId=15){:target="_blank"} |
+| 🏗️ Architecture Center | [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/){:target="_blank"} |
+| 💶 EU Exam Booking | [Pearson VUE Microsoft](https://home.pearsonvue.com/microsoft){:target="_blank"} |
 
 ---
 
 ## ✍️ About the Author
 
-These notes are maintained by **Marco Grimaldi**, an IT professional and certification enthusiast writing about Azure, cloud architecture, and language certifications.
+These notes are maintained by **[Marco Grimaldi](https://www.linkedin.com/in/marco-grimaldi29/){:target="_blank"}**, an IT professional and lifelong learning enthusiast writing about Azure, Cloud, and Certifications.
 
-📍 **Find more content at [marcogrimaldi29.com](https://marcogrimaldi29.com)**
+📍 **Find more content at [marcogrimaldi29.com](https://marcogrimaldi29.com){:target="_blank"}**
 
 > Sharing study notes, certification tips, and tech insights for the IT community.
 
 ---
 
-*Content based on the Microsoft Learn AZ-305 path and official study guide (October 2024 revision).
+*Content based on the Microsoft Learn AZ-305 path and official study guide (October 2024 revision as per the official Microsoft's [AZ-305 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305){:target="_blank"}).
 Not affiliated with or endorsed by Microsoft Corporation.*

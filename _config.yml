@@ -55,7 +55,7 @@ nav_external_links:
     url:   "https://marcogrimaldi29.com"
   - title: "📄 Official AZ-305 Exam"
     url:   "https://learn.microsoft.com/en-us/credentials/certifications/exams/az-305/"
-  - title: "📚 Microsoft Learn Path"
+  - title: "📚 Microsoft AZ-305 Certification Learning Paths"
     url:   "https://learn.microsoft.com/en-us/credentials/certifications/azure-solutions-architect/"
 
 # Back to top button
@@ -77,8 +77,8 @@ footer_content: >
   &nbsp;|&nbsp;
   <a href="https://marcogrimaldi29.com" target="_blank">marcogrimaldi29.com</a>
   &nbsp;·&nbsp;
-  Based on <a href="https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305" target="_blank">Microsoft Learn AZ-305 Study Guide</a>
-  (Oct 2024). Not affiliated with Microsoft.
+  Based on <a href="https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305" target="_blank">Microsoft AZ-305 Study Guide</a>
+  Not affiliated with or endorsed by Microsoft Corporation.
 
 # ── Mermaid diagram support ───────────────────────────────
 # Just the Docs handles Mermaid loading automatically when `mermaid: true`
