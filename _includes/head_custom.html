@@ -1,0 +1,94 @@
+<!-- _includes/head_custom.html -->
+<!-- Injected into every page <head> by Just the Docs -->
+
+<!-- ── Open Graph / Social sharing meta ──────────────── -->
+<meta property="og:site_name" content="{{ site.title }}">
+{% if page.title %}
+  <meta property="og:title"   content="{{ page.title }} | {{ site.title }}">
+{% else %}
+  <meta property="og:title"   content="{{ site.title }}">
+{% endif %}
+{% if page.description %}
+  <meta property="og:description" content="{{ page.description }}">
+{% else %}
+  <meta property="og:description" content="{{ site.description }}">
+{% endif %}
+<meta property="og:type" content="website">
+{% if page.url %}
+  <meta property="og:url" content="{{ site.url }}{{ site.baseurl }}{{ page.url }}">
+{% endif %}
+
+<!-- Twitter Card -->
+<meta name="twitter:card"        content="summary">
+<meta name="twitter:title"       content="{{ page.title | default: site.title }}">
+<meta name="twitter:description" content="{{ page.description | default: site.description }}">
+
+<!-- Canonical back-link to personal site -->
+<link rel="author" href="{{ site.personal_site_url }}">
+
+<!-- ── Mermaid.js initialisation ─────────────────────── -->
+<!-- Just the Docs loads mermaid.js when mermaid: true is set in front matter.
+     This block adds a custom init config for better rendering in dark mode. -->
+{% if page.mermaid %}
+<script>
+  // Run after Mermaid is loaded by Just the Docs
+  document.addEventListener("DOMContentLoaded", function () {
+    if (typeof mermaid !== "undefined") {
+      mermaid.initialize({
+        startOnLoad:   true,
+        theme:         "dark",
+        themeVariables: {
+          primaryColor:        "#1a73e8",
+          primaryTextColor:    "#e8eaed",
+          primaryBorderColor:  "#5f6368",
+          lineColor:           "#8ab4f8",
+          secondaryColor:      "#202124",
+          tertiaryColor:       "#3c4043",
+          background:          "#202124",
+          mainBkg:             "#2d2f31",
+          nodeBorder:          "#5f6368",
+          clusterBkg:          "#292b2d",
+          titleColor:          "#e8eaed",
+          edgeLabelBackground: "#3c4043",
+          fontFamily:          "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+        },
+        flowchart: {
+          curve:           "basis",
+          htmlLabels:      true,
+          diagramPadding:  16
+        },
+        pie: {
+          textPosition: 0.75
+        }
+      });
+    }
+  });
+</script>
+{% endif %}
+
+<!-- ── Subtle branding footer badge ──────────────────── -->
+<style>
+  /* Author badge shown at bottom of sidebar */
+  .site-footer {
+    border-top: 1px solid var(--border-color);
+    padding-top: 0.75rem;
+  }
+  /* Exam warning callout boxes */
+  .highlight-box {
+    border-left: 4px solid #f4b400;
+    background: rgba(244, 180, 0, 0.07);
+    padding: 0.5rem 1rem;
+    margin: 1rem 0;
+    border-radius: 0 4px 4px 0;
+  }
+  /* Responsive table overflow */
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  table td, table th {
+    white-space: normal;
+    min-width: 90px;
+  }
+</style>
