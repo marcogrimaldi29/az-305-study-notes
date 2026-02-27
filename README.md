@@ -2,13 +2,13 @@
 ### Study Notes Repository 
 
 [![Deploy to GitHub Pages](https://github.com/marcogrimaldi29/az-305-study-notes/actions/workflows/pages.yml/badge.svg)](https://github.com/marcogrimaldi29/az-305-study-notes/actions/workflows/pages.yml)
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen?logo=github)](https://marcogrimaldi29.github.io/az-305-study-notes/)
+[![GitHub](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen?logo=github)](https://github.com/marcogrimaldi29/az-305-study-notes)
 [![Blog](https://img.shields.io/badge/Blog-marcogrimaldi29.com-blue?logo=rss)](https://marcogrimaldi29.com)
 
 > 🎯 **Goal:** Earn the **Microsoft Certified: Azure Solutions Architect Expert** badge
-> 📅 **Notes Version:** 2025 | 🌍 **Region:** European Union
-> 🌐 **Published site:** [YOUR_GITHUB_USERNAME.github.io/az-305-study-notes](https://YOUR_GITHUB_USERNAME.github.io/az-305-study-notes/)
-> ✍️ **Author:** [Marco Grimaldi — marcogrimaldi29.com](https://marcogrimaldi29.com)
+> 📅 **Notes Version:** 2026
+> 🌐 **Published site:** [marco.github.io/az-305-study-notes](https://marcogrimaldi29.com/az-305-study-notes/)
+> ✍️ **Author:** [Marco Grimaldi — marcogrimaldi29.com](https://www.linkedin.com/in/marco-grimaldi29/)
 
 ---
 
@@ -19,13 +19,10 @@
 | 🏅 Certification | Microsoft Certified: Azure Solutions Architect Expert |
 | 📝 Passing Score | **700 / 1000** |
 | 💶 Exam Price | **~€126 EUR** *(varies by EU country & Pearson VUE location; VAT may apply)* |
-| ⏱️ Duration | ~150 minutes |
+| ⏱️ Duration | **~120 minutes** |
 | ❓ Question Types | MCQ, multi-select, drag-and-drop, case studies |
-| 🌐 Languages | EN, DE, FR, ES, IT, PT, JA, KO, ZH, AR, RU, ID |
-| 🔁 Renewal | Annually via free online assessment on Microsoft Learn |
-| 🛡️ Prerequisite | AZ-104: Azure Administrator Associate *(required for Expert badge)* |
-
-> 💶 **EU Pricing Note:** The ~€126 EUR is approximate. Check [Pearson VUE](https://home.pearsonvue.com/microsoft) for the exact price in your country. Prices differ across EU member states and VAT treatment varies. Microsoft Learning Partner vouchers often include discounts.
+| 🔁 Renewal | **Annual** via free online assessment on Microsoft Learn |
+| 🛡️ Prerequisite | **AZ-104: Azure Administrator Associate** *(required for Expert badge)* |
 
 ---
 
@@ -88,7 +85,7 @@ az-305-study-notes/
 
 | Resource | Link |
 |----------|------|
-| 🎓 Prerequisites Learning Path | [Microsoft Learn](https://learn.microsoft.com/en-us/training/paths/microsoft-azure-architect-design-prerequisites/) |
+| 📚 Microsoft's AZ-305 Certification Learning Paths | [Certification Learning Paths]("https://learn.microsoft.com/en-us/credentials/certifications/azure-solutions-architect/) |
 | 📄 Official Exam Page | [AZ-305 Exam](https://learn.microsoft.com/en-us/credentials/certifications/exams/az-305/) |
 | 📋 Skills Measured / Study Guide | [Official Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305) |
 | 🧪 Free Practice Assessment | [Practice Assessment](https://learn.microsoft.com/en-us/credentials/certifications/exams/az-305/practice/assessment?assessment-type=practice&assessmentId=15) |
@@ -151,7 +148,7 @@ gantt
 
 These notes are published as a searchable website via **GitHub Pages**:
 
-👉 **[YOUR_GITHUB_USERNAME.github.io/az-305-study-notes](https://YOUR_GITHUB_USERNAME.github.io/az-305-study-notes/)**
+👉 **[marcogrimaldi29/az-305-study-notes](https://marcogrimaldi29.com/az-305-study-notes/)**
 
 The site includes full-text search, Mermaid diagram rendering, and mobile-friendly navigation.
 See [`SETUP.md`](./SETUP.md) for step-by-step deployment instructions.
@@ -160,7 +157,7 @@ See [`SETUP.md`](./SETUP.md) for step-by-step deployment instructions.
 
 ## ✍️ Author
 
-Maintained by **[Marco Grimaldi](https://marcogrimaldi29.com)** — IT professional and certification blogger.
+Maintained by **[Marco Grimaldi](https://www.linkedin.com/in/marco-grimaldi29/)** — Cloud Consultant & Language Trainer.
 
 🏠 Find more certification guides, study tips, and tech content at **[marcogrimaldi29.com](https://marcogrimaldi29.com)**
 
