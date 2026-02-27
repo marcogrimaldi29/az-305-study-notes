@@ -345,4 +345,4 @@ graph TD
 
 ---
 
-*← [02 - Data Storage Solutions](./02-data-storage-solutions/) | [04 - Infrastructure Solutions →](./04-infrastructure-solutions/)*
+*← [02 - Data Storage Solutions](/az-305-study-notes/02-data-storage-solutions/) | [04 - Infrastructure Solutions →](/az-305-study-notes/04-infrastructure-solutions/)*
