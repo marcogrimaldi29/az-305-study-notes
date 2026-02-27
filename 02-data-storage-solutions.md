@@ -9,7 +9,7 @@ mermaid: true
 
 # 02 — Design Data Storage Solutions
 > **Official Exam Weight: 25–30%**
-> 📁 [← Back to Home](./)
+> 📁 [← Back to Home](/az-305-study-notes/)
 
 ---
 
@@ -351,4 +351,4 @@ graph TD
 
 ---
 
-*← [01 - Identity, Governance & Monitoring](/az-305-study-notes/01-identity-governance-monitoring/) | [03 - Business Continuity →](/az-305-study-notes/03-business-continuity/)*
+*[← 01 - Identity, Governance & Monitoring](/az-305-study-notes/01-identity-governance-monitoring/) | [03 - Business Continuity →](/az-305-study-notes/03-business-continuity/)*

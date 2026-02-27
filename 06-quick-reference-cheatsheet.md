@@ -9,7 +9,7 @@ mermaid: true
 
 # 06 — Quick Reference Cheatsheet
 > Last-minute exam review — key numbers, SLAs, decision tables, and traps
-> 📁 [← Back to Home](./)
+> 📁 [← Back to Home](/az-305-study-notes/)
 
 ---
 
@@ -354,4 +354,4 @@ mindmap
 
 *Good luck — you've got this! 🎯*
 
-*← [05 - Well-Architected Framework](/az-305-study-notes/05-well-architected-framework/) | [Back to Home →](/az-305-study-notes/)*
+*[← 05 - Well-Architected Framework](/az-305-study-notes/05-well-architected-framework/) | [Back to Home →](/az-305-study-notes/)*

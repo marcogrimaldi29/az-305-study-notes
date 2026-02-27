@@ -9,7 +9,7 @@ mermaid: true
 
 # 03 — Design Business Continuity Solutions
 > **Official Exam Weight: 15–20%**
-> 📁 [← Back to Home](./)
+> 📁 [← Back to Home](/az-305-study-notes/)
 
 ---
 
@@ -345,4 +345,4 @@ graph TD
 
 ---
 
-*← [02 - Data Storage Solutions](/az-305-study-notes/02-data-storage-solutions/) | [04 - Infrastructure Solutions →](/az-305-study-notes/04-infrastructure-solutions/)*
+*[← 02 - Data Storage Solutions](/az-305-study-notes/02-data-storage-solutions/) | [04 - Infrastructure Solutions →](/az-305-study-notes/04-infrastructure-solutions/)*

@@ -9,7 +9,7 @@ mermaid: true
 
 # 04 — Design Infrastructure Solutions
 > **Official Exam Weight: 30–35%** — Heaviest Domain
-> 📁 [← Back to Home](./)
+> 📁 [← Back to Home](/az-305-study-notes/)
 
 ---
 
@@ -447,4 +447,4 @@ graph TD
 
 ---
 
-*← [03 - Business Continuity](/az-305-study-notes/03-business-continuity/) | [05 - Well-Architected Framework →](/az-305-study-notes/05-well-architected-framework/)*
+*[← 03 - Business Continuity](/az-305-study-notes/03-business-continuity/) | [05 - Well-Architected Framework →](/az-305-study-notes/05-well-architected-framework/)*
