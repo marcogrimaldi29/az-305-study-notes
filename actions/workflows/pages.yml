@@ -39,6 +39,7 @@ jobs:
 
       - name: "🔧 Configure GitHub Pages"
         uses: actions/configure-pages@v5
+        id: pages
 
       - name: "🏗️ Build with Jekyll"
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"

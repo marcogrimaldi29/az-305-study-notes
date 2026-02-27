@@ -23,8 +23,8 @@ url:     "https://marcogrimaldi29.com"
 baseurl: "/az-305-study-notes"
 
 # ── Personal website back-link ────────────────────────────
-# personal_site_url:   "https://marcogrimaldi29.com"
-# personal_site_label: "marcogrimaldi29.com"
+personal_site_url:   "https://marcogrimaldi29.com"
+personal_site_label: "marcogrimaldi29.com"
 
 # ── GitHub repo (for "Edit this page" links) ──────────────
 # Update YOUR_GITHUB_USERNAME
