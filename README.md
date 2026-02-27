@@ -31,11 +31,11 @@
 > ⚠️ **Official ranges** from the Microsoft study guide (updated October 2024)
 
 ```mermaid
-pie title AZ-305 Exam Domain Weights (official ranges)
+pie title Exam Domain Weights of the AZ-305 (official ranges)
     "Design Infrastructure Solutions (30–35%)" : 32
-    "Design Identity, Governance & Monitoring (25–30%)" : 27
-    "Design Data Storage Solutions (25–30%)" : 22
-    "Design Business Continuity Solutions (15–20%)" : 17
+    "Design Identity, Governance & Monitoring (25–30%)" : 25
+    "Design Data Storage Solutions (25–30%)" : 25
+    "Design Business Continuity Solutions (15–20%)" : 18
 ```
 
 | # | Domain | Official Weight | Key Services |
