@@ -35,14 +35,14 @@ pie title AZ-305 Exam Domain Weights (official ranges)
     "Design Infrastructure Solutions (30–35%)" : 32
     "Design Identity, Governance & Monitoring (25–30%)" : 27
     "Design Data Storage Solutions (25–30%)" : 22
-    "Design Business Continuity Solutions (10–15%)" : 12
+    "Design Business Continuity Solutions (15–20%)" : 17
 ```
 
 | # | Domain | Official Weight | Key Services |
 |---|--------|----------------|-------------|
 | 1 | Design Identity, Governance & Monitoring | **25–30%** | Entra ID, RBAC, PIM, Azure Policy, Monitor, Sentinel |
 | 2 | Design Data Storage Solutions | **25–30%** | Azure SQL, Cosmos DB, Blob, ADLS Gen2, Synapse |
-| 3 | Design Business Continuity Solutions | **10–15%** | ASR, Azure Backup, Availability Zones, Geo-replication |
+| 3 | Design Business Continuity Solutions | **15–20%** | ASR, Azure Backup, Availability Zones, Geo-replication |
 | 4 | Design Infrastructure Solutions | **30–35%** | VMs, AKS, App Service, VNets, VPN, ExpressRoute |
 
 > 🔑 **Domain 4 = heaviest domain** — allocate ≥35% of total study time here.
@@ -73,7 +73,7 @@ az-305-study-notes/
 ├── 00-azure-prerequisites.md             ← Core Azure architecture fundamentals
 ├── 01-identity-governance-monitoring.md  ← Domain 1 (25–30%)
 ├── 02-data-storage-solutions.md          ← Domain 2 (25–30%)
-├── 03-business-continuity.md             ← Domain 3 (10–15%)
+├── 03-business-continuity.md             ← Domain 3 (15–20%)
 ├── 04-infrastructure-solutions.md        ← Domain 4 (30–35%)
 ├── 05-well-architected-framework.md      ← WAF pillars + Cloud Adoption Framework
 └── 06-quick-reference-cheatsheet.md      ← Last-minute review & exam traps

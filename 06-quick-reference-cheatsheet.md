@@ -29,7 +29,7 @@ pie title AZ-305 Domain Weight Distribution
     "Domain 4: Infrastructure (30–35%)" : 32
     "Domain 1: Identity & Governance (25–30%)" : 27
     "Domain 2: Data Storage (25–30%)" : 22
-    "Domain 3: Business Continuity (10–15%)" : 12
+    "Domain 3: Business Continuity (15–20%)" : 17
 ```
 
 ---
@@ -276,7 +276,7 @@ mindmap
 - [ ] Private Endpoints vs Service Endpoints for storage
 - [ ] Azure Synapse — Dedicated SQL Pool vs Serverless SQL Pool vs Spark
 
-### Domain 3 — Business Continuity (10–15%)
+### Domain 3 — Business Continuity (15–20%)
 - [ ] RPO vs RTO definitions and exam application
 - [ ] Composite SLA calculation (serial = multiply, parallel = 1 - (1-p)^n)
 - [ ] Availability Set vs Availability Zones — protection level and SLA

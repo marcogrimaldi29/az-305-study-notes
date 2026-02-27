@@ -43,14 +43,14 @@ pie title AZ-305 — Official Exam Domain Weights
     "Design Infrastructure Solutions (30–35%)" : 32
     "Design Identity, Governance & Monitoring (25–30%)" : 27
     "Design Data Storage Solutions (25–30%)" : 22
-    "Design Business Continuity Solutions (10–15%)" : 12
+    "Design Business Continuity Solutions (15–20%)" : 17
 ```
 
 | # | Domain | Weight | Key Focus Areas |
 |---|--------|--------|----------------|
 | 1 | [Design Identity, Governance & Monitoring](./01-identity-governance-monitoring/) | **25–30%** | Entra ID, RBAC, PIM, Azure Policy, Monitor, Sentinel |
 | 2 | [Design Data Storage Solutions](./02-data-storage-solutions/) | **25–30%** | Azure SQL, Cosmos DB, Blob, ADLS Gen2, Synapse |
-| 3 | [Design Business Continuity Solutions](./03-business-continuity/) | **10–15%** | HA, DR, SLAs, Backup, ASR, geo-replication |
+| 3 | [Design Business Continuity Solutions](./03-business-continuity/) | **15–20%** | HA, DR, SLAs, Backup, ASR, geo-replication |
 | 4 | [Design Infrastructure Solutions](./04-infrastructure-solutions/) | **30–35%** | Compute, Networking, Migrations, App Architecture |
 
 ---
@@ -79,7 +79,7 @@ pie title AZ-305 — Official Exam Domain Weights
 
 <div style="border:1px solid #34a853; border-radius:8px; padding:1rem; background:#2d2f31;">
 <h3 style="margin-top:0;">🔄 Domain 3 — Business Continuity</h3>
-<p><strong>10–15%</strong> of exam. SLA math, HA patterns, Azure Backup, ASR, auto-failover groups.</p>
+<p><strong>15–20%</strong> of exam. SLA math, HA patterns, Azure Backup, ASR, auto-failover groups.</p>
 <a href="./03-business-continuity/" class="btn btn-outline fs-5">Read →</a>
 </div>
 
@@ -114,7 +114,7 @@ flowchart LR
     PRE["📘 Prerequisites\n(fundamentals)"]
     D1["🔐 Domain 1\nIdentity & Governance\n25–30%"]
     D2["🗄️ Domain 2\nData Storage\n25–30%"]
-    D3["🔄 Domain 3\nBusiness Continuity\n10–15%"]
+    D3["🔄 Domain 3\nBusiness Continuity\n15–20%"]
     D4["🏗️ Domain 4\nInfrastructure\n30–35%"]
     WAF["🏛️ WAF & CAF\n(cross-domain)"]
     SHEET["⚡ Cheatsheet\n(last-minute)"]

@@ -2,13 +2,13 @@
 layout: default
 title: "03 — Business Continuity"
 nav_order: 5
-description: "Design business continuity solutions: RPO, RTO, SLA calculations, Availability Sets vs Availability Zones, Azure Backup, Azure Site Recovery, Auto-Failover Groups. AZ-305 Domain 3 (10–15%)."
+description: "Design business continuity solutions: RPO, RTO, SLA calculations, Availability Sets vs Availability Zones, Azure Backup, Azure Site Recovery, Auto-Failover Groups. AZ-305 Domain 3 (15–20%)."
 permalink: /03-business-continuity/
 mermaid: true
 ---
 
 # 03 — Design Business Continuity Solutions
-> **Official Exam Weight: 10–15%**
+> **Official Exam Weight: 15–20%**
 > 📁 [← Back to Home](./)
 
 ---
@@ -17,7 +17,7 @@ mermaid: true
 
 ```mermaid
 mindmap
-  root((Domain 3\n10–15%))
+  root((Domain 3\n15–20%))
     Core Concepts
       RTO – Recovery Time Objective
       RPO – Recovery Point Objective
