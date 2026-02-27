@@ -1,7 +1,9 @@
 source "https://rubygems.org"
 
-# Just the Docs theme — used as `theme:` in _config.yml (NOT remote_theme)
-gem "just-the-docs", "~> 0.10"
+# Pin to 0.10.x — "~> 0.10.0" (three segments) means >= 0.10.0, < 0.11.0
+# "~> 0.10" (two segments) means >= 0.10, < 1.0 and would grab 0.12+,
+# where internal SCSS variable names differ and break custom/custom.scss.
+gem "just-the-docs", "~> 0.10.0"
 
 # Jekyll core
 gem "jekyll", "~> 4.3"
