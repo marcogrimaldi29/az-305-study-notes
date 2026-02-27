@@ -3,12 +3,12 @@
 
 [![Deploy to GitHub Pages](https://github.com/marcogrimaldi29/az-305-study-notes/actions/workflows/pages.yml/badge.svg)](https://github.com/marcogrimaldi29/az-305-study-notes/actions/workflows/pages.yml)
 [![GitHub](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen?logo=github)](https://github.com/marcogrimaldi29/az-305-study-notes)
-[![Blog](https://img.shields.io/badge/Blog-marcogrimaldi29.com-blue?logo=rss)](https://marcogrimaldi29.com)
+[![Personal Hub of Marco Grimaldi](https://img.shields.io/badge/Blog-marcogrimaldi29.com-blue?logo=rss)](https://marcogrimaldi29.com)
 
 > 🎯 **Goal:** Earn the **Microsoft Certified: Azure Solutions Architect Expert** badge
 > 📅 **Notes Version:** 2026
-> 🌐 **Published site:** [marco.github.io/az-305-study-notes](https://marcogrimaldi29.com/az-305-study-notes/)
-> ✍️ **Author:** [Marco Grimaldi — marcogrimaldi29.com](https://www.linkedin.com/in/marco-grimaldi29/)
+> 🌐 **Published site:** [marcogrimaldi29.com/az-305-study-notes](https://marcogrimaldi29.com/az-305-study-notes/)
+> ✍️ **Author:** [Marco Grimaldi](https://www.linkedin.com/in/marco-grimaldi29/)
 
 ---
 
