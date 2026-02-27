@@ -1,26 +1,39 @@
 // _sass/custom/custom.scss
-// Just the Docs picks this file up automatically for custom overrides.
+// Just the Docs loads this file automatically for overrides.
+//
+// IMPORTANT: Do NOT reference internal Just the Docs SCSS variables here
+// (e.g. $nav-list-item-padding, $link-color, $sidebar-color).
+// Those variables are scoped to the theme's own compilation context and
+// are NOT available in this file, causing "Undefined variable" build errors.
+// All visual polish that needs those values lives in head_custom.html instead.
 
-// ── Sidebar nav enhancements ──────────────────────────────
-.nav-list .nav-list-item .nav-list-link {
-  font-size: 0.875rem;
-  line-height: 1.4;
+// ── Smooth scroll ─────────────────────────────────────────
+html {
+  scroll-behavior: smooth;
 }
 
-// Active nav item — stronger highlight
-.nav-list .nav-list-item .nav-list-link.active {
+// ── Horizontal rule ───────────────────────────────────────
+hr {
+  margin: 1.75rem 0;
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+// ── Bold text ─────────────────────────────────────────────
+.main-content strong {
   font-weight: 700;
-  border-left: 3px solid $link-color;
-  padding-left: calc(#{$nav-list-item-padding} - 3px);
 }
 
-// ── Domain colour accents in sidebar ─────────────────────
-// Pages 3-8 (nav_order 3-8) each get a subtle left-border tint
-// This is handled via the .domain-badge class in head_custom.html.
+// ── Blockquotes (exam caveats) ────────────────────────────
+.main-content blockquote {
+  font-style: normal;
+  margin: 1rem 0;
+}
 
-// ── TOC (table of contents) ───────────────────────────────
-.toc-list {
-  font-size: 0.82rem;
+// ── Mermaid container ─────────────────────────────────────
+pre.mermaid,
+.mermaid {
+  background: transparent !important;
 }
 
 // ── Inline code in tables ─────────────────────────────────
@@ -28,32 +41,4 @@ table code {
   font-size: 0.8em;
   padding: 0.1em 0.35em;
   border-radius: 3px;
-}
-
-// ── Horizontal rule styling ───────────────────────────────
-hr {
-  margin: 1.75rem 0;
-  border-color: rgba(255, 255, 255, 0.08);
-}
-
-// ── Bold text in body copy ────────────────────────────────
-.main-content strong {
-  font-weight: 700;
-}
-
-// ── "Exam Tip" blockquotes ────────────────────────────────
-// blockquotes that start with an emoji key are exam tips
-.main-content blockquote {
-  margin: 1rem 0;
-  font-style: normal;
-}
-
-// ── Smooth anchor scroll ─────────────────────────────────
-html {
-  scroll-behavior: smooth;
-}
-
-// ── Mermaid container ─────────────────────────────────────
-pre.mermaid, .mermaid {
-  background: transparent !important;
 }
