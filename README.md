@@ -1,0 +1,170 @@
+# 📘 AZ-305: Designing Microsoft Azure Infrastructure Solutions
+### Study Notes Repository 
+
+[![Deploy to GitHub Pages](https://github.com/marcogrimaldi29/az-305-study-notes/actions/workflows/pages.yml/badge.svg)](https://github.com/marcogrimaldi29/az-305-study-notes/actions/workflows/pages.yml)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen?logo=github)](https://marcogrimaldi29.github.io/az-305-study-notes/)
+[![Blog](https://img.shields.io/badge/Blog-marcogrimaldi29.com-blue?logo=rss)](https://marcogrimaldi29.com)
+
+> 🎯 **Goal:** Earn the **Microsoft Certified: Azure Solutions Architect Expert** badge
+> 📅 **Notes Version:** 2025 | 🌍 **Region:** European Union
+> 🌐 **Published site:** [YOUR_GITHUB_USERNAME.github.io/az-305-study-notes](https://YOUR_GITHUB_USERNAME.github.io/az-305-study-notes/)
+> ✍️ **Author:** [Marco Grimaldi — marcogrimaldi29.com](https://marcogrimaldi29.com)
+
+---
+
+## 📋 Exam At-a-Glance
+
+| Detail | Info |
+|--------|------|
+| 🏅 Certification | Microsoft Certified: Azure Solutions Architect Expert |
+| 📝 Passing Score | **700 / 1000** |
+| 💶 Exam Price | **~€126 EUR** *(varies by EU country & Pearson VUE location; VAT may apply)* |
+| ⏱️ Duration | ~150 minutes |
+| ❓ Question Types | MCQ, multi-select, drag-and-drop, case studies |
+| 🌐 Languages | EN, DE, FR, ES, IT, PT, JA, KO, ZH, AR, RU, ID |
+| 🔁 Renewal | Annually via free online assessment on Microsoft Learn |
+| 🛡️ Prerequisite | AZ-104: Azure Administrator Associate *(required for Expert badge)* |
+
+> 💶 **EU Pricing Note:** The ~€126 EUR is approximate. Check [Pearson VUE](https://home.pearsonvue.com/microsoft) for the exact price in your country. Prices differ across EU member states and VAT treatment varies. Microsoft Learning Partner vouchers often include discounts.
+
+---
+
+## 📊 Official Domain Breakdown
+
+> ⚠️ **Official ranges** from the Microsoft study guide (updated October 2024)
+
+```mermaid
+pie title AZ-305 Exam Domain Weights (official ranges)
+    "Design Infrastructure Solutions (30–35%)" : 32
+    "Design Identity, Governance & Monitoring (25–30%)" : 27
+    "Design Data Storage Solutions (25–30%)" : 22
+    "Design Business Continuity Solutions (10–15%)" : 12
+```
+
+| # | Domain | Official Weight | Key Services |
+|---|--------|----------------|-------------|
+| 1 | Design Identity, Governance & Monitoring | **25–30%** | Entra ID, RBAC, PIM, Azure Policy, Monitor, Sentinel |
+| 2 | Design Data Storage Solutions | **25–30%** | Azure SQL, Cosmos DB, Blob, ADLS Gen2, Synapse |
+| 3 | Design Business Continuity Solutions | **10–15%** | ASR, Azure Backup, Availability Zones, Geo-replication |
+| 4 | Design Infrastructure Solutions | **30–35%** | VMs, AKS, App Service, VNets, VPN, ExpressRoute |
+
+> 🔑 **Domain 4 = heaviest domain** — allocate ≥35% of total study time here.
+
+---
+
+## 🗺️ Certification Path
+
+```mermaid
+flowchart LR
+    AZ900["☁️ AZ-900\nAzure Fundamentals\n(Recommended)"]
+    AZ104["🔧 AZ-104\nAzure Administrator\nAssociate\n(Active cert required)"]
+    AZ305["🏛️ AZ-305\nDesigning Azure\nInfrastructure Solutions\n(This Exam)"]
+    BADGE["🏅 Azure Solutions\nArchitect Expert"]
+
+    AZ900 -->|Foundation| AZ104
+    AZ104 -->|"Prerequisite\n(must be active)"| AZ305
+    AZ305 --> BADGE
+```
+
+---
+
+## 🗂️ Repository Structure
+
+```
+az-305-study-notes/
+├── README.md                             ← 📍 You are here
+├── 00-azure-prerequisites.md             ← Core Azure architecture fundamentals
+├── 01-identity-governance-monitoring.md  ← Domain 1 (25–30%)
+├── 02-data-storage-solutions.md          ← Domain 2 (25–30%)
+├── 03-business-continuity.md             ← Domain 3 (10–15%)
+├── 04-infrastructure-solutions.md        ← Domain 4 (30–35%)
+├── 05-well-architected-framework.md      ← WAF pillars + Cloud Adoption Framework
+└── 06-quick-reference-cheatsheet.md      ← Last-minute review & exam traps
+```
+
+---
+
+## 📚 Official Learning Resources
+
+| Resource | Link |
+|----------|------|
+| 🎓 Prerequisites Learning Path | [Microsoft Learn](https://learn.microsoft.com/en-us/training/paths/microsoft-azure-architect-design-prerequisites/) |
+| 📄 Official Exam Page | [AZ-305 Exam](https://learn.microsoft.com/en-us/credentials/certifications/exams/az-305/) |
+| 📋 Skills Measured / Study Guide | [Official Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305) |
+| 🧪 Free Practice Assessment | [Practice Assessment](https://learn.microsoft.com/en-us/credentials/certifications/exams/az-305/practice/assessment?assessment-type=practice&assessmentId=15) |
+| 🎬 Exam Readiness Videos | [Exam Readiness Zone](https://learn.microsoft.com/en-us/shows/exam-readiness-zone/) |
+| 🏗️ Architecture Reference | [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/) |
+| 💶 EU Exam Pricing | [Pearson VUE Microsoft](https://home.pearsonvue.com/microsoft) |
+
+---
+
+## 🧠 4-Week Study Plan
+
+```mermaid
+gantt
+    title AZ-305 — 4-Week Study Roadmap
+    dateFormat  YYYY-MM-DD
+    section Week 1 — Foundations
+    Azure Prerequisites Review        :w1a, 2025-01-01, 2d
+    Domain 1 — Identity & Governance  :w1b, after w1a, 5d
+    section Week 2 — Data & Continuity
+    Domain 2 — Data Storage           :w2a, after w1b, 4d
+    Domain 3 — Business Continuity    :w2b, after w2a, 3d
+    section Week 3 — Infrastructure
+    Domain 4 — Compute & App Arch     :w3a, after w2b, 4d
+    Domain 4 — Networking & Migrations :w3b, after w3a, 3d
+    section Week 4 — Review
+    Practice Test 1 + Gap Analysis    :w4a, after w3b, 2d
+    WAF & CAF Deep Dive               :w4b, after w4a, 2d
+    Cheatsheet Review + Rest          :w4c, after w4b, 3d
+```
+
+### ✅ Key Study Tips
+
+- 🎯 The exam tests **"why this service?"** not just **"what does it do?"** — think in trade-offs and constraints
+- 🔄 Know IaaS vs PaaS vs SaaS boundaries — the exam tests blurry edge cases
+- 💰 Know **SKU tier feature gates** — what Premium has that Standard doesn't matters a lot
+- 📐 Study **Azure Architecture Center** reference architectures for real-world pattern fluency
+- ⚡ Anchor every answer to the **Well-Architected Framework** pillars when in doubt
+- 📊 Memorise **SLA uptime percentages** — scenario questions frequently test availability math
+- 📖 For case studies: read **business requirements and constraints first**, then eliminate answers
+
+---
+
+## ⚡ Quick Navigation
+
+| File | Topics Covered |
+|------|---------------|
+| [📘 00 — Azure Prerequisites](./00-azure-prerequisites.md) | Regions, AZs, VNets, storage, identity basics, SLAs |
+| [🔐 01 — Identity, Governance & Monitoring](./01-identity-governance-monitoring.md) | Entra ID, RBAC, PIM, Azure Policy, Monitor, Sentinel |
+| [🗄️ 02 — Data Storage Solutions](./02-data-storage-solutions.md) | SQL family, Cosmos DB, Blob, ADLS Gen2, Synapse, ADF |
+| [🔄 03 — Business Continuity](./03-business-continuity.md) | HA, DR, SLA math, Azure Backup, ASR, geo-replication |
+| [🏗️ 04 — Infrastructure Solutions](./04-infrastructure-solutions.md) | Compute, App Architecture, Networking, Migrations |
+| [🏛️ 05 — Well-Architected & CAF](./05-well-architected-framework.md) | WAF 5 pillars, CAF lifecycle, Landing Zones |
+| [⚡ 06 — Quick Reference Cheatsheet](./06-quick-reference-cheatsheet.md) | Key numbers, decision tables, exam traps, final checklist |
+
+---
+
+---
+
+## 🌐 Published Website
+
+These notes are published as a searchable website via **GitHub Pages**:
+
+👉 **[YOUR_GITHUB_USERNAME.github.io/az-305-study-notes](https://YOUR_GITHUB_USERNAME.github.io/az-305-study-notes/)**
+
+The site includes full-text search, Mermaid diagram rendering, and mobile-friendly navigation.
+See [`SETUP.md`](./SETUP.md) for step-by-step deployment instructions.
+
+---
+
+## ✍️ Author
+
+Maintained by **[Marco Grimaldi](https://marcogrimaldi29.com)** — IT professional and certification blogger.
+
+🏠 Find more certification guides, study tips, and tech content at **[marcogrimaldi29.com](https://marcogrimaldi29.com)**
+
+---
+
+*Based on the official Microsoft Learn AZ-305 path and study guide (Oct 2024 revision).
+Not affiliated with or endorsed by Microsoft. Always verify against the latest Microsoft documentation.*
