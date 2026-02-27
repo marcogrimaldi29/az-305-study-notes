@@ -354,4 +354,4 @@ mindmap
 
 *Good luck — you've got this! 🎯*
 
-*← [05 - Well-Architected Framework](./05-well-architected-framework/) | [Back to Home →](./)*
+*← [05 - Well-Architected Framework](/az-305-study-notes/05-well-architected-framework/) | [Back to Home →](/az-305-study-notes/)*
