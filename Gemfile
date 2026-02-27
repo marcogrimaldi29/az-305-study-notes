@@ -1,17 +1,16 @@
 source "https://rubygems.org"
 
-# Just the Docs theme (matches remote_theme in _config.yml)
+# Just the Docs theme — used as `theme:` in _config.yml (NOT remote_theme)
 gem "just-the-docs", "~> 0.10"
 
 # Jekyll core
-gem "jekyll",         "~> 4.3"
+gem "jekyll", "~> 4.3"
 
 # Plugins (must match _config.yml plugins list)
 gem "jekyll-seo-tag"
 gem "jekyll-sitemap"
-gem "jekyll-github-metadata"
 
-# Required by GitHub Pages environment
+# Required by newer Ruby versions
 gem "webrick", "~> 1.8"
 gem "csv"
 gem "base64"

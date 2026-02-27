@@ -9,15 +9,13 @@ on:
   push:
     branches:
       - "main"
-  # Allow manual trigger from the Actions tab
   workflow_dispatch:
 
 permissions:
-  contents:  read
-  pages:     write
-  id-token:  write
+  contents: read
+  pages:    write
+  id-token: write
 
-# Only one deployment at a time; cancel in-flight runs
 concurrency:
   group: "pages"
   cancel-in-progress: false
@@ -31,11 +29,14 @@ jobs:
       - name: "📥 Checkout repository"
         uses: actions/checkout@v4
 
-      - name: "⚙️ Set up Ruby"
+      - name: "⚙️ Set up Ruby 3.3"
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version:    "3.3"
-          bundler-cache:   true   # runs bundle install and caches gems
+          ruby-version: "3.3"
+          bundler-cache: false   # we run bundle install manually below
+
+      - name: "📦 Install gems"
+        run: bundle install --jobs 4 --retry 3
 
       - name: "🔧 Configure GitHub Pages"
         uses: actions/configure-pages@v5
@@ -46,7 +47,7 @@ jobs:
         env:
           JEKYLL_ENV: production
 
-      - name: "📦 Upload built site artifact"
+      - name: "🗜️ Upload site artifact"
         uses: actions/upload-pages-artifact@v3
         with:
           path: "./_site"

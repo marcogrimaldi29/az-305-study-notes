@@ -60,11 +60,36 @@ pie title AZ-305 Domain Weight Distribution
 ### SLA Uptime Reference Table
 
 ```mermaid
-xychart-beta
-    title "Azure Service SLAs (uptime %)"
-    x-axis ["Cosmos DB Multi", "Storage RA-GRS", "VM + AZones", "SQL DB GP", "App Svc Std", "VM + AvSet", "AKS Standard", "Single VM"]
-    y-axis "Uptime %" 99.8 --> 100
-    bar [99.999, 99.99, 99.99, 99.99, 99.95, 99.95, 99.95, 99.9]
+graph LR
+    subgraph T5["🏆 99.999% — ~26 sec downtime/month"]
+        A1["Cosmos DB\nMulti-region write"]
+    end
+    subgraph T4["✅ 99.99% — ~4.4 min downtime/month"]
+        B1["Azure VM\n+ Avail. Zones"]
+        B2["Azure SQL DB\nAll tiers"]
+        B3["Azure Load Balancer\nStandard"]
+        B4["Azure Front Door\nStd / Premium"]
+        B5["Traffic Manager"]
+        B6["AKS Standard\n+ Avail. Zones"]
+        B7["Azure Firewall"]
+        B8["Storage RA-GRS\n(read SLA)"]
+    end
+    subgraph T3["🟡 99.95% — ~22 min downtime/month"]
+        C1["App Service\nStd / Premium"]
+        C2["Azure VM\n+ Avail. Set"]
+        C3["AKS Standard"]
+        C4["VPN Gateway\nActive-Active"]
+        C5["ExpressRoute"]
+    end
+    subgraph T2["🟠 99.9% — ~43 min downtime/month"]
+        D1["Azure VM\nSingle (Premium SSD)"]
+        D2["Storage\nLRS / ZRS / GRS"]
+    end
+    subgraph T1["❌ No SLA"]
+        E1["App Service Free/Shared"]
+        E2["AKS Free tier"]
+        E3["Redis Basic tier"]
+    end
 ```
 
 | Service | Configuration | SLA | Downtime/Month |
