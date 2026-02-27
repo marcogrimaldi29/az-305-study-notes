@@ -9,7 +9,7 @@ mermaid: true
 
 # 05 — Azure Well-Architected Framework & Cloud Adoption Framework
 > Based on Microsoft Learn modules: *Azure Well-Architected Framework Introduction* & *Cloud Adoption Framework Introduction*
-> 📁 [← Back to Home](./)
+> 📁 [← Back to Home](/az-305-study-notes/)
 
 ---
 
@@ -302,4 +302,4 @@ flowchart LR
 
 ---
 
-*← [04 - Infrastructure Solutions](/az-305-study-notes/04-infrastructure-solutions/) | [06 - Quick Reference Cheatsheet →](/az-305-study-notes/06-quick-reference-cheatsheet/)*
+*[← 04 - Infrastructure Solutions](/az-305-study-notes/04-infrastructure-solutions/) | [06 - Quick Reference Cheatsheet →](/az-305-study-notes/06-quick-reference-cheatsheet/)*

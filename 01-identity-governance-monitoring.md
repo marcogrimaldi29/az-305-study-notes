@@ -9,7 +9,7 @@ mermaid: true
 
 # 01 — Design Identity, Governance & Monitoring Solutions
 > **Official Exam Weight: 25–30%**
-> 📁 [← Back to Home](./)
+> 📁 [← Back to Home](/az-305-study-notes/)
 
 ---
 
@@ -406,4 +406,4 @@ flowchart TD
 
 ---
 
-*← [00 - Azure Prerequisites](/az-305-study-notes/00-azure-prerequisites/) | [02 - Data Storage Solutions →](/az-305-study-notes/02-data-storage-solutions/)*
+*[← 00 - Azure Prerequisites](/az-305-study-notes/00-azure-prerequisites/) | [02 - Data Storage Solutions →](/az-305-study-notes/02-data-storage-solutions/)*

@@ -10,7 +10,7 @@ mermaid: true
 # 00 — Azure Prerequisites & Core Architecture Fundamentals
 
 > Based on: *Describe the core architectural components of Azure* (Microsoft Learn)
-> 📁 [← Back to Home](./)
+> 📁 [← Back to Home](/az-305-study-notes/)
 
 ---
 
