@@ -302,4 +302,4 @@ flowchart LR
 
 ---
 
-*[← 04 - Infrastructure Solutions](/az-305-study-notes/04-infrastructure-solutions/) | [06 - Quick Reference Cheatsheet →](/az-305-study-notes/06-quick-reference-cheatsheet/)*
+[← 04 - Infrastructure Solutions](/az-305-study-notes/04-infrastructure-solutions/) | [06 - Quick Reference Cheatsheet →](/az-305-study-notes/06-quick-reference-cheatsheet/)
