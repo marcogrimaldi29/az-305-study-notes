@@ -85,7 +85,7 @@ az-305-study-notes/
 
 | Resource | Link |
 |----------|------|
-| 📚 Microsoft's AZ-305 Certification Learning Paths | [Certification Learning Paths]("https://learn.microsoft.com/en-us/credentials/certifications/azure-solutions-architect/) |
+| 📚 Microsoft's AZ-305 Certification Learning Paths | [Certification Learning Paths](https://learn.microsoft.com/en-us/credentials/certifications/azure-solutions-architect/) |
 | 📄 Official Exam Page | [AZ-305 Exam](https://learn.microsoft.com/en-us/credentials/certifications/exams/az-305/) |
 | 📋 Skills Measured / Study Guide | [Official Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305) |
 | 🧪 Free Practice Assessment | [Practice Assessment](https://learn.microsoft.com/en-us/credentials/certifications/exams/az-305/practice/assessment?assessment-type=practice&assessmentId=15) |
@@ -127,7 +127,11 @@ These notes are hosted on **GitHub Pages** and published as a searchable website
 
 👉 **[marcogrimaldi29/az-305-study-notes](https://marcogrimaldi29.com/az-305-study-notes/)**
 
-The site includes full-text search, Mermaid diagram rendering, and mobile-friendly navigation for on-the-go review. These notes are mot designed to be comprehensive, but rather a structured, exam-focused summary of the most important concepts and services found on the official Microsoft Learning Path.
+The site includes full-text search, Mermaid diagram rendering, and mobile-friendly navigation for on-the-go review. 
+
+These notes are designed to be a structured, exam-focused summary of the most important concepts and services baseds on the official [Microsoft Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305) and its criteria.
+
+> *Not affiliated with or endorsed by Microsoft. Always verify against the latest Microsoft documentation.*
 
 ---
 
@@ -143,11 +147,8 @@ The site is continuously updated and based on my personal study notes and experi
 
 ## ©️ Credits & Acknowledgements
 
-The [Just the Docs](https://github.com/just-the-docs/just-the-docs) theme is used for a clean, documentation-style layout that emphasizes readability and quick reference.
+The [Just the Docs](https://github.com/just-the-docs/just-the-docs) theme is used for a clean, documentation-style layout that emphasizes readability and quick reference. Licensed under [MIT](https://opensource.org/license/MIT).
 
 [Claude Sonnet 4.6](https://www.anthropic.com/news/claude-sonnet-4-6) was used for initial content generation and structuring, with all final edits, fact-checking, and formatting done by the author.
 
 ---
-
-*Based on the official Microsoft Learn AZ-305 path and study guide (Oct 2024 revision).
-Not affiliated with or endorsed by Microsoft. Always verify against the latest Microsoft documentation.*
