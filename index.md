@@ -146,11 +146,19 @@ flowchart LR
 
 ## ✍️ About the Author
 
-These notes are maintained by **[Marco Grimaldi](https://www.linkedin.com/in/marco-grimaldi29/){:target="_blank"}**, an IT professional and lifelong learning enthusiast writing about Azure, Cloud, and Certifications.
+These notes are maintained by **[Marco Grimaldi](https://www.linkedin.com/in/marco-grimaldi29/){:target="_blank"}** — Cloud Consultant, Language Trainer & Lifelong Learner.
 
 📍 **Find more content at [marcogrimaldi29.com](https://marcogrimaldi29.com){:target="_blank"}**
 
-> Sharing study notes, certification tips, and tech insights for the IT community.
+> site is continuously updated and based on my personal study notes and experiences. If you have any feedback, suggestions, or corrections, feel free to [reach out](https://marcogrimaldi29.com/contact/)!
+
+---
+
+## ©️ Credits & Acknowledgements
+
+The [Just the Docs](https://github.com/just-the-docs/just-the-docs) theme is used for a clean, documentation-style layout that emphasizes readability and quick reference.
+
+[Claude Sonnet 4.6](https://www.anthropic.com/news/claude-sonnet-4-6) was used for initial content generation and structuring, with all final edits, fact-checking, and formatting done by the author.
 
 ---
 
