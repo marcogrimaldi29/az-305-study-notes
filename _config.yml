@@ -66,8 +66,6 @@ back_to_top_text: "Back to top ↑"
 aux_links:
   "🏠 Personal Hub of Marco Grimaldi":
     - "https://marcogrimaldi29.com"
-  "📋 AZ-305 Exam":
-    - "https://learn.microsoft.com/en-us/credentials/certifications/exams/az-305/"
 
 aux_links_new_tab: true
 

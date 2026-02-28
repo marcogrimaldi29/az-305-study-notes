@@ -123,7 +123,7 @@ az-305-study-notes/
 
 ## 🌐 Published Website
 
-These notes are hosted on **GitHub Pages** and published as a searchable website on this URL:
+These notes are hosted on **GitHub Pages** and published as a searchable website via the following URL:
 
 👉 **[marcogrimaldi29/az-305-study-notes](https://marcogrimaldi29.com/az-305-study-notes/)**
 
