@@ -338,20 +338,6 @@ mindmap
 
 ---
 
-## 📅 Final Week Study Schedule
-
-| Day | Focus | Goal |
-|-----|-------|------|
-| **Day 1** | Domain 4 — Compute + Networking | Re-read notes, draw diagrams from memory |
-| **Day 2** | Domain 1 — Identity + Governance | Focus on Conditional Access, Policy effects |
-| **Day 3** | Domain 2 + Domain 3 | Storage decisions, SLA math, BC scenarios |
-| **Day 4** | Full practice test (timed) | Identify weak areas from score report |
-| **Day 5** | Re-study weak areas from practice test | Focus review, not broad review |
-| **Day 6** | WAF + CAF + This cheatsheet | Light review, memorise key numbers |
-| **Day 7** | Rest 🌙 | Light read of exam traps section only |
-
----
-
 *Good luck — you've got this! 🎯*
 
 *[← 05 - Well-Architected Framework](/az-305-study-notes/05-well-architected-framework/) | [Back to Home →](/az-305-study-notes/)*

@@ -17,7 +17,7 @@ mermaid: true
 
 ```mermaid
 mindmap
-  root((Domain 4\n30–35%))
+  root((Infrastructure Solutions))
     Compute Solutions
       Virtual Machines & VMSS
       Azure App Service
