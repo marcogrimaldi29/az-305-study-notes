@@ -18,8 +18,8 @@ mermaid: true
 | Detail | Value |
 |--------|-------|
 | Passing Score | **700 / 1000** |
-| Duration | ~150 minutes |
-| Cost (EU) | **~€165 EUR** *(varies by EU country + VAT)* |
+| Duration | **~120 minutes** |
+| Cost (EU) | **~€126 EUR** *(varies by EU country + VAT)* |
 | Renewal | Annual — free online assessment |
 
 ### Domain Weights (Official Ranges)
@@ -27,9 +27,9 @@ mermaid: true
 ```mermaid
 pie title AZ-305 Domain Weight Distribution
     "Domain 4: Infrastructure (30–35%)" : 32
-    "Domain 1: Identity & Governance (25–30%)" : 27
-    "Domain 2: Data Storage (25–30%)" : 22
-    "Domain 3: Business Continuity (15–20%)" : 17
+    "Domain 1: Identity & Governance (25–30%)" : 25
+    "Domain 2: Data Storage (25–30%)" : 25
+    "Domain 3: Business Continuity (15–20%)" : 18
 ```
 
 ---

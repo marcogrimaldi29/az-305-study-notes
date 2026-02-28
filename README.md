@@ -95,27 +95,6 @@ az-305-study-notes/
 
 ---
 
-## 🧠 4-Week Study Plan
-
-```mermaid
-gantt
-    title AZ-305 — 4-Week Study Roadmap
-    dateFormat  YYYY-MM-DD
-    section Week 1 — Foundations
-    Azure Prerequisites Review        :w1a, 2025-01-01, 2d
-    Domain 1 — Identity & Governance  :w1b, after w1a, 5d
-    section Week 2 — Data & Continuity
-    Domain 2 — Data Storage           :w2a, after w1b, 4d
-    Domain 3 — Business Continuity    :w2b, after w2a, 3d
-    section Week 3 — Infrastructure
-    Domain 4 — Compute & App Arch     :w3a, after w2b, 4d
-    Domain 4 — Networking & Migrations :w3b, after w3a, 3d
-    section Week 4 — Review
-    Practice Test 1 + Gap Analysis    :w4a, after w3b, 2d
-    WAF & CAF Deep Dive               :w4b, after w4a, 2d
-    Cheatsheet Review + Rest          :w4c, after w4b, 3d
-```
-
 ### ✅ Key Study Tips
 
 - 🎯 The exam tests **"why this service?"** not just **"what does it do?"** — think in trade-offs and constraints
