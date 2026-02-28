@@ -36,7 +36,7 @@ gh_edit_view_mode:    "edit"
 # ── Just the Docs theme settings ──────────────────────────
 color_scheme: dark
 
-logo: "/az-305-study-notes/assets/images/logo-sunrise-domain.jpg"
+logo: "/assets/images/logo-sunrise-domain.jpg"
 
 # Search
 search_enabled: true
@@ -74,10 +74,11 @@ aux_links_new_tab: true
 # Footer
 footer_content: >
   Study notes by <a href="https://marcogrimaldi29.com" target="_blank"><strong>Marco Grimaldi</strong></a>
-  &nbsp;|&nbsp;
+  &nbsp;·&nbsp;
   <a href="https://marcogrimaldi29.com" target="_blank">marcogrimaldi29.com</a>
   &nbsp;·&nbsp;
   Based on <a href="https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305" target="_blank">Microsoft AZ-305 Study Guide</a>
+  &nbsp;·&nbsp;
   Not affiliated with or endorsed by Microsoft Corporation.
 
 # ── Mermaid diagram support ───────────────────────────────
