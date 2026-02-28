@@ -121,23 +121,23 @@ az-305-study-notes/
 
 ---
 
----
-
 ## 🌐 Published Website
 
-These notes are published as a searchable website via **GitHub Pages**:
+These notes are hosted on **GitHub Pages** and published as a searchable website via the following URL:
 
 👉 **[marcogrimaldi29/az-305-study-notes](https://marcogrimaldi29.com/az-305-study-notes/)**
 
-The site includes full-text search, Mermaid diagram rendering, and mobile-friendly navigation for on-the-go review.
+The site includes full-text search, Mermaid diagram rendering, and mobile-friendly navigation for on-the-go review. These notes are mot designed to be comprehensive, but rather a structured, exam-focused summary of the most important concepts and services found on the official Microsoft Learning Path.
 
 ---
 
 ## ✍️ Author
 
-Maintained by **[Marco Grimaldi](https://www.linkedin.com/in/marco-grimaldi29/)** — Cloud Consultant & Language Trainer.
+Maintained by **[Marco Grimaldi](https://www.linkedin.com/in/marco-grimaldi29/)** — Cloud Consultant, Language Trainer & Lifelong Learner.
 
 🏠 Find more certification guides, study tips, and tech content at **[marcogrimaldi29.com](https://marcogrimaldi29.com)**
+
+The site is continuously updated and based on my personal study notes and experiences. If you have any feedback, suggestions, or corrections, feel free to [reach out](https://marcogrimaldi29.com/contact/)!
 
 ---
 
