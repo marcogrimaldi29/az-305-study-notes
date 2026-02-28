@@ -81,6 +81,9 @@
     border-radius: 8px;
     overflow-x:    auto;
     text-align:    center;
+  }  /* Ensure diagram text (e.g. pie labels/title) is white for dark background */
+  .main-content .mermaid svg text {
+    fill: #fff !important;
   }
 
   /* ── Code blocks ─────────────────────────────────────── */
