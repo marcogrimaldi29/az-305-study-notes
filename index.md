@@ -150,7 +150,7 @@ These notes are maintained by **[Marco Grimaldi](https://www.linkedin.com/in/mar
 
 📍 **Find more content at [marcogrimaldi29.com](https://marcogrimaldi29.com){:target="_blank"}**
 
-> site is continuously updated and based on my personal study notes and experiences. If you have any feedback, suggestions, or corrections, feel free to [reach out](https://marcogrimaldi29.com/contact/)!
+> The website is continuously updated and based on my personal study notes and experiences. If you have any feedback, suggestions, or corrections, feel free to [reach out](https://marcogrimaldi29.com/contact/)!
 
 ---
 
