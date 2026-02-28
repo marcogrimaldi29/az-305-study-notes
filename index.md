@@ -18,8 +18,9 @@ mermaid: true
 
 ---
 
-> 🏠 These notes are maintained by **[Marco Grimaldi](https://www.linkedin.com/in/marco-grimaldi29/){:target="_blank"}** and based on the official Microsoft documentation.
+> 🏠 These notes are maintained by **[Marco Grimaldi](https://www.linkedin.com/in/marco-grimaldi29/){:target="_blank"}** and based on the **[official Microsoft documentation](https://learn.microsoft.com/en-us/credentials/certifications/azure-solutions-architect/){:target="_blank"}**.
 > Find more certification guides, study tips, and tech content at **[marcogrimaldi29.com](https://marcogrimaldi29.com){:target="_blank"}**.
+> *Not affiliated with or endorsed by Microsoft. Always verify against the latest Microsoft documentation.*
 
 ---
 
@@ -122,7 +123,7 @@ flowchart LR
     PRE --> D1 --> D2 --> D3 --> D4 --> WAF --> SHEET
 ```
 
-### Study Tips
+### 💡 Study Tips
 
 - 🎯 The exam tests **"why this service?"** — think in trade-offs and constraints, not just definitions
 - 💶 Know **SKU tier feature gates** — what's in Premium that Standard doesn't have often decides exam answers
@@ -136,11 +137,23 @@ flowchart LR
 
 | Resource | Link |
 |----------|------|
-| 🎓 Microsoft Certification Path | [AZ-305 Learning Paths](https://learn.microsoft.com/en-us/credentials/certifications/azure-solutions-architect/){:target="_blank"} |
+| 🎓 Microsoft Certification Path | [AZ-305 Certification Path](https://learn.microsoft.com/en-us/credentials/certifications/azure-solutions-architect/){:target="_blank"} |
 | 📋 Skills Measured Guide | [Official Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305){:target="_blank"} |
 | 🧪 Free Practice Assessment | [Practice Test](https://learn.microsoft.com/en-us/credentials/certifications/exams/az-305/practice/assessment?assessment-type=practice&assessmentId=15){:target="_blank"} |
 | 🏗️ Architecture Center | [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/){:target="_blank"} |
 | 💶 EU Exam Booking | [Pearson VUE Microsoft](https://home.pearsonvue.com/microsoft){:target="_blank"} |
+
+---
+
+## 🌐 Published Website
+
+These notes are hosted on **GitHub Pages** and published as a searchable website on this URL:
+
+👉 **[marcogrimaldi29/az-305-study-notes](https://marcogrimaldi29.com/az-305-study-notes/)**
+
+The site includes full-text search, Mermaid diagram rendering, and mobile-friendly navigation for on-the-go review. 
+
+These notes are designed to be a structured, exam-focused summary of the most important concepts and services baseds on the official [Microsoft Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305) and its criteria.
 
 ---
 
@@ -156,11 +169,8 @@ These notes are maintained by **[Marco Grimaldi](https://www.linkedin.com/in/mar
 
 ## ©️ Credits & Acknowledgements
 
-The [Just the Docs](https://github.com/just-the-docs/just-the-docs) theme is used for a clean, documentation-style layout that emphasizes readability and quick reference.
+The [Just the Docs](https://github.com/just-the-docs/just-the-docs) theme is used for a clean, documentation-style layout that emphasizes readability and quick reference. Licensed under [MIT](https://opensource.org/license/MIT).
 
 [Claude Sonnet 4.6](https://www.anthropic.com/news/claude-sonnet-4-6) was used for initial content generation and structuring, with all final edits, fact-checking, and formatting done by the author.
 
 ---
-
-*Content based on the Microsoft Learn AZ-305 path and official study guide (October 2024 revision as per the official Microsoft's [AZ-305 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305){:target="_blank"}).
-Not affiliated with or endorsed by Microsoft Corporation.*
