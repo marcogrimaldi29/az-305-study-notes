@@ -2,11 +2,11 @@
 <!-- Injected into every page <head> by Just the Docs -->
 
 <!-- ── Open Graph / Social sharing meta ─────────────────── -->
-<meta property="og:site_name" content="{{ site.title }}">
+<meta property="og:site_name" content="{{ site.site_title_alt }}">
 {% if page.title %}
-  <meta property="og:title" content="{{ page.title }} | {{ site.title }}">
+  <meta property="og:title" content="{{ page.title }} | {{ site.site_title_alt }}">
 {% else %}
-  <meta property="og:title" content="{{ site.title }}">
+  <meta property="og:title" content="{{ site.site_title_alt }}">
 {% endif %}
 {% if page.description %}
   <meta property="og:description" content="{{ page.description }}">
@@ -15,7 +15,7 @@
 {% endif %}
 <meta property="og:type" content="website">
 <meta name="twitter:card"        content="summary">
-<meta name="twitter:title"       content="{{ page.title | default: site.title }}">
+<meta name="twitter:title"       content="{{ page.title | default: site.site_title_alt }}">
 <meta name="twitter:description" content="{{ page.description | default: site.description }}">
 <link rel="author" href="{{ site.personal_site_url }}">
 

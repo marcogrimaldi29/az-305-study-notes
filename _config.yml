@@ -9,7 +9,7 @@
 theme: just-the-docs
 
 # ── Site identity ─────────────────────────────────────────
-title: "AZ-305 Study Notes"
+site_title_alt: "AZ-305 Study Notes"
 description: >
   Microsoft Azure Solutions Architect Expert — Study Notes & Exam Prep.
   Comprehensive notes covering all four exam domains with decision diagrams,
@@ -36,6 +36,9 @@ gh_edit_view_mode:    "edit"
 # ── Just the Docs theme settings ──────────────────────────
 color_scheme: dark
 
+# Custom logo
+title: "marcogrimaldi29.com"
+subtitle: "Personal Hub of Marco Grimaldi"
 logo: "/assets/images/logo-sunrise-domain.jpg"
 
 # Search
