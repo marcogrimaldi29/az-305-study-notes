@@ -17,7 +17,7 @@ mermaid: true
 
 ```mermaid
 mindmap
-  root((Domain 2\n25–30%))
+  root((Data Storage Solutions))
     Relational Storage
       Azure SQL Database
       SQL Managed Instance

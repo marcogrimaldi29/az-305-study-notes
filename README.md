@@ -129,8 +129,7 @@ These notes are published as a searchable website via **GitHub Pages**:
 
 👉 **[marcogrimaldi29/az-305-study-notes](https://marcogrimaldi29.com/az-305-study-notes/)**
 
-The site includes full-text search, Mermaid diagram rendering, and mobile-friendly navigation.
-See [`SETUP.md`](./SETUP.md) for step-by-step deployment instructions.
+The site includes full-text search, Mermaid diagram rendering, and mobile-friendly navigation for on-the-go review.
 
 ---
 
@@ -139,6 +138,14 @@ See [`SETUP.md`](./SETUP.md) for step-by-step deployment instructions.
 Maintained by **[Marco Grimaldi](https://www.linkedin.com/in/marco-grimaldi29/)** — Cloud Consultant & Language Trainer.
 
 🏠 Find more certification guides, study tips, and tech content at **[marcogrimaldi29.com](https://marcogrimaldi29.com)**
+
+---
+
+## ©️ Credits & Acknowledgements
+
+The [Just the Docs](https://github.com/just-the-docs/just-the-docs) theme is used for a clean, documentation-style layout that emphasizes readability and quick reference.
+
+[Claude Sonnet 4.6](https://www.anthropic.com/news/claude-sonnet-4-6) was used for initial content generation and structuring, with all final edits, fact-checking, and formatting done by the author.
 
 ---
 

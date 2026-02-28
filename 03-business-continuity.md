@@ -17,7 +17,7 @@ mermaid: true
 
 ```mermaid
 mindmap
-  root((Domain 3\n15–20%))
+  root((Business Continuity))
     Core Concepts
       RTO – Recovery Time Objective
       RPO – Recovery Point Objective
