@@ -340,5 +340,5 @@ mindmap
 
 *Good luck — you've got this! 🎯*
 
-*[← 05 - Well-Architected Framework](/az-305-study-notes/05-well-architected-framework/) | [07 — Azure Architectures →](/az-305-study-notes/07-azure-architectures/)*
+[← 05 - Well-Architected Framework](/az-305-study-notes/05-well-architected-framework/) | [07 — Azure Architectures →](/az-305-study-notes/07-azure-architectures/)
 

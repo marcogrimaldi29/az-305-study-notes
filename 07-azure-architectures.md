@@ -688,5 +688,5 @@ Defender for Cloud provides built-in regulatory compliance dashboards that conti
 
 ---
 
-*[← 06 - Quick Reference Cheatsheet](/az-305-study-notes/06-quick-reference-cheatsheet/) | [Back to Home →](/az-305-study-notes/)*
+[← 06 - Quick Reference Cheatsheet](/az-305-study-notes/06-quick-reference-cheatsheet/) | [Back to Home →](/az-305-study-notes/)
 
