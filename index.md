@@ -1,6 +1,6 @@
 ---
 layout: home
-title: Home
+title: AZ-305 Study Notes
 nav_order: 1
 description: "AZ-305 Microsoft Azure Solutions Architect Expert — complete study notes covering all four exam domains with Mermaid diagrams, SKU comparisons, SLA tables, and exam caveats."
 permalink: /
