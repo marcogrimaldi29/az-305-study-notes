@@ -38,6 +38,10 @@ jobs:
       - name: "📦 Install gems"
         run: bundle install --jobs 4 --retry 3
 
+      - name: "🔑 Inject Umami website ID"
+        run: |
+          sed -i 's/UMAMI_WEBSITE_ID_PLACEHOLDER/${{ secrets.UMAMI_WEBSITE_ID }}/g' _includes/head_custom.html
+
       - name: "🔧 Configure GitHub Pages"
         uses: actions/configure-pages@v5
         id: pages
