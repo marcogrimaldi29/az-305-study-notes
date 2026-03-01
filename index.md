@@ -139,7 +139,7 @@ flowchart LR
 
 ---
 
-## 📚 Official Resources
+## 📄 Official Resources
 
 | Resource | Link |
 |----------|------|
@@ -151,15 +151,19 @@ flowchart LR
 
 ---
 
-## 🌐 Published Website
+## 📚 About the Study Notes
 
 These notes are hosted on **GitHub Pages** and published as a searchable website on this URL:
 
-👉 **[marcogrimaldi29/az-305-study-notes](https://marcogrimaldi29.com/az-305-study-notes/)**
+👉 **[📘 AZ-305 Study Notes](https://marcogrimaldi29.com/az-305-study-notes/)**
 
 The site includes full-text search, Mermaid diagram rendering, and mobile-friendly navigation for on-the-go review. 
 
-These notes are designed to be a structured, exam-focused summary of the most important concepts and services baseds on the official [Microsoft Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305){:target="_blank"} and its criteria.
+These notes are designed to be a structured, exam-focused summary of the most important concepts and services baseds on the official [Microsoft AZ-305Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305){:target="_blank"} and its criteria.
+
+Additional resources and study notes maintained by me, such as the **[📘 AZ-500 Study Notes](https://marcogrimaldi29.com/az-500-study-notes/){:target="_blank"}** and more, are also available for those pursuing the Microsoft and Azure certifications at the following Landing Page:
+
+👉 **[🧑‍🏫 Microsoft Study Notes: Central Hub](https://marcogrimaldi29.com/microsoft-study-notes/){:target="_blank"}**
 
 ---
 
@@ -170,6 +174,12 @@ These notes are maintained by **[Marco Grimaldi](https://www.linkedin.com/in/mar
 📍 **Find more content at [marcogrimaldi29.com](https://marcogrimaldi29.com){:target="_blank"}**
 
 > The website is continuously updated and based on my personal study notes and experiences. If you have any feedback, suggestions, or corrections, feel free to [reach out](https://marcogrimaldi29.com/contact/){:target="_blank"}!
+
+---
+
+## 📈 Analytics
+
+This site uses [Umami](https://umami.is/) for privacy-friendly analytics.
 
 ---
 
