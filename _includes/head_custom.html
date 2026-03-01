@@ -177,3 +177,30 @@
     }
   }
 </style>
+
+<!-- Taken from main website marcogrimaldi29.github.io and Umami analytics -->
+<!-- Google Search Console Verification -->
+<meta name="google-site-verification" content="2odQD3jEYS9beLb8PwPvtMhlwwBdeqIdQUsqM1V3Cr4" />
+
+<!-- External links in new tabs -->
+<script>
+(function() {
+  document.addEventListener("DOMContentLoaded", function() {
+    const currentHost = window.location.hostname;
+    document.querySelectorAll("a[href]").forEach(link => {
+      if (link.hostname && link.hostname !== currentHost) {
+        link.setAttribute("target", "_blank");
+        link.setAttribute("rel", "noopener noreferrer");
+      }
+    });
+  });
+})();
+</script>
+
+<!-- Umami Analytics - GDPR-friendly / cookieless configuration --> 
+{%- if jekyll.environment == "production" -%}
+<script defer src="https://cloud.umami.is/script.js" data-website-id="e5363bda-3e67-41f1-b38b-31188d781897"></script>
+{%- endif -%}
+
+<!-- Related to SEO -->
+{% seo %}
