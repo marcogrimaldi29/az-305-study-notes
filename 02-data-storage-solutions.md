@@ -274,6 +274,7 @@ flowchart TD
 > - **User Delegation SAS** is signed with Entra ID credentials (not account keys) — the most secure SAS type
 > - Rotating a Storage Account Key **immediately invalidates** all SAS tokens signed with the old key
 > - **Private Endpoint** for storage = traffic never leaves your VNet (preferred over Service Endpoints for on-prem access)
+> - **Stored / Shared access policies** are NOT supported for the user delegation SAS or the account SAS.
 
 ---
 
@@ -304,7 +305,7 @@ graph TD
 > - **Dedicated SQL Pool** must be **paused when not in use** to stop billing (a common cost management question)
 > - Synapse Link provides **near real-time analytical queries** directly against Cosmos DB data — no ETL needed
 
-### Azure Data Factory — Key Components
+### Azure Data Factory (ADF) — Key Components
 
 | Component | Description |
 |-----------|-------------|
