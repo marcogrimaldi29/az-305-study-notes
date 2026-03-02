@@ -2,7 +2,7 @@
 layout: default
 title: "01 — Identity, Governance & Monitoring"
 nav_order: 3
-description: "Design identity, governance and monitoring solutions: Entra ID, RBAC, PIM, Conditional Access, Azure Policy, Management Groups, Azure Monitor, Sentinel. AZ-305 Domain 1 (25–30%)."
+description: "Design identity, governance and monitoring solutions: Entra ID, Hybrid Identity, MFA, Conditional Access, Identity Protection, RBAC, Managed Identities, PIM, Access Reviews, Entitlement Management, Lifecycle Workflows, Azure Policy, Management Groups, Azure Monitor, Sentinel. AZ-305 Domain 1 (25–30%)."
 permalink: /01-identity-governance-monitoring/
 mermaid: true
 ---
@@ -17,23 +17,41 @@ mermaid: true
 
 ```mermaid
 mindmap
-  root((Identity, Governance & Monitoring))
-    Identity & Auth
+  root((Domain 1\n25–30%))
+    1.1 Authentication
       Entra ID
       Hybrid Identity
       MFA & Passwordless
-      External Identities B2B/B2C
-    Authorisation
+      Conditional Access
+      Identity Protection
+        User Risk
+        Sign-in Risk
+        Risk Detections
+    1.2 Authorization
       Azure RBAC
       Managed Identities
+      External Identities B2B/B2C
+    1.3 Identity Governance
       PIM – Just-in-Time
-      Conditional Access
-    Governance
+        Eligible vs Active
+        Approval Workflow
+      Access Reviews
+        Group Membership
+        App Assignments
+        Role Reviews
+      Entitlement Management
+        Catalogs
+        Access Packages
+        Connected Orgs
+      Lifecycle Workflows
+        Joiner
+        Mover
+        Leaver
+    1.4 Azure Governance
       Management Groups
       Azure Policy
-      Blueprints
       Cost Management & Tagging
-    Monitoring
+    1.5 Monitoring
       Azure Monitor
       Log Analytics / KQL
       Application Insights
@@ -86,14 +104,14 @@ flowchart TD
 
 | # | Factor Type | Example | Strength |
 |---|-------------|---------|---------|
-| 1 | Something you **are** + possession | FIDO2 Security Key | 🔒🔒🔒🔒🔒 Strongest |
+| 1 | Something you **are** + **have** | FIDO2 Security Key | 🔒🔒🔒🔒🔒 (Strongest) |
 | 2 | Something you **are** (biometric) | Windows Hello for Business | 🔒🔒🔒🔒🔒 |
 | 3 | Something you **have** (app) | Microsoft Authenticator (passwordless) | 🔒🔒🔒🔒 |
 | 4 | Certificate-based Auth | Smart card / PIV | 🔒🔒🔒🔒 |
 | 5 | App OTP | Authenticator app TOTP | 🔒🔒🔒 |
 | 6 | Hardware OATH token | OATH hardware token | 🔒🔒🔒 |
 | 7 | Software OTP | Authenticator app code | 🔒🔒 |
-| 8 | SMS / Voice call | SMS code to phone | 🔒 Weakest |
+| 8 | SMS / Voice call | SMS code to phone | 🔒 (Weakest) |
 
 > **Exam Caveat ⚠️:** SMS and voice call MFA should be **avoided** for high-security scenarios — SIM swapping attacks. Exam scenarios should favour Authenticator App or FIDO2.
 
@@ -116,9 +134,9 @@ flowchart LR
 | Feature | Required Licence |
 |---------|----------------|
 | Basic Conditional Access policies | **Entra ID P1** |
-| Risk-based Conditional Access | **Entra ID P2** |
 | Named Locations, compliance conditions | **Entra ID P1** |
-| Sign-in / User risk policies | **Entra ID P2** (Identity Protection) |
+| Risk-based Conditional Access | **Entra ID P2** |
+| Sign-in / User risk policies | **Entra ID P2** (part of Identity Protection) |
 
 > **Exam Caveats ⚠️:**
 > - **Sign-in risk** and **user risk** conditions require **P2** (Identity Protection)
@@ -127,7 +145,74 @@ flowchart LR
 
 ---
 
-## 👤 1.2 Design Authorisation Solutions
+### Entra ID Identity Protection
+
+**What Identity Protection does:** Detects suspicious identity-related activity in real time, assigns a risk level to each event, and feeds those risk signals into Conditional Access policies for automated remediation.
+
+```mermaid
+flowchart TD
+    subgraph DETECT["🔍 Risk Detection Engine"]
+        RD1["Leaked credentials\n(password found in dark web)"]
+        RD2["Anonymous IP address\n(Tor / VPN)"]
+        RD3["Atypical travel\n(impossible geography)"]
+        RD4["Malware-linked IP"]
+        RD5["Password spray\n(many accounts, few passwords)"]
+        RD6["Unfamiliar sign-in\nproperties"]
+        RD7["Entra ID Threat\nIntelligence"]
+    end
+
+    subgraph RISK["⚠️ Risk Levels"]
+        LOW["Low risk\n(low confidence)"]
+        MED["Medium risk"]
+        HIGH["High risk\n(high confidence)"]
+    end
+
+    subgraph POLICY["🛡️ Automated Response\n(via Conditional Access)"]
+        CA_SIGNIN["Sign-in Risk Policy\nBlock or require MFA\nat sign-in time"]
+        CA_USER["User Risk Policy\nBlock or require\npassword reset"]
+        CA_MFA["MFA Registration Policy\nForce MFA enrolment\nbefore risk occurs"]
+    end
+
+    subgraph BLADE["📊 Investigation Blades"]
+        RISKY_U["Risky Users\n(user-level risk score)"]
+        RISKY_S["Risky Sign-ins\n(per sign-in risk score)"]
+        DETECT_B["Risk Detections\n(individual events)"]
+    end
+
+    DETECT --> RISK
+    RISK --> POLICY
+    RISK --> BLADE
+```
+
+**Risk types — User Risk vs Sign-in Risk:**
+
+| Dimension | User Risk | Sign-in Risk |
+|-----------|-----------|-------------|
+| **What it measures** | Cumulative risk on an account (e.g., leaked credential) | Risk of a specific authentication attempt |
+| **Persists until** | Manually dismissed or remediated | Resolved at end of sign-in session |
+| **Self-remediation** | Secure password change (if SSPR enabled) | Complete MFA challenge |
+| **Admin action** | Dismiss user risk / confirm compromised | Dismiss / confirm sign-in |
+| **CA condition** | `User risk` ≥ Low/Medium/High | `Sign-in risk` ≥ Low/Medium/High |
+
+**Key risk detections to know:**
+
+| Detection | Risk Type | Why It Matters |
+|-----------|-----------|---------------|
+| Leaked credentials | User risk | Password found in credential dump — almost always High |
+| Anonymous IP | Sign-in risk | Tor exit node or anonymising proxy |
+| Atypical travel | Sign-in risk | Sign-in from two locations impossible to travel between |
+| Password spray | Sign-in / User risk | Broad low-volume attack across many accounts |
+| Entra ID Threat Intel | Both | Microsoft's own threat intelligence feed |
+
+> **Exam Caveats ⚠️:**
+> - Identity Protection requires **Entra ID P2** — the risk detections page and automated policies are not available in P1
+> - **Risk ≠ blocked**: by itself Identity Protection only *scores* risk. You need a **Conditional Access policy** with a risk condition to take action
+> - Users can **self-remediate** without admin intervention if SSPR and MFA are enabled — this is the recommended path for sign-in risk
+> - **Confirm compromised** escalates risk to High and triggers any CA policies at that level; **Dismiss** clears the risk without treatment
+
+---
+
+## 👤 1.2 Design Authorization Solutions
 
 ### Azure RBAC — Built-in Roles
 
@@ -182,7 +267,43 @@ graph LR
 > - Use **system-assigned** for simple single-resource scenarios
 > - Use **user-assigned** when multiple resources need the same permissions or when the identity must survive resource deletion
 
-### Privileged Identity Management (PIM)
+---
+
+## 🛡️ 1.3 Design Identity Governance Solutions
+
+**Identity Governance** = ensuring the right people have the right access to the right resources for the right amount of time — and that access is periodically validated and automatically revoked when no longer needed.
+
+Microsoft Entra ID Governance covers four pillars:
+
+```mermaid
+graph LR
+    GOVROOT["🛡️ Entra ID\nIdentity Governance"]
+    PIM_N["⏱️ PIM\nPrivileged Identity\nManagement"]
+    AR["🔍 Access Reviews\nPerodic validation\nof existing access"]
+    EM["📦 Entitlement\nManagement\nAccess lifecycle\nfor all users"]
+    LW["🔄 Lifecycle\nWorkflows\nHR-driven\nautomation"]
+
+    GOVROOT --> PIM_N
+    GOVROOT --> AR
+    GOVROOT --> EM
+    GOVROOT --> LW
+
+    PIM_N --> PIM_J["JIT activation\nApproval workflow\nAudit history"]
+    AR --> AR_S["Group review\nApp assignment\nRole review"]
+    EM --> EM_S["Catalogs\nAccess packages\nConnected orgs"]
+    LW --> LW_S["Joiner\nMover\nLeaver"]
+```
+
+| Pillar | Licence | Core Question Answered |
+|--------|---------|----------------------|
+| PIM | P2 | Who has privileged access *right now* and why? |
+| Access Reviews | P2 | Does this person *still need* this access? |
+| Entitlement Management | P2 | How does someone *request and get* access? |
+| Lifecycle Workflows | Entra ID Governance (P2+) | What happens *automatically* when someone joins, moves, or leaves? |
+
+---
+
+### ⏱️ Privileged Identity Management (PIM)
 
 **What PIM provides:**
 
@@ -190,24 +311,185 @@ graph LR
 - 📋 **Approval workflow** — require approval before activation
 - 🔐 **MFA on activation** — always require MFA to activate a privileged role
 - ⏰ **Time-bound** — access expires automatically
-- 📊 **Access reviews** — periodically validate who still needs access
+- 📊 **Access reviews** — periodically validate who still needs privileged roles
 - 📜 **Audit history** — full log of all activations and changes
 
-| Requirement | Detail |
-|-------------|--------|
+```mermaid
+flowchart LR
+    ELIG["👤 Eligible assignment\n(has the role but\nnot yet activated)"]
+    REQ["📝 User requests\nactivation"]
+    MFA_P["🔐 MFA verification\n(always required)"]
+    APPR{Approval\nrequired?}
+    APPROV["✅ Approver approves\n(or auto-approved)"]
+    ACTIVE["🔑 Active assignment\n(time-bound: e.g. 1–8 hrs)"]
+    EXPIRE["⏰ Auto-expires\nreturns to Eligible"]
+
+    ELIG --> REQ --> MFA_P --> APPR
+    APPR -->|Yes| APPROV --> ACTIVE
+    APPR -->|No| ACTIVE
+    ACTIVE --> EXPIRE
+```
+
+| Concept | Detail |
+|---------|--------|
 | Licence required | **Entra ID P2** |
-| Covers | Azure RBAC roles + Entra ID roles |
-| Max activation duration | Configurable (e.g., 1 hour, 8 hours) |
-| SLA | Standard Entra ID SLA (**99.99%**) |
+| Covers | Entra ID roles (e.g. Global Admin) + Azure RBAC roles |
+| Role states | **Eligible** (assigned, not active) · **Active** (currently elevated) |
+| Max activation duration | Configurable per role (typically 1–8 hours) |
+| Standing access | Anti-pattern — PIM eliminates permanently active admin roles |
+| SLA | **99.99%** (standard Entra ID) |
 
 > **Exam Caveats ⚠️:**
-> - PIM requires **Entra ID Premium P2** — not included in P1
-> - "Eligible" role = assigned but not yet activated; "Active" role = currently active
-> - Standing access (always-on admin roles) is an anti-pattern — PIM enforces JIT
+> - PIM requires **Entra ID P2** — not available in P1
+> - **Eligible** role = person *can* activate it but hasn't yet. **Active** role = currently elevated.
+> - Global Administrator is the highest Entra ID role — PIM can require dual approval for it
+> - PIM covers both **Entra ID directory roles** (e.g. Global Admin, Security Admin) and **Azure resource roles** (e.g. Owner on a subscription)
 
 ---
 
-## 🏛️ 1.3 Design Governance Solutions
+### 🔍 Access Reviews
+
+Access Reviews provide a structured, recurring process to validate that assigned access is still appropriate — and automatically remove it when it isn't.
+
+**What can be reviewed:**
+
+| Review Target | Who Typically Reviews | Frequency Options |
+|--------------|----------------------|------------------|
+| Group membership | Group owner, manager, or self | Weekly / Monthly / Quarterly / Semi-annual / Annual |
+| Application assignments | App owner or designated reviewer | Same |
+| Entra ID directory roles | Security admin or Global Admin | Same |
+| Azure resource roles (via PIM) | Resource owner | Same |
+| Privileged role assignments | PIM reviewer | Same |
+
+```mermaid
+flowchart TD
+    CREATE["🛠️ Admin creates\nAccess Review\n(scope + reviewers + schedule)"]
+    NOTIFY["📧 Reviewers notified\n(email + portal)"]
+    REVIEW{"Reviewer decision"}
+    APPROVE["✅ Approve\nAccess continues"]
+    DENY["❌ Deny\nAccess flagged for removal"]
+    NORESPONSE["⏳ No response\nby deadline"]
+    AUTOAPPLY["⚙️ Auto-apply results\n(if enabled)"]
+    REMOVE["🗑️ Access removed\nautomatically"]
+    KEEPDEFAULT["Settings determine:\nKeep / Remove\non no-response"]
+
+    CREATE --> NOTIFY --> REVIEW
+    REVIEW --> APPROVE
+    REVIEW --> DENY --> AUTOAPPLY --> REMOVE
+    REVIEW --> NORESPONSE --> KEEPDEFAULT
+```
+
+**Key configuration decisions:**
+
+| Setting | Options | Exam Relevance |
+|---------|---------|---------------|
+| **Reviewers** | Resource owners · Managers · Selected users · Self-review | Self-review = users approve own access (light-touch) |
+| **Duration** | 1–180 days | Longer = more time for reviewers; missed reviews = risk |
+| **Auto-apply results** | On / Off | Must be On to remove access automatically at close |
+| **On no response** | Keep access / Remove access / Take recommendations | "Remove access" = safest; "Recommendations" = ML-assisted |
+| **Recommendations** | Based on last sign-in activity | Users with no sign-in in 30+ days flagged for removal |
+
+> **Exam Caveats ⚠️:**
+> - Access Reviews require **Entra ID P2**
+> - **Auto-apply must be explicitly enabled** — if off, an admin must manually apply review results after the review period closes
+> - Access Reviews are **separate from PIM** but they integrate: PIM has its own built-in access review schedule for privileged roles
+> - The exam may describe access reviews as "periodic certification of access" — same concept
+> - "On no response → Remove" is the recommended setting for security — reviewers who don't act result in access removal, not continuation
+
+---
+
+### 📦 Entitlement Management
+
+Entitlement Management governs **how access is requested, approved, assigned, and expired** for both internal employees and external guests (B2B). It replaces ad-hoc "email your manager to get SharePoint access" processes with a self-service, policy-driven workflow.
+
+**Core objects:**
+
+```mermaid
+graph TD
+    CATALOG["📁 Catalog\n(container of resources\nand access packages)"]
+    AP["📦 Access Package\n(bundle of resource roles:\ngroups + apps + SharePoint sites)"]
+    POL["📋 Policy\n(who can request,\napprovals, expiry, reviews)"]
+    REQ["👤 User Request\n(internal or external guest)"]
+    APPROVAL["✅ Approval\n(0, 1, or 2-stage)"]
+    ASSIGN["🔑 Assignment\n(time-bound access granted)"]
+    EXPIRY["⏰ Expiry / Review\n(auto-remove or access review)"]
+    CONN["🌍 Connected Org\n(external partner tenant\nallowed to request)"]
+
+    CATALOG --> AP
+    AP --> POL
+    POL --> REQ
+    REQ --> APPROVAL
+    APPROVAL --> ASSIGN
+    ASSIGN --> EXPIRY
+    CONN --> REQ
+```
+
+**Key concepts:**
+
+| Object | Description | Exam Signal |
+|--------|-------------|-------------|
+| **Catalog** | Container grouping access packages and the resources they reference | "Delegate package management to a department owner" |
+| **Access Package** | Bundles one or more resource roles into a single requestable unit | "Single request gives access to group + app + SharePoint" |
+| **Policy** | Controls who can request, approval stages, max duration, access reviews | "External partners should get 90-day auto-expiring access" |
+| **Connected Organization** | External Entra ID tenant or domain allowed to request access packages | "Contractors from partner.com can self-serve project access" |
+| **Assignment** | Active access grant from an approved request | Time-bound; renewed by new request or auto-renewal |
+
+**Entitlement Management vs PIM vs Access Reviews:**
+
+| Feature | PIM | Access Reviews | Entitlement Management |
+|---------|-----|---------------|----------------------|
+| **Focus** | Privileged role JIT activation | Validating *existing* access | Requesting and granting *new* access |
+| **Trigger** | User self-activates | Scheduled review | User submits a request |
+| **Best for** | Admin / high-privilege roles | Recurring certification of any access | Self-service access requests (employees + guests) |
+| **Handles external users?** | ❌ No | ✅ Yes (guest group membership) | ✅ Yes (Connected Organizations) |
+| **Licence** | P2 | P2 | P2 |
+
+> **Exam Caveats ⚠️:**
+> - Entitlement Management requires **Entra ID P2**
+> - **Connected Organizations** are the mechanism for B2B external access requests — the partner doesn't need to be managed by you, just an Entra ID tenant or verified domain
+> - Access packages can contain groups, apps, and SharePoint Online sites — but not individual SharePoint files or folders
+> - When an access package policy includes an **access review**, the review is triggered automatically at the configured interval — no manual scheduling needed
+> - Entitlement Management does **not** replace RBAC for Azure resource access (subscriptions, VMs, etc.); it manages **directory-level and application access**
+
+---
+
+### 🔄 Lifecycle Workflows
+
+Lifecycle Workflows automate identity tasks that need to happen when an employee **joins, moves within, or leaves** an organisation, triggered by HR system attributes (hire date, department change, last day).
+
+```mermaid
+flowchart LR
+    JOINER["🧑‍💼 Joiner\n(New hire)"]
+    MOVER["🔄 Mover\n(Role / dept change)"]
+    LEAVER["🚪 Leaver\n(Offboarding)"]
+
+    JOINER -->|"Day –14 to Day 0"| JT1["Generate\nTemporary Access Pass"]
+    JOINER -->|"Day 0"| JT2["Add to onboarding\ngroups and apps"]
+    JOINER -->|"Day +7"| JT3["Send welcome\nnotification"]
+
+    MOVER -->|"On change"| MT1["Add to new\ndepartment group"]
+    MOVER -->|"On change"| MT2["Remove from\nold department group"]
+
+    LEAVER -->|"Last day"| LT1["Disable account"]
+    LEAVER -->|"Last day +7"| LT2["Remove all group\nmemberships"]
+    LEAVER -->|"Last day +30"| LT3["Delete account"]
+```
+
+| Aspect | Detail |
+|--------|--------|
+| Licence required | **Microsoft Entra ID Governance** (superset of P2) |
+| Trigger | HR attribute changes (employeeHireDate, employeeLeaveDate, jobTitle) |
+| Integration | Works with Workday, SAP SuccessFactors, and other HR connectors via Entra provisioning |
+| Task types | Generate TAP · Add/remove group membership · Enable/disable account · Delete account · Send email notification |
+
+> **Exam Caveats ⚠️:**
+> - Lifecycle Workflows require the **Entra ID Governance** licence — this is distinct from P1 and P2, though P2 is included within it
+> - The key differentiator vs Azure AD provisioning is **temporal triggers**: Lifecycle Workflows act *before* the first day (pre-boarding) and *after* the last day (post-offboarding), not just at the moment of account creation
+> - **Temporary Access Pass (TAP)** generation on day-1 is a common Lifecycle Workflows exam scenario — it lets a new hire enrol in MFA without needing a password
+
+---
+
+## 🏛️ 1.4 Design Azure Governance Solutions
 
 ### Management Group Hierarchy Design Patterns
 
@@ -274,7 +556,7 @@ flowchart LR
 **Recommended tag taxonomy:**
 
 | Tag Name | Example Value | Purpose |
-|----------|--------------|---------|
+|----------|--------------|---------||
 | `Environment` | `Production` / `Dev` / `Test` | Filter cost by environment |
 | `Owner` | `team-finance@contoso.com` | Accountability and alerts |
 | `CostCenter` | `FIN-001` | Chargeback / showback reporting |
@@ -289,7 +571,7 @@ flowchart LR
 
 ---
 
-## 📊 1.4 Design Monitoring Solutions
+## 📊 1.5 Design Monitoring Solutions
 
 ### Azure Monitor Architecture
 
@@ -403,7 +685,17 @@ flowchart TD
 | User needs read access to a storage account only | **Storage Blob Data Reader** role (RBAC) |
 | Audit which resources don't have required tags (no block) | **Azure Policy (Audit)** effect |
 | Auto-deploy a Log Analytics agent to all new VMs | **Azure Policy (DeployIfNotExists)** |
+| User account flagged as compromised — force password reset | **Identity Protection** User Risk Policy → require password change on high risk |
+| Detect sign-in from Tor exit node and block automatically | **Identity Protection** Sign-in Risk Policy (Anonymous IP detection) + **Conditional Access** block on High risk |
+| Employee's leaked credential detected — what risk type? | **User risk** (not sign-in risk) — persists on account until remediated |
+| Quarterly review of who has access to the Finance app | **Access Reviews** on application assignment, quarterly recurrence, auto-apply |
+| Remove stale guest access automatically after 90-day review | **Access Reviews** — on no response: Remove access, auto-apply enabled |
+| External contractor needs access to 3 SharePoint sites + 1 app | **Entitlement Management** access package bundling all four resources |
+| Partner company employees should self-request project access | **Entitlement Management** + **Connected Organization** for partner tenant |
+| New hire should get MFA enrolled before first day, auto | **Lifecycle Workflows** (Joiner) → Generate Temporary Access Pass task |
+| Disable account and remove all groups on last day automatically | **Lifecycle Workflows** (Leaver) → Disable account + Remove group memberships tasks |
+| Department head needs to certify their team's app access monthly | **Access Reviews** — reviewer = manager, monthly recurrence, self-review option |
 
 ---
 
-[← 00 - Azure Prerequisites](/az-305-study-notes/00-azure-prerequisites/) | [02 - Data Storage Solutions →](/az-305-study-notes/02-data-storage-solutions/)
+*← [00 - Azure Prerequisites](/az-305-study-notes/00-azure-prerequisites/) | [02 - Data Storage Solutions →](/az-305-study-notes/02-data-storage-solutions/)*
