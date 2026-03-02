@@ -17,7 +17,7 @@ mermaid: true
 
 ```mermaid
 mindmap
-  root((Domain 1\n25–30%))
+  root((Domain 1))
     1.1 Authentication
       Entra ID
       Hybrid Identity
@@ -167,7 +167,7 @@ flowchart TD
         HIGH["High risk\n(high confidence)"]
     end
 
-    subgraph POLICY["🛡️ Automated Response\n(via Conditional Access)"]
+    subgraph POLICY["🛡️ Automated Response (via Conditional Access)"]
         CA_SIGNIN["Sign-in Risk Policy\nBlock or require MFA\nat sign-in time"]
         CA_USER["User Risk Policy\nBlock or require\npassword reset"]
         CA_MFA["MFA Registration Policy\nForce MFA enrolment\nbefore risk occurs"]
