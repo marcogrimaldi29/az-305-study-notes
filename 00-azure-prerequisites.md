@@ -57,7 +57,7 @@ graph TD
 |------|-----------|---------|
 | **Zonal** | Pinned to a specific zone (you choose) | VMs, Managed Disks |
 | **Zone-redundant** | Automatically spreads across zones | ZRS Storage, Azure SQL, App Gateway v2 |
-| **Non-zonal** (regional) | No zone awareness | Basic tier services |
+| **Non-zonal** / **Regional** | No zone awareness | Basic tier services |
 
 > **Exam Caveat ⚠️:** AZs protect against **datacenter-level** failures only — not regional failures. To survive a region outage you need geo-redundancy or multi-region architecture.
 
@@ -141,26 +141,26 @@ graph LR
 | **D-series** | Balanced (general purpose) | Web servers, app servers, mid-size DBs |
 | **E-series** | Memory-optimised | In-memory DBs, SAP HANA (small) |
 | **F-series** | Compute-optimised | Batch processing, gaming |
-| **M-series** | Very large memory | SAP HANA (large), large in-memory DBs |
-| **L-series** | Storage-optimised | High IOPS NoSQL, data warehousing |
-| **N-series (GPU)** | GPU workloads | ML training, rendering, visualisation |
 | **H-series** | HPC | Simulations, fluid dynamics, modelling |
+| **L-series** | Storage-optimised | High IOPS NoSQL, data warehousing |
+| **M-series** | Memory-optimised (very large memory) | SAP HANA (large), large in-memory DBs |
+| **N-series (GPU)** | GPU workloads | ML training, rendering, visualisation |
 
 **VM Managed Disk SKUs:**
 
 | Disk Type | Max IOPS | Latency | SLA |
 |-----------|---------|---------|-----|
-| Standard HDD | 500 IOPS | High | No SLA |
-| Standard SSD | 6,000 IOPS | Medium | ✅ 99.9% |
-| Premium SSD | 20,000 IOPS | Low | ✅ 99.9% |
-| Premium SSD v2 | 80,000 IOPS | Very low | ✅ 99.9% |
-| Ultra Disk | 160,000 IOPS | Sub-ms | ✅ 99.9% |
+| **Standard HDD** | 500 IOPS | High | No SLA |
+| **Standard SSD** | 6,000 IOPS | Medium | ✅ 99.9% |
+| **Premium SSD** | 20,000 IOPS | Low | ✅ 99.9% |
+| **Premium SSD v2** | 80,000 IOPS | Very low | ✅ 99.9% |
+| **Ultra Disk** | 160,000 IOPS | Sub-ms | ✅ 99.9% |
 
 > **Exam Caveat ⚠️:** Ultra Disks require a compatible VM size **and** must be in the same Availability Zone as the VM. They cannot be used as OS disks.
 
 ### Azure App Service — Pricing Tiers
 
-| Tier | Instances | Auto-scale | Slots | Custom Domains | VNET Integration | SLA |
+| Tier | Instances | Auto-scale | Staging /Deployment Slots | Custom Domains | VNET Integration | SLA |
 |------|-----------|-----------|-------|---------------|-----------------|-----|
 | **Free (F1)** | Shared | ❌ | 0 | ❌ | ❌ | No SLA |
 | **Shared (D1)** | Shared | ❌ | 0 | ✅ | ❌ | No SLA |
@@ -199,11 +199,11 @@ graph LR
 
 | Service | OSI Layer | Scope | SSL Offload | WAF | SLA |
 |---------|-----------|-------|------------|-----|-----|
-| **Azure Load Balancer (Standard)** | L4 | Regional | ❌ | ❌ | **99.99%** |
+| **Azure Public Load Balancer (Standard)** | L4 | Regional / Global tier | ❌ | ❌ | **99.99%** |
 | **Application Gateway (v2)** | L7 | Regional | ✅ | ✅ (add-on) | **99.95%** |
 | **Azure Front Door (Standard/Premium)** | L7 | Global | ✅ | ✅ | **99.99%** |
 | **Traffic Manager** | DNS | Global | ❌ | ❌ | **99.99%** |
-| **Internal Load Balancer** | L4 | Regional (private) | ❌ | ❌ | **99.99%** |
+| **Azure Internal Load Balancer** | L4 | Regional (only private) | ❌ | ❌ | **99.99%** |
 
 > **Exam Caveats ⚠️:**
 > - Use **Application Gateway** for HTTP/HTTPS within a region with path-based routing or WAF
