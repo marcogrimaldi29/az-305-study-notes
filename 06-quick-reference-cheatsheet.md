@@ -88,7 +88,7 @@ graph LR
     subgraph T1["❌ No SLA"]
         E1["App Service Free/Shared"]
         E2["AKS Free tier"]
-        E3["Redis Basic tier"]
+        E3["Azure Managed Redis\n(HA disabled)"]
     end
 ```
 
@@ -112,7 +112,8 @@ graph LR
 | **App Service** | Basic tier | **99.95%** | ~22 minutes |
 | **App Service** | Free / Shared | **No SLA** | — |
 | **AKS** | Free tier | **No SLA** | — |
-| **Azure Cache for Redis** | Basic | **No SLA** | — |
+| **Azure Managed Redis** | HA disabled | **No SLA** | — |
+| **Azure Managed Redis** | HA enabled | **99.99%** | ~4.4 minutes |
 | **Cosmos DB** | Single region | **99.99%** | ~4.4 minutes |
 
 ---
@@ -319,7 +320,7 @@ mindmap
 - [ ] VMSS — Uniform vs Flexible orchestration
 - [ ] Service Bus vs Storage Queue vs Event Hubs vs Event Grid
 - [ ] API Management SKU tiers and feature gates
-- [ ] Azure Cache for Redis SKU tiers (Basic has no SLA)
+- [ ] Azure Managed Redis tiers (Memory Optimized / Balanced / Compute Optimized / Flash Optimized) — SLA depends on HA enabled, not tier; all tiers support geo-replication and persistence
 - [ ] Migration 6 Rs — Rehost, Replatform, Refactor, Rebuild, Replace, Retire
 - [ ] Azure Migrate workflow — discovery → assessment → replicate → test → migrate
 - [ ] VPN Gateway vs ExpressRoute — encrypted internet vs private circuit

@@ -209,7 +209,7 @@ graph LR
 
 | Pattern | Service | Benefit |
 |---------|---------|---------|
-| **Caching** | Azure Cache for Redis | Reduce DB load, sub-ms latency |
+| **Caching** | Azure Managed Redis | Reduce DB load, sub-ms latency |
 | **CDN / Edge caching** | Azure Front Door, Azure CDN | Serve static content from edge nodes |
 | **Read replicas** | SQL Business Critical, Cosmos DB | Offload reads from primary |
 | **Database partitioning** | Cosmos DB, Azure SQL Hyperscale | Distribute data and queries |
