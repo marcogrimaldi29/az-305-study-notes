@@ -196,8 +196,12 @@ graph TD
 | Azure SQL Database | Zone-redundant config (BC/GP) | **99.99%** |
 | Azure Storage ZRS | Automatic across zones | **99.9%** |
 | Azure Kubernetes Service | Zone-spread node pools | **99.99%** |
-| Azure Cache for Redis | Zone-redundant (Premium) | **99.9%** |
+| Azure Managed Redis | Zone-redundant (Premium/Enteprise) | **99.9%/99.99%**  |
 | Azure Service Bus | Zone-redundant (Premium) | **99.9%** |
+
+> **Exam Caveat ⚠️:** 
+> - **Azure Managed Redis** SLA is **99.999% in multi-region active-active geo-replication**, but only 99.9% in zone-redundant mode (Premium tier) and 99.99% in zone-redundant mode (Enterprise tier).
+> - **Azure Storage ZRS** is often described as having many nines (Durability / Data protection), but the official SLA is still 99.9% — the ZRS redundancy protects against data loss, but not necessarily downtime.
 
 ---
 
