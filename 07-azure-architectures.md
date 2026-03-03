@@ -580,7 +580,7 @@ graph LR
     AFD3 --> AGW3[Application Gateway\nRegional WAF]
     AGW3 --> WEB[App Service\nweb and API tier]
     WEB --> COSMOS3[Cosmos DB\nproduct catalogue]
-    WEB --> REDIS[Azure Cache for Redis\nsessions and cart]
+    WEB --> REDIS[Azure Managed Redis\nsessions and cart]
     WEB --> SB3[Service Bus\norder queue]
     SB3 --> ORD[Order Service\nFunction or Container App]
     ORD --> SQLR[SQL Database\ntransactional orders]
@@ -591,7 +591,7 @@ graph LR
 |-------------|---------------|-----|
 | Payment data isolation (PCI DSS CDE) | **App Service Isolated** (ASE) + **Private Endpoints** | Single-tenant environment; no shared infra |
 | Peak traffic (Black Friday) | **App Service Autoscale** + **Azure Front Door** | Horizontal scale-out; global load distribution |
-| Product catalogue + low latency | **Cosmos DB** + **Redis Cache** | Global reads from Cosmos; Redis for session/cart cache |
+| Product catalogue + low latency | **Cosmos DB** + **Azure Managed Redis** | Global reads from Cosmos; Redis for session/cart cache |
 | EU customer data (GDPR) | **EU regions** + **Azure Policy** deny non-EU | Data subject rights require data to stay in EU |
 | Real-time fraud detection | **Event Hubs** + **Stream Analytics** | Real-time transaction stream processing |
 | Static assets and CDN | **Blob Storage** + **Azure Front Door CDN** | Global edge caching for images, JS, CSS |
