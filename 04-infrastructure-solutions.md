@@ -30,7 +30,7 @@ mindmap
       Service Bus & Event Grid
       Event Hubs
       API Management
-      Azure Cache for Redis
+      Azure Managed Redis
       Azure CDN & Front Door
       Logic Apps
     Migration Solutions
@@ -229,20 +229,53 @@ graph LR
 
 ---
 
-### Azure Cache for Redis — Tier Comparison
+### Azure Managed Redis — Tier Comparison
 
-| Tier | Max Memory | Clustering | Persistence | Geo-Replication | SLA |
-|------|-----------|-----------|------------|----------------|-----|
-| **Basic** | 53 GB | ❌ | ❌ | ❌ | No SLA |
-| **Standard** | 53 GB | ❌ | ❌ | ❌ | **99.9%** |
-| **Premium** | 1.2 TB | ✅ | ✅ (RDB/AOF) | ✅ (passive) | **99.9%** |
-| **Enterprise** | 2 TB | ✅ | ✅ | ✅ (active-active) | **99.9%** |
-| **Enterprise Flash** | 13 TB | ✅ | ✅ | ✅ | **99.9%** |
+> ⚠️ **Azure Cache for Redis is retiring.** Azure Managed Redis (AMR) is now GA and the recommended replacement. Basic/Standard/Premium retire **September 30, 2028**; Enterprise/Enterprise Flash retire **March 31, 2027**. Microsoft recommends migrating now rather than waiting.
+
+Azure Managed Redis is built on **Redis Enterprise** software (not the community OSS fork). All tiers support clustering, persistence, and active geo-replication by default — enterprise features that were previously gated behind higher tiers in Azure Cache for Redis.
+
+**Performance tier selection — the new model:**
+
+| Tier | vCPU:Memory Ratio | Storage | Best For | Status |
+|------|------------------|---------|---------|--------|
+| **Memory Optimized** | 1:8 (most memory per vCPU) | RAM only | Memory-intensive workloads; large datasets, lower throughput needs | GA (≤235 GB); Preview (>235 GB) |
+| **Balanced** | 1:4 | RAM only | Standard workloads; healthy mix of memory and compute | GA (≤235 GB); Preview (>235 GB) |
+| **Compute Optimized** | 1:2 (most vCPU per GB) | RAM only | Throughput-intensive, high-performance, mission-critical | GA (≤235 GB); Preview (>235 GB) |
+| **Flash Optimized** | — | 20% RAM + 80% NVMe | Large datasets at lower cost; read-heavy, infrequently accessed data | Preview |
+
+**SLA and availability:**
+
+| Configuration | SLA |
+|--------------|-----|
+| High availability disabled (no replication) | No SLA — dev/test only |
+| HA enabled (primary + replica across 2 nodes) | **99.99%** |
+| HA + deployment across 3+ regions with 3+ AZs | **99.999%** |
+
+**Key architectural details:**
+
+- **Zone redundant by default** when HA is enabled — primary and replica shards placed across AZs automatically
+- **~20% memory reserved** per instance as a buffer for replication, failover, and active geo-replication operations
+- **Active geo-replication** available on all tiers (was Enterprise-only in Azure Cache for Redis)
+- **Clustering on by default** — clients must support Redis Cluster API; nonclustered option available up to 25 GB
+- **Flash Optimized**: keys always in RAM, values spill to NVMe; well-suited for read-heavy workloads with large values and a "hot" key subset; not suitable for write-heavy or uniformly random access patterns
+
+**Legacy Azure Cache for Redis — tier mapping for migration:**
+
+| Legacy Tier | Retiring | Recommended Migration Target |
+|-------------|---------|------------------------------|
+| Basic | Sep 30, 2028 | AMR Balanced (smallest SKU, disable HA for dev/test) |
+| Standard | Sep 30, 2028 | AMR Balanced |
+| Premium | Sep 30, 2028 | AMR Memory Optimized or Balanced |
+| Enterprise | Mar 31, 2027 | AMR Compute Optimized or Balanced |
+| Enterprise Flash | Mar 31, 2027 | AMR Flash Optimized |
 
 > **Exam Caveats ⚠️:**
-> - **Basic** has no SLA and no replication — dev/test only
-> - **Active geo-replication** (multi-region write for Redis) requires **Enterprise** tier
-> - **Persistence** (RDB/AOF for data durability) requires **Premium** or higher
+> - **Active geo-replication is no longer Enterprise-only** — it is available on all Azure Managed Redis tiers. The old rule (Enterprise required) applied to Azure Cache for Redis, which is now retiring.
+> - **SLA requires HA to be enabled.** Disabling HA halves cost but gives no SLA and risks data loss — dev/test only.
+> - **Flash Optimized** is still in **Public Preview** — avoid it as the exam answer when "production" or "GA" is a constraint.
+> - **Tiers select by workload profile, not by feature gates.** In AMR, all tiers get clustering, persistence, and geo-replication; tier choice is about the memory-to-compute ratio you need.
+> - The exam may still reference Azure Cache for Redis tiers until materials are updated — know both models and watch for context clues (retirement notices, "new deployment", "Azure Managed Redis") to determine which tier model a question uses.
 
 ---
 
