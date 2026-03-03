@@ -101,7 +101,7 @@ pie title AZ-305 — Official Exam Domain Weights
 <p>Key numbers, SLA tables, decision matrices, EU pricing, exam traps, and pre-exam checklist.</p>
 <a href="./06-quick-reference-cheatsheet/" class="btn btn-outline fs-5">Read →</a>
 </div>
-<div style="border:1px solid #0078d4; border-radius:8px; padding:1rem; background:#2d2f31;">
+<div style="border:1px solid #d4003c; border-radius:8px; padding:1rem; background:#2d2f31;">
 <h3 style="margin-top:0;">🏗️ Azure Architectures (AAC)</h3>
 <p>Architecture choices by type (compute, messaging, routing, data, security) and compliance implications for financial services, healthcare, government, retail, energy, and manufacturing.</p>
 <a href="./07-azure-architectures/" class="btn btn-outline fs-5">Read →</a>
