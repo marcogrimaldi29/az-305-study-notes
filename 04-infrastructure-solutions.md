@@ -94,13 +94,13 @@ flowchart TD
 
 ### Azure Functions — Hosting Plans Comparison
 
-| Plan | Scale | Cold Start | Timeout | VNet Integration | SLA |
+| Plan | Scale | Cold Start | Timeout (Default / Max) | VNet Integration | SLA |
 |------|-------|-----------|---------|-----------------|-----|
-| **Consumption** | Auto (unlimited) | ✅ Yes | 5 min (max 10) | ❌ No | **99.9%** |
-| **Flex Consumption** | Auto + pre-provisioned | ✅ Reduced | Unlimited | ✅ Yes | **99.9%** |
-| **Premium (EP)** | Auto | ❌ Pre-warmed | Unlimited | ✅ Yes | **99.9%** |
-| **Dedicated (App Svc)** | Manual / auto | ❌ Always on | Unlimited | ✅ Yes | **99.9%** |
-| **Container Apps** | Auto (KEDA) | ✅ Possible | Unlimited | ✅ Yes | **99.9%** |
+| **Consumption** | Auto (unlimited) | ✅ Yes | 5m (max 10m) | ❌ No | **99.9%** |
+| **Flex Consumption** | Auto + pre-provisioned | ✅ Reduced | 30m (max Unbounded) | ✅ Yes | **99.9%** |
+| **Premium (EP)** | Auto | ❌ Pre-warmed | 30m (max Unbounded) | ✅ Yes | **99.9%** |
+| **Dedicated (App Svc)** | Manual / auto | ❌ Always on | 30m (max Unbounded) | ✅ Yes | **99.9%** |
+| **Container Apps** | Auto (KEDA) | ✅ Possible | 30m (max Unbounded) | ✅ Yes | **99.9%** |
 
 > **Exam Caveats ⚠️:**
 > - **Consumption plan** cannot use **VNet Integration** — use Premium or Dedicated if needed

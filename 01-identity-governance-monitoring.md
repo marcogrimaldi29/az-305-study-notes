@@ -17,7 +17,7 @@ mermaid: true
 
 ```mermaid
 mindmap
-  root((Domain 1))
+  root((Identity, Governance & Monitoring))
     1.1 Authentication
       Entra ID
       Hybrid Identity
