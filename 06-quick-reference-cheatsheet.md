@@ -26,10 +26,10 @@ mermaid: true
 
 ```mermaid
 pie title AZ-305 Domain Weight Distribution
-    "Domain 4: Infrastructure (30–35%)" : 32
-    "Domain 1: Identity & Governance (25–30%)" : 25
-    "Domain 2: Data Storage (25–30%)" : 25
-    "Domain 3: Business Continuity (15–20%)" : 18
+    " Infrastructure (30–35%)" : 32
+    " Identity & Governance (25–30%)" : 25
+    " Data Storage (25–30%)" : 25
+    " Business Continuity (15–20%)" : 18
 ```
 
 ---
@@ -191,7 +191,7 @@ graph LR
 | Feature | P1 | P2 |
 |---------|----|----|
 | Basic Conditional Access | ✅ | ✅ |
-| Risk-based Conditional Access | ❌ | ✅ |
+| **Risk-based Conditional Access** | ❌ | ✅ |
 | MFA (per-user) | ✅ | ✅ |
 | **Privileged Identity Management (PIM)** | ❌ | ✅ |
 | **Identity Protection (risk scores)** | ❌ | ✅ |
@@ -201,7 +201,7 @@ graph LR
 | SSO (unlimited apps) | ✅ | ✅ |
 | Named Locations in CA | ✅ | ✅ |
 | Device-based Conditional Access | ✅ | ✅ |
-| MFA Registration Policy | ❌ | ✅ |
+| **MFA Registration Policy** | ❌ | ✅ |
 
 ---
 
