@@ -10,9 +10,9 @@ mermaid: true
 # 07 — Azure Architectures (AAC)
 {: .no_toc }
 
-> Architecture choices by type · Industry compliance & solution selection
-> 📁 [← Back to Home](/az-305-study-notes/)
-> 🔗 Source: [Azure Architecture Center (AAC)](https://learn.microsoft.com/en-us/azure/architecture/) · [Azure Compliance documentation](https://learn.microsoft.com/en-us/azure/compliance/) · [Microsoft Trust Center](https://www.microsoft.com/en-us/trust-center)
+> - Architecture choices by type · Industry compliance & solution selection
+> - 📁 [← Back to Home](/az-305-study-notes/)
+> - 🔗 Source: [Azure Architecture Center (AAC)](https://learn.microsoft.com/en-us/azure/architecture/) · [Azure Compliance documentation](https://learn.microsoft.com/en-us/azure/compliance/) · [Microsoft Trust Center](https://www.microsoft.com/en-us/trust-center)
 
 ---
 
@@ -226,6 +226,12 @@ flowchart TD
 | **Application Gateway** | L7 | Regional | ✅ WAF v2 | ✅ | 99.95% |
 | **Azure Front Door** | L7 | Global | ✅ WAF | ✅ | 99.99% |
 | **Traffic Manager** | DNS (L7) | Global | ❌ | ❌ | 99.99% |
+
+> **Exam Caveats ⚠️**
+> - **Azure Load Balancer** also has a Global tier. However, the exam focuses on the Regional tier for *"HA ports / inbound scenarios"*; for global TCP/UDP load balancing, the exam answer is still Traffic Manager (DNS-based).
+> - **Azure Front Door vs Application Gateway**: AFD is the exam answer for *"global HTTP/S with WAF and CDN"*; AppGW is for *"regional HTTP/S with WAF and SSL offload"*.
+> - **Traffic Manager** is DNS-based only — it cannot do SSL offload or WAF. Additionally, it does not work internally.
+> - **Azure Gateway Load Balancer (GWLB)** is not in the AAC decision tree but is an important exam trap. It is a regional L4 service for transparently inserting NVAs (firewalls, IDPS) into a VNet. It does not do load balancing itself; it relies on an external Load Balancer to distribute traffic to the NVAs (internal or set as backend of another Azure Load Balancer).
 
 #### Network Topology — Hub-Spoke vs Virtual WAN
 

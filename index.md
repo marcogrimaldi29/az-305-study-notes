@@ -72,7 +72,7 @@ pie title AZ-305 — Official Exam Domain Weights
 <a href="./01-identity-governance-monitoring/" class="btn btn-outline fs-5">Read →</a>
 </div>
 
-<div style="border:1px solid #1a73e8; border-radius:8px; padding:1rem; background:#2d2f31;">
+<div style="border:1px solid #1ab8e8; border-radius:8px; padding:1rem; background:#2d2f31;">
 <h3 style="margin-top:0;">🗄️ Domain 2 — Data Storage</h3>
 <p><strong>25–30%</strong> of exam. SQL family, Cosmos DB consistency, Blob tiers, ADLS Gen2, Synapse, ADF.</p>
 <a href="./02-data-storage-solutions/" class="btn btn-outline fs-5">Read →</a>
@@ -84,24 +84,24 @@ pie title AZ-305 — Official Exam Domain Weights
 <a href="./03-business-continuity/" class="btn btn-outline fs-5">Read →</a>
 </div>
 
-<div style="border:1px solid #ea4335; border-radius:8px; padding:1rem; background:#2d2f31;">
+<div style="border:1px solid #eadb35; border-radius:8px; padding:1rem; background:#2d2f31;">
 <h3 style="margin-top:0;">🏗️ Domain 4 — Infrastructure</h3>
 <p><strong>30–35%</strong> of exam — heaviest domain. Compute, networking, migrations, messaging, API Management.</p>
 <a href="./04-infrastructure-solutions/" class="btn btn-outline fs-5">Read →</a>
 </div>
 
-<div style="border:1px solid #f4b400; border-radius:8px; padding:1rem; background:#2d2f31;">
+<div style="border:1px solid #f43d00; border-radius:8px; padding:1rem; background:#2d2f31;">
 <h3 style="margin-top:0;">🏛️ Well-Architected & CAF</h3>
 <p>WAF 5 pillars (Reliability, Security, Cost, Ops, Performance) + Cloud Adoption Framework lifecycle.</p>
 <a href="./05-well-architected-framework/" class="btn btn-outline fs-5">Read →</a>
 </div>
 
-<div style="border:1px solid #ab47bc; border-radius:8px; padding:1rem; background:#2d2f31;">
+<div style="border:1px solid #bc4753; border-radius:8px; padding:1rem; background:#2d2f31;">
 <h3 style="margin-top:0;">⚡ Quick Reference Cheatsheet</h3>
 <p>Key numbers, SLA tables, decision matrices, EU pricing, exam traps, and pre-exam checklist.</p>
 <a href="./06-quick-reference-cheatsheet/" class="btn btn-outline fs-5">Read →</a>
 </div>
-<div style="border:1px solid #d4003c; border-radius:8px; padding:1rem; background:#2d2f31;">
+<div style="border:1px solid #c900d4; border-radius:8px; padding:1rem; background:#2d2f31;">
 <h3 style="margin-top:0;">🏗️ Azure Architectures (AAC)</h3>
 <p>Architecture choices by type (compute, messaging, routing, data, security) and compliance implications for financial services, healthcare, government, retail, energy, and manufacturing.</p>
 <a href="./07-azure-architectures/" class="btn btn-outline fs-5">Read →</a>

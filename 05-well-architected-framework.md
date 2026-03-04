@@ -8,8 +8,8 @@ mermaid: true
 ---
 
 # 05 — Azure Well-Architected Framework & Cloud Adoption Framework
-> Based on Microsoft Learn modules: *Azure Well-Architected Framework Introduction* & *Cloud Adoption Framework Introduction*
-> 📁 [← Back to Home](/az-305-study-notes/)
+> - Based on Microsoft Learn modules: *Azure Well-Architected Framework Introduction* & *Cloud Adoption Framework Introduction*
+> - 📁 [← Back to Home](/az-305-study-notes/)
 
 ---
 
