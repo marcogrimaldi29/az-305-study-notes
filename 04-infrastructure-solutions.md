@@ -96,11 +96,11 @@ flowchart TD
 
 | Plan | Scale | Cold Start | Timeout (Default / Max) | VNet Integration | SLA |
 |------|-------|-----------|---------|-----------------|-----|
-| **Consumption** | Auto (unlimited) | ✅ Yes | 5m (max 10m) | ❌ No | **99.9%** |
-| **Flex Consumption** | Auto + pre-provisioned | ✅ Reduced | 30m (max Unbounded) | ✅ Yes | **99.9%** |
-| **Premium (EP)** | Auto | ❌ Pre-warmed | 30m (max Unbounded) | ✅ Yes | **99.9%** |
-| **Dedicated (App Svc)** | Manual / auto | ❌ Always on | 30m (max Unbounded) | ✅ Yes | **99.9%** |
-| **Container Apps** | Auto (KEDA) | ✅ Possible | 30m (max Unbounded) | ✅ Yes | **99.9%** |
+| **Consumption** | Auto (unlimited) | ✅ Yes | 5m / 10m | ❌ No | **99.9%** |
+| **Flex Consumption** | Auto + pre-provisioned | ✅ Reduced | 30m / Unbounded | ✅ Yes | **99.9%** |
+| **Premium (EP)** | Auto | ❌ Pre-warmed | 30m / Unbounded | ✅ Yes | **99.9%** |
+| **Dedicated (App Svc)** | Manual / auto | ❌ Always on | 30m / Unbounded | ✅ Yes | **99.9%** |
+| **Container Apps** | Auto (KEDA) | ✅ Possible | 30m / Unbounded | ✅ Yes | **99.9%** |
 
 > **Exam Caveats ⚠️:**
 > - **Consumption plan** cannot use **VNet Integration** — use Premium or Dedicated if needed
@@ -173,6 +173,19 @@ graph LR
         EH["📡 Azure Event Hubs\n————————\nEvent streaming (pull)\nKafka-compatible\nRetention: 1–90 days\nMB/s to GB/s throughput\nSLA: 99.9%"]
     end
 ```
+**Detailed comparison — Event Grid vs Event Hubs:**
+
+| Feature | Azure Event Grid | Azure Event Hubs |
+|---------|-----------------|-----------------|
+| Pattern | Event routing (push) | Event streaming (pull/checkpoint) |
+| Retention | None (fire-and-forget) | 1–90 days |
+| Consumer model | Push to subscribers | Pull via consumer groups |
+| Throughput | Millions of events/sec | Millions of events/sec |
+| Ordering | ❌ | ✅ (within partition) |
+| Replay | ❌ | ✅ |
+| Kafka compat | ❌ | ✅ |
+| SLA | **99.9%** | **99.9%** |
+| Use when | Trigger serverless functions, webhooks | Log aggregation, telemetry, analytics |
 
 **Detailed comparison — Service Bus vs Storage Queue:**
 
@@ -190,25 +203,11 @@ graph LR
 | Cost | Higher | Lower |
 | Use when | Enterprise messaging, ordering, reliability | Simple, high-volume, cheap queuing |
 
-**Event Grid vs Event Hubs:**
-
-| Feature | Azure Event Grid | Azure Event Hubs |
-|---------|-----------------|-----------------|
-| Pattern | Event routing (push) | Event streaming (pull/checkpoint) |
-| Retention | None (fire-and-forget) | 1–90 days |
-| Consumer model | Push to subscribers | Pull via consumer groups |
-| Throughput | Millions of events/sec | Millions of events/sec |
-| Ordering | ❌ | ✅ (within partition) |
-| Replay | ❌ | ✅ |
-| Kafka compat | ❌ | ✅ |
-| SLA | **99.9%** | **99.9%** |
-| Use when | Trigger serverless functions, webhooks | Log aggregation, telemetry, analytics |
-
 > **Exam Caveats ⚠️:**
-> - **Service Bus** = enterprise messaging (reliability, ordering, DLQ) — use when message delivery guarantee matters
-> - **Event Hubs** = high-throughput streaming (think: Apache Kafka use cases, IoT telemetry)
 > - **Event Grid** = reactive programming trigger (e.g., blob created → trigger a function)
+> - **Event Hubs** = high-throughput streaming (think: Apache Kafka use cases, IoT telemetry)
 > - **Storage Queue** = simplest, cheapest; use only when Service Bus features are not needed
+> - **Service Bus** = enterprise messaging (reliability, ordering, DLQ) — use when message delivery guarantee matters
 
 ---
 
@@ -300,7 +299,7 @@ graph LR
 |----------|--------------|--------|--------------|
 | **Rehost** (Lift & Shift) | Low | Low | Fastest |
 | **Replatform** (Lift & Optimize) | Medium | Medium | Moderate |
-| **Refactor** / Re-architect | High | High | Slower |
+| **Refactor** / **Rearchitect** | High | High | Slower |
 | **Rebuild** | Very High | Very High | Slowest |
 | **Replace** | Variable | Low | Fast |
 | **Retain** | None | None | N/A |
@@ -417,7 +416,7 @@ graph TD
 |---------|------------------|-------------------|
 | Resource gets private IP in VNet | ❌ (traffic routes via Azure backbone) | ✅ Yes — private IP in your VNet |
 | Accessible from on-premises (VPN/ER) | ❌ | ✅ |
-| DNS required | No | ✅ (private DNS zone) |
+| DNS required | ❌ | ✅ (private DNS zone) |
 | Cost | Free | ~€7–10/month per endpoint |
 | Network path | Azure backbone (still exits VNet) | Stays entirely in VNet |
 | SLA impact | None | None (follows service SLA) |

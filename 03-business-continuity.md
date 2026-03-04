@@ -148,17 +148,6 @@ Parallel availability = 1 - (probability both fail)
 
 ```mermaid
 graph TD
-    subgraph "Availability Set"
-        direction LR
-        DC1["🏢 Single Datacenter"]
-        DC1 --> FD1["🔧 Fault Domain 1\n(Rack A)"]
-        DC1 --> FD2["🔧 Fault Domain 2\n(Rack B)"]
-        DC1 --> FD3["🔧 Fault Domain 3\n(Rack C)"]
-        FD1 --> VM1["VM 1"]
-        FD2 --> VM2["VM 2"]
-        FD3 --> VM3["VM 3"]
-    end
-
     subgraph "Availability Zones"
         direction LR
         REGION["🌍 Azure Region"]
@@ -168,6 +157,17 @@ graph TD
         Z1 --> VMZ1["VM 1"]
         Z2 --> VMZ2["VM 2"]
         Z3 --> VMZ3["VM 3"]
+    end
+
+    subgraph "Availability Set"
+        direction LR
+        DC1["🏢 Single Datacenter"]
+        DC1 --> FD1["🔧 Fault Domain 1\n(Rack A)"]
+        DC1 --> FD2["🔧 Fault Domain 2\n(Rack B)"]
+        DC1 --> FD3["🔧 Fault Domain 3\n(Rack C)"]
+        FD1 --> VM1["VM 1"]
+        FD2 --> VM2["VM 2"]
+        FD3 --> VM3["VM 3"]
     end
 ```
 
