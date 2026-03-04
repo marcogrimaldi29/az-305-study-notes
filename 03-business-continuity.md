@@ -257,8 +257,8 @@ graph LR
 
 - **Standard policy:** Daily backups only
 - **Enhanced policy:** Up to **hourly** backups (every 1–24 hours)
-- Required for: SQL Server (log backups), SAP HANA, and Azure VM hourly snapshots
-- Lower RPO achieved with enhanced policy
+    - Required for: SQL Server (log backups), SAP HANA, and Azure VM hourly snapshots
+    - Lower RPO achieved with enhanced policy
 
 ---
 
