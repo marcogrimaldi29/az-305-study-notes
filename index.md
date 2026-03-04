@@ -41,10 +41,10 @@ mermaid: true
 
 ```mermaid
 pie title AZ-305 — Official Exam Domain Weights
-    "Design Infrastructure Solutions (30–35%)" : 32
-    "Design Identity, Governance & Monitoring (25–30%)" : 25
-    "Design Data Storage Solutions (25–30%)" : 25
-    "Design Business Continuity Solutions (15–20%)" : 18
+    " Design Infrastructure Solutions (30–35%)" : 32
+    " Design Identity, Governance & Monitoring (25–30%)" : 25
+    " Design Data Storage Solutions (25–30%)" : 25
+    " Design Business Continuity Solutions (15–20%)" : 18
 ```
 
 | # | Domain | Weight | Key Focus Areas |

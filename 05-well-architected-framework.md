@@ -92,11 +92,11 @@ graph LR
 |---------|--------------|-------------|
 | Secrets | ✅ | ✅ |
 | Keys (software-protected) | ✅ | ✅ |
-| Keys (HSM-protected) | ❌ | ✅ |
+| **Keys (HSM-protected)** | ❌ | ✅ |
 | Certificates | ✅ | ✅ |
 | Auto-renewal | ✅ | ✅ |
 | FIPS 140-2 Level 2 | ✅ | ✅ |
-| FIPS 140-2 Level 3 (HSM) | ❌ | ✅ |
+| **FIPS 140-2 Level 3 (HSM)** | ❌ | ✅ |
 | SLA | **99.9%** | **99.9%** |
 
 > **Exam Caveats ⚠️:**
@@ -104,6 +104,7 @@ graph LR
 > - **CMK (Customer-Managed Keys)** in Key Vault gives you control over encryption keys for Azure services
 > - Key Vault **Soft Delete** is enabled by default (90-day recovery window) and cannot be disabled
 > - Key Vault **Purge Protection** prevents immediate permanent deletion (must wait 90 days)
+> - Key Vault **Premium tier** is required for HSM-protected keys and FIPS 140-2 Level 3 compliance (hardware-backed keys with highest security level)
 
 ---
 
