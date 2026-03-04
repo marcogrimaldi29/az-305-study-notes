@@ -8,8 +8,8 @@ mermaid: true
 ---
 
 # 06 — Quick Reference Cheatsheet
-> Last-minute exam review — key numbers, SLAs, decision tables, and traps
-> 📁 [← Back to Home](/az-305-study-notes/)
+> - Last-minute exam review — key numbers, SLAs, decision tables, and traps
+> - 📁 [← Back to Home](/az-305-study-notes/)
 
 ---
 

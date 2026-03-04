@@ -207,7 +207,7 @@ graph LR
 > - **Event Grid** = reactive programming trigger (e.g., blob created → trigger a function)
 > - **Event Hubs** = high-throughput streaming (think: Apache Kafka use cases, IoT telemetry)
 > - **Storage Queue** = simplest, cheapest; use only when Service Bus features are not needed
-> - **Service Bus** = enterprise messaging (reliability, ordering, DLQ) — use when message delivery guarantee matters
+> - **Service Bus** = enterprise messaging (reliability, ordering, DLQ, AMQP) — use when message delivery guarantee matters
 
 ---
 
