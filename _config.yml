@@ -51,12 +51,16 @@ search:
 # Navigation
 nav_sort: order
 nav_external_links:
-  - title: "🏠 marcogrimaldi29.com"
-    url:   "https://marcogrimaldi29.com"
-  - title: "📄 Official AZ-305 Exam"
-    url:   "https://learn.microsoft.com/en-us/credentials/certifications/exams/az-305/"
-  - title: "📚 AZ-305 Certification"
-    url:   "https://learn.microsoft.com/en-us/credentials/certifications/azure-solutions-architect/"
+  - title: "🥽 AZ-305: Azure Compute Services — Deep Dive"
+    url: https://marcogrimaldi29.com/az-305-compute/
+  - title: "🥽 AZ-305: Azure Messaging Services — Deep Dive"
+    url: https://marcogrimaldi29.com/az-305-messaging/
+  - title: "🥽 AZ-305: Data & Analytics Services — Deep Dive"
+    url: https://marcogrimaldi29.com/az-305-data-analytics/
+  - title: "📘 AZ-104 Study Notes"
+    url: https://marcogrimaldi29.com/az-104-study-notes/
+#  - title: "🏠 marcogrimaldi29.com"
+#    url:   "https://marcogrimaldi29.com"
 
 # ── Back to top button ───────────────────────────────────────────────
 back_to_top:      true

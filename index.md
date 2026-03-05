@@ -185,8 +185,12 @@ This site uses [Umami](https://umami.is/) for privacy-friendly analytics.
 
 ## ©️ Credits & Acknowledgements
 
-The [Just the Docs](https://github.com/just-the-docs/just-the-docs){:target="_blank"} theme is used for a clean, documentation-style layout that emphasizes readability and quick reference. Licensed under [MIT](https://opensource.org/license/MIT){:target="_blank"}.
+The [Just the Docs](https://github.com/just-the-docs/just-the-docs) theme is used for a clean, documentation-style layout. Licensed under [MIT](https://opensource.org/license/MIT).
 
-[Claude Sonnet 4.6](https://www.anthropic.com/news/claude-sonnet-4-6){:target="_blank"} was used for initial content generation and structuring, with all final edits, fact-checking, and formatting done by the author.
+Created with the help of AI. Model used: [Claude Sonnet 4.6](https://www.anthropic.com/news/claude-sonnet-4-6). The content has been reviewed and edited by the author for accuracy and clarity, but may contain errors. Always verify against the latest [Microsoft documentation](https://learn.microsoft.com/en-us/azure/).
+
+> *Not affiliated with or endorsed by Microsoft.*
 
 ---
+
+[00 — Azure Prerequisites →](/az-305-study-notes/00-prerequisites/)
