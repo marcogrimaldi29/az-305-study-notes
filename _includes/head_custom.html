@@ -182,44 +182,71 @@
 <!-- Google Search Console Verification -->
 <meta name="google-site-verification" content="2odQD3jEYS9beLb8PwPvtMhlwwBdeqIdQUsqM1V3Cr4" />
 
-<!-- ── Open all navigable links in a new tab ─────────────
-     FIX: the previous version only targeted external links
-     (link.hostname !== currentHost), which silently skipped
-     every same-domain link — sidebar nav, cross-repo links,
-     internal section links — because they all share the
-     marcogrimaldi29.com hostname.
+<!-- ── Link target logic ──────────────────────────────────
+  Rules (evaluated in order):
+    1. In-page anchors (#…) and javascript: links → no action
+    2. Different hostname (truly external site) → new tab
+    3. Same hostname, pathname starts with THIS repo's baseurl
+       (e.g. /az-305-study-notes/) → same tab (internal nav)
+    4. Same hostname, different path prefix
+       (e.g. /az-305-messaging/ from within az-305-study-notes)
+       → new tab (cross-repo link)
 
-     New logic: open EVERY <a href> in a new tab EXCEPT:
-       • in-page anchors  (href starts with "#")
-       • javascript: pseudo-links
-     This covers external links, cross-repo links, and all
-     same-site navigation links equally.
-──────────────────────────────────────────────────────── -->
+  The repo baseurl is injected by Jekyll/Liquid at build time
+  so each repo gets the correct value automatically — no manual
+  changes needed when copying this file across repos.
+───────────────────────────────────────────────────────── -->
 <script>
 (function () {
-  function applyNewTab() {
+  // Injected by Jekyll at build time from _config.yml → baseurl.
+  // e.g. "/az-305-study-notes" — strip any trailing slash for
+  // safe prefix matching below.
+  var REPO_BASE = "{{ site.baseurl }}".replace(/\/$/, "");
+
+  function applyLinkTargets() {
     document.querySelectorAll("a[href]").forEach(function (link) {
       var href = link.getAttribute("href") || "";
 
-      // Skip in-page anchors and javascript: pseudo-links —
-      // these must never navigate away from the current page.
+      // Rule 1 — never touch in-page anchors or javascript: links.
       if (href.startsWith("#") || href.startsWith("javascript:")) {
         return;
       }
 
-      link.setAttribute("target", "_blank");
-      link.setAttribute("rel", "noopener noreferrer");
+      // Rule 2 — different hostname → external site → new tab.
+      // Browsers resolve link.hostname for both absolute and
+      // relative hrefs, so this works for all href formats.
+      if (link.hostname !== window.location.hostname) {
+        link.setAttribute("target", "_blank");
+        link.setAttribute("rel",    "noopener noreferrer");
+        return;
+      }
+
+      // Rules 3 & 4 — same hostname.
+      // Check whether the link's pathname falls inside THIS repo.
+      // link.pathname is always the resolved absolute path, e.g.:
+      //   /az-305-study-notes/01-identity-governance-monitoring/
+      var pathname = link.pathname || "";
+
+      var isSameRepo =
+        REPO_BASE === "" ||                          // root-deployed repo
+        pathname === REPO_BASE ||                    // exact baseurl match
+        pathname.startsWith(REPO_BASE + "/");        // page inside this repo
+
+      if (!isSameRepo) {
+        // Rule 4 — same hostname but a different repo path → new tab.
+        link.setAttribute("target", "_blank");
+        link.setAttribute("rel",    "noopener noreferrer");
+      }
+      // Rule 3 — same repo → do nothing, browser default (same tab).
     });
   }
 
-  // Run after initial DOM load …
+  // Guard against the script loading after DOMContentLoaded has
+  // already fired (can happen with async/deferred injection).
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", applyNewTab);
+    document.addEventListener("DOMContentLoaded", applyLinkTargets);
   } else {
-    // … or immediately if the DOM is already ready
-    // (handles cases where the script loads after DOMContentLoaded fires,
-    //  e.g. when Just the Docs injects content dynamically).
-    applyNewTab();
+    applyLinkTargets();
   }
 })();
 </script>
