@@ -281,4 +281,4 @@ graph TD
 
 ---
 
-Next: [01 — Identity, Governance & Monitoring →](/az-305-study-notes/01-identity-governance-monitoring/)
+[← Back to Home](/az-305-study-notes/) | [01 — Identity, Governance & Monitoring →](/az-305-study-notes/01-identity-governance-monitoring/)
