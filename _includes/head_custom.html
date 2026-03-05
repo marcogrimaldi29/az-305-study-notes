@@ -182,18 +182,45 @@
 <!-- Google Search Console Verification -->
 <meta name="google-site-verification" content="2odQD3jEYS9beLb8PwPvtMhlwwBdeqIdQUsqM1V3Cr4" />
 
-<!-- External links in new tabs -->
+<!-- ── Open all navigable links in a new tab ─────────────
+     FIX: the previous version only targeted external links
+     (link.hostname !== currentHost), which silently skipped
+     every same-domain link — sidebar nav, cross-repo links,
+     internal section links — because they all share the
+     marcogrimaldi29.com hostname.
+
+     New logic: open EVERY <a href> in a new tab EXCEPT:
+       • in-page anchors  (href starts with "#")
+       • javascript: pseudo-links
+     This covers external links, cross-repo links, and all
+     same-site navigation links equally.
+──────────────────────────────────────────────────────── -->
 <script>
-(function() {
-  document.addEventListener("DOMContentLoaded", function() {
-    const currentHost = window.location.hostname;
-    document.querySelectorAll("a[href]").forEach(link => {
-      if (link.hostname && link.hostname !== currentHost) {
-        link.setAttribute("target", "_blank");
-        link.setAttribute("rel", "noopener noreferrer");
+(function () {
+  function applyNewTab() {
+    document.querySelectorAll("a[href]").forEach(function (link) {
+      var href = link.getAttribute("href") || "";
+
+      // Skip in-page anchors and javascript: pseudo-links —
+      // these must never navigate away from the current page.
+      if (href.startsWith("#") || href.startsWith("javascript:")) {
+        return;
       }
+
+      link.setAttribute("target", "_blank");
+      link.setAttribute("rel", "noopener noreferrer");
     });
-  });
+  }
+
+  // Run after initial DOM load …
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", applyNewTab);
+  } else {
+    // … or immediately if the DOM is already ready
+    // (handles cases where the script loads after DOMContentLoaded fires,
+    //  e.g. when Just the Docs injects content dynamically).
+    applyNewTab();
+  }
 })();
 </script>
 
