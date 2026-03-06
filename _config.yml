@@ -57,6 +57,8 @@ nav_external_links:
     url: https://marcogrimaldi29.com/az-305-messaging/
   - title: "🥽 AZ-305: Data & Analytics Services — Deep Dive"
     url: https://marcogrimaldi29.com/az-305-data-analytics/
+  - title: "🥽 AZ-305: Migration, HA & BCDR — Deep Dive"
+    url: https://marcogrimaldi29.com/az-305-bcdr/
   - title: "📘 AZ-104 Study Notes"
     url: https://marcogrimaldi29.com/az-104-study-notes/
 #  - title: "🏠 marcogrimaldi29.com"
@@ -75,14 +77,13 @@ aux_links_new_tab: true
 
 # Footer
 footer_content: >
-  Study notes by <a href="https://marcogrimaldi29.com" target="_blank"><strong>Marco Grimaldi</strong></a>
-  &nbsp;·&nbsp;
-  <a href="https://marcogrimaldi29.com" target="_blank">marcogrimaldi29.com</a>
-  &nbsp;·&nbsp;
-  Based on <a href="https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305" target="_blank">Microsoft AZ-305 Study Guide</a>
-  &nbsp;·&nbsp;
-  Not affiliated with or endorsed by Microsoft Corporation.
-
+  Maintained by <a href="https://www.linkedin.com/in/marco-grimaldi29/">Marco Grimaldi</a>.
+  Not affiliated with or endorsed by Microsoft. All content for study purposes only.
+  Theme: <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a> (MIT).
+  Built with <a href="https://jekyllrb.com/">Jekyll</a> and hosted on <a href="https://pages.github.com/">GitHub Pages</a>.
+  <br>
+  <small>Last updated: {{ site.time | date: "%d %b %Y" }}</small>
+  
 # ── Mermaid diagram support ───────────────────────────────
 # Just the Docs handles Mermaid loading automatically when `mermaid: true`
 # is set in a page's front matter. Do NOT also call mermaid.initialize()
