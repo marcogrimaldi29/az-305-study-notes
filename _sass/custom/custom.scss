@@ -1,44 +1,86 @@
-// _sass/custom/custom.scss
-// Just the Docs loads this file automatically for overrides.
+// ╔══════════════════════════════════════════════════════════════════╗
+// ║  az-305-study-notes — "Slate" palette                            ║
+// ║  Default blue-grey — calm, neutral, the anchor of the series.    ║
+// ║                                                                  ║
+// ╚══════════════════════════════════════════════════════════════════╝
 //
-// IMPORTANT: Do NOT reference internal Just the Docs SCSS variables here
-// (e.g. $nav-list-item-padding, $link-color, $sidebar-color).
-// Those variables are scoped to the theme's own compilation context and
-// are NOT available in this file, causing "Undefined variable" build errors.
-// All visual polish that needs those values lives in head_custom.html instead.
-
-// ── Smooth scroll ─────────────────────────────────────────
-html {
-  scroll-behavior: smooth;
+// HOW THE THEMING SYSTEM WORKS
+// ─────────────────────────────
+// head_custom.html (shared, identical across all repos) uses CSS
+// custom properties with fallbacks, e.g. var(--repo-accent, #8ab4f8).
+// Defining those vars here overrides the fallback for this repo only.
+//
+// To create a palette for another repo, copy this file, change the
+// vars in Section 1 and the colours in Sections 2–6. Everything else
+// (structural rules below the palette block) stays the same.
+//
+// ── Section 1: Accent CSS variables ───────────────────────────────────
+// Consumed by head_custom.html via var(--repo-*, fallback).
+// These five vars are the complete theming contract with head_custom.html.
+:root {
+  --repo-accent:        #8ab4f8;
+  --repo-caveat-border: #f4b400;
+  --repo-caveat-bg:     rgba(244, 180, 0, 0.06);
+  --repo-badge-bg:      #1a73e8;
+  --repo-hover-bg:      rgba(26, 115, 232, 0.08);
 }
 
-// ── Horizontal rule ───────────────────────────────────────
-hr {
-  margin: 1.75rem 0;
-  border: 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+// ── Section 2: Sidebar ────────────────────────────────────────────────
+// Deep navy — clearly different from the grey default in other repos.
+body .side-bar       { background-color: #1a1e26; }
+
+
+// Thin accent stripe at the very top of the page — the most immediately
+// noticeable visual differentiator when switching between repos.
+body .site-header    { border-bottom: 2px solid #3c6fce; }
+
+// Site title in the sidebar top-left.
+body .site-title     { color: #8ab4f8 !important; }
+
+
+// ── Section 3: Navigation links ───────────────────────────────────────
+body .nav-list .nav-list-link              { color: #94b8e8; }
+
+body .nav-list .nav-list-link:hover        { color: #8ab4f8; background-color: rgba(138, 180, 248, 0.07); }
+
+
+body .nav-list .nav-list-link.active       { color: #8ab4f8; background-color: rgba(138, 180, 248, 0.13); font-weight: 600; }
+
+
+// ── Section 4: Body content links ─────────────────────────────────────
+body .main-content a                       { color: #8ab4f8; }
+
+body .main-content a:hover                 { color: #bdd3fc; text-decoration: underline; }
+
+
+// ── Section 5: Table header ───────────────────────────────────────────
+// head_custom.html uses var(--sidebar-color) for th background — that
+// CSS var is set by Just the Docs and won't pick up our sidebar colour.
+// Override explicitly here to match the deep navy sidebar.
+body .main-content table th                { background-color: #1e2433; color: #e2e8f0; }
+
+
+// ── Section 6: Search box focus ring ──────────────────────────────────
+body .search-input:focus                   { border-color: #3c6fce; box-shadow: 0 0 0 3px rgba(60, 111, 206, 0.15); }
+
+// ── Section 7: Aux / external nav links ───────────────────────────────
+body .aux-nav-list-item a                  { color: #8ab4f8; }
+
+
+// ══════════════════════════════════════════════════════════════════════
+// STRUCTURAL RULES — identical across all AZ-305-related repos
+// ══════════════════════════════════════════════════════════════════════
+
+.mermaid { margin: 1.5rem 0; text-align: center; }
+
+.exam-tip {
+  border-left:   4px solid var(--repo-caveat-border, #f59e0b);
+  background:    var(--repo-caveat-bg, rgba(245, 158, 11, 0.08));
+  padding:       0.75rem 1rem;
+  border-radius: 0 0.4rem 0.4rem 0;
+  margin:        1rem 0;
 }
 
-// ── Bold text ─────────────────────────────────────────────
-.main-content strong {
-  font-weight: 700;
-}
-
-// ── Blockquotes (exam caveats) ────────────────────────────
-.main-content blockquote {
-  font-style: normal;
-  margin: 1rem 0;
-}
-
-// ── Mermaid container ─────────────────────────────────────
-pre.mermaid,
-.mermaid {
-  background: transparent !important;
-}
-
-// ── Inline code in tables ─────────────────────────────────
-table code {
-  font-size: 0.8em;
-  padding: 0.1em 0.35em;
-  border-radius: 3px;
-}
+table          { font-size: 0.875rem; }
+th             { white-space: nowrap; }
+pre.highlight  { border-radius: 0.4rem; }

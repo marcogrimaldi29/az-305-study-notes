@@ -69,7 +69,8 @@
   }
 
   .main-content table tbody tr:hover {
-    background: rgba(26, 115, 232, 0.08);
+    /* --repo-hover-bg defined per-repo in _sass/custom/custom.scss */
+    background: var(--repo-hover-bg, rgba(26, 115, 232, 0.08));
   }
 
   /* ── Mermaid diagrams ────────────────────────────────── */
@@ -100,8 +101,9 @@
 
   /* ── SLA badges ─────────────────────────────────────── */
   /* Bold SLA percentages stand out in tables */
+  /* --repo-accent defined per-repo in _sass/custom/custom.scss */
   .main-content table td strong {
-    color: #8ab4f8;
+    color: var(--repo-accent, #8ab4f8);
   }
 
   /* ── Domain weight badges in nav ─────────────────────── */
@@ -119,7 +121,8 @@
 
   .main-content h3 {
     margin-top: 1.5rem;
-    color:      #8ab4f8;
+    /* --repo-accent defined per-repo in _sass/custom/custom.scss */
+    color: var(--repo-accent, #8ab4f8);
   }
 
   /* ── Scenario quick-reference tables ────────────────── */
@@ -129,9 +132,10 @@
   }
 
   /* ── Exam-caveats blockquote styling ─────────────────── */
+  /* --repo-caveat-border / --repo-caveat-bg defined per-repo in _sass/custom/custom.scss */
   .main-content blockquote {
-    border-left:  4px solid #f4b400;
-    background:   rgba(244, 180, 0, 0.06);
+    border-left:  4px solid var(--repo-caveat-border, #f4b400);
+    background:   var(--repo-caveat-bg, rgba(244, 180, 0, 0.06));
     padding:      0.6rem 1rem;
     border-radius: 0 6px 6px 0;
     font-size:    0.92rem;
@@ -142,9 +146,10 @@
   }
 
   /* ── Page breadcrumb / domain weight tag ─────────────── */
+  /* --repo-badge-bg defined per-repo in _sass/custom/custom.scss */
   .domain-badge {
     display:        inline-block;
-    background:     #1a73e8;
+    background:     var(--repo-badge-bg, #1a73e8);
     color:          #fff;
     font-size:      0.75rem;
     font-weight:    700;
