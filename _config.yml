@@ -82,7 +82,6 @@ footer_content: >
   Theme: <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a> (MIT).
   Built with <a href="https://jekyllrb.com/">Jekyll</a> and hosted on <a href="https://pages.github.com/">GitHub Pages</a>.
   <br>
-  <small>Last updated: {{ site.time | date: "%d %b %Y" }}</small>
   
 # ── Mermaid diagram support ───────────────────────────────
 # Just the Docs handles Mermaid loading automatically when `mermaid: true`
