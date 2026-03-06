@@ -5,11 +5,11 @@
 [![GitHub](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen?logo=github)](https://github.com/marcogrimaldi29/az-305-study-notes)
 [![Personal Hub of Marco Grimaldi](https://img.shields.io/badge/Blog-marcogrimaldi29.com-blue?logo=rss)](https://marcogrimaldi29.com)
 
-> 🎯 **Goal:** Earn the Microsoft Certified: Azure Solutions Architect Expert badge
-> 📅 **Notes Version:** 2026
-> 🌐 **Published site:** [📘 AZ-305 Study Notes](https://marcogrimaldi29.com/az-305-study-notes/)
-> ✍️ **Author:** [Marco Grimaldi](https://www.linkedin.com/in/marco-grimaldi29/)
-
+> - 🎯 **Goal:** Earn the Microsoft Certified: Azure Solutions Architect Expert badge
+> - 📅 **Notes Version:** 2026
+> - 🌐 **Published site:** [📘 AZ-305 Study Notes](https://marcogrimaldi29.com/az-305-study-notes/)
+> - ✍️ **Author:** [Marco Grimaldi](https://www.linkedin.com/in/marco-grimaldi29/)
+> - 🔗 **Companion repos:** [🥽 AZ-305: Azure Compute Services — Deep Dive](https://marcogrimaldi29.com/az-305-compute/) · [🥽 AZ-305: Azure Messaging Services — Deep Dive](https://marcogrimaldi29.com/az-305-messaging/) · [🥽 AZ-305: Data & Analytics Services — Deep Dive](https://marcogrimaldi29.com/az-305-data-analytics/) · [🥽 AZ-305: Migration, HA & BCDR — Deep Dive](https://marcogrimaldi29.com/az-305-bcdr/) · [📘 AZ-104 Study Notes](https://marcogrimaldi29.com/az-104-study-notes/)
 ---
 
 ## 📋 Exam At-a-Glance
