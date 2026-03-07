@@ -129,17 +129,15 @@ These notes are hosted on **GitHub Pages** and published as a searchable website
 
 The site includes full-text search, Mermaid diagram rendering, and mobile-friendly navigation for on-the-go review. 
 
-These notes are designed to be a structured, exam-focused summary of the most important concepts and services baseds on the official [Microsoft AZ-305Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305){:target="_blank"} and its criteria.
+These notes are designed to be a structured, exam-focused summary of the most important concepts and services baseds on the official [Microsoft AZ-305 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305) and its criteria.
 
-Additional resources and study notes maintained by me, such as the **[📘 AZ-500 Study Notes](https://marcogrimaldi29.com/az-500-study-notes/){:target="_blank"}** and more, are also available for those pursuing the Microsoft and Azure certifications at the following Landing Page:
+Additional resources and study notes maintained by me, such as the **[📘 AZ-500 Study Notes](https://marcogrimaldi29.com/az-500-study-notes/)** and more, are also available for those pursuing the Microsoft and Azure certifications at the following Landing Page:
 
-👉 **[🧑‍🏫 Microsoft Study Notes: Central Hub](https://marcogrimaldi29.com/microsoft-study-notes/){:target="_blank"}**
-
-> *Not affiliated with or endorsed by Microsoft. Always verify against the latest Microsoft documentation.*
+👉 **[🧑‍🏫 Microsoft Study Notes: Central Hub](https://marcogrimaldi29.com/microsoft-study-notes/)**
 
 ---
 
-## ✍️ Author
+## ✍️ About the Author
 
 Maintained by **[Marco Grimaldi](https://www.linkedin.com/in/marco-grimaldi29/)** — Cloud Consultant, Language Trainer & Lifelong Learner.
 

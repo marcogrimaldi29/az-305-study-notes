@@ -18,8 +18,8 @@ mermaid: true
 
 ---
 
-> 🏠 These notes are maintained by **[Marco Grimaldi](https://www.linkedin.com/in/marco-grimaldi29/){:target="_blank"}** and based on the **[official Microsoft documentation](https://learn.microsoft.com/en-us/credentials/certifications/azure-solutions-architect/){:target="_blank"}**.
-> Find more certification guides, study tips, and tech content at **[🌐 marcogrimaldi29.com](https://marcogrimaldi29.com){:target="_blank"}**.
+> 🏠 These notes are maintained by **[Marco Grimaldi](https://www.linkedin.com/in/marco-grimaldi29/)** and based on the **[official Microsoft documentation](https://learn.microsoft.com/en-us/credentials/certifications/azure-solutions-architect/)**.
+> Find more certification guides, study tips, and tech content at **[🌐 marcogrimaldi29.com](https://marcogrimaldi29.com)**.
 > *Not affiliated with or endorsed by Microsoft. Always verify against the latest Microsoft documentation.*
 
 ---
@@ -143,11 +143,11 @@ flowchart LR
 
 | Resource | Link |
 |----------|------|
-| 🎓 Microsoft Certification Path | [AZ-305 Certification Path](https://learn.microsoft.com/en-us/credentials/certifications/azure-solutions-architect/){:target="_blank"} |
-| 📋 Skills Measured Guide | [Official Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305){:target="_blank"} |
-| 🧪 Free Practice Assessment | [Practice Test](https://learn.microsoft.com/en-us/credentials/certifications/exams/az-305/practice/assessment?assessment-type=practice&assessmentId=15){:target="_blank"} |
-| 🏗️ Architecture Center | [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/){:target="_blank"} |
-| 💶 EU Exam Booking | [Pearson VUE Microsoft](https://home.pearsonvue.com/microsoft){:target="_blank"} |
+| 🎓 Microsoft Certification Path | [AZ-305 Certification Path](https://learn.microsoft.com/en-us/credentials/certifications/azure-solutions-architect/) |
+| 📋 Skills Measured Guide | [Official Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305) |
+| 🧪 Free Practice Assessment | [Practice Test](https://learn.microsoft.com/en-us/credentials/certifications/exams/az-305/practice/assessment?assessment-type=practice&assessmentId=15) |
+| 🏗️ Architecture Center | [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/) |
+| 💶 EU Exam Booking | [Pearson VUE Microsoft](https://home.pearsonvue.com/microsoft) |
 
 ---
 
@@ -159,17 +159,17 @@ These notes are hosted on **GitHub Pages** and published as a searchable website
 
 The site includes full-text search, Mermaid diagram rendering, and mobile-friendly navigation for on-the-go review. 
 
-These notes are designed to be a structured, exam-focused summary of the most important concepts and services baseds on the official **[Microsoft AZ-305 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305){:target="_blank"}** and its criteria.
+These notes are designed to be a structured, exam-focused summary of the most important concepts and services baseds on the official **[Microsoft AZ-305 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305)** and its criteria.
 
-Additional resources and study notes maintained by me, such as the **[📘 AZ-500 Study Notes](https://marcogrimaldi29.com/az-500-study-notes/){:target="_blank"}** and more, are also available for those pursuing the Microsoft and Azure certifications at the following Landing Page:
+Additional resources and study notes maintained by me, such as the **[📘 AZ-500 Study Notes](https://marcogrimaldi29.com/az-500-study-notes/)** and more, are also available for those pursuing the Microsoft and Azure certifications at the following Landing Page:
 
-👉 **[🧑‍🏫 Microsoft Study Notes: Central Hub](https://marcogrimaldi29.com/microsoft-study-notes/){:target="_blank"}**
+👉 **[🧑‍🏫 Microsoft Study Notes: Central Hub](https://marcogrimaldi29.com/microsoft-study-notes/)**
 
 ---
 
 ## ✍️ About the Author
 
-These notes are maintained by **[Marco Grimaldi](https://www.linkedin.com/in/marco-grimaldi29/){:target="_blank"}** — Cloud Consultant, Language Trainer & Lifelong Learner.
+These notes are maintained by **[Marco Grimaldi](https://www.linkedin.com/in/marco-grimaldi29/)** — Cloud Consultant, Language Trainer & Lifelong Learner.
 
 📍 **Find more content at [🌐 marcogrimaldi29.com](https://marcogrimaldi29.com){:target="_blank"}**
 
