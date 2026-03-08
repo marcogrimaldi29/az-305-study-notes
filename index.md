@@ -13,7 +13,7 @@ mermaid: true
 **Microsoft Azure Solutions Architect Expert**
 {: .fs-5 .fw-300 }
 
-[Start Studying →](#-exam-overview){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
+[Start Studying →](/az-305-study-notes/00-azure-prerequisites){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
 [View on GitHub](https://github.com/marcogrimaldi29/az-305-study-notes){: .btn .fs-5 .mb-4 .mb-md-0 target="_blank" }
 
 ---
