@@ -49,7 +49,7 @@ pie title Exam Domain Weights of the AZ-305 (official ranges)
 
 ---
 
-## 🗺️ Certification Path
+## 🗺 Certification Path
 
 ```mermaid
 flowchart LR
