@@ -117,7 +117,7 @@ graph TD
 
 ---
 
-## 🖥️ Azure Compute Services
+## 🖥 Azure Compute Services
 
 ### Compute Service Comparison
 
