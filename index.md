@@ -153,17 +153,22 @@ flowchart LR
 
 ## 📚 About the Study Notes
 
-These notes are hosted on **GitHub Pages** and published as a searchable website on this URL:
-
-👉 **[📘 AZ-305 Study Notes](https://marcogrimaldi29.com/az-305-study-notes/)**
-
 The site includes full-text search, Mermaid diagram rendering, and mobile-friendly navigation for on-the-go review. 
 
 These notes are designed to be a structured, exam-focused summary of the most important concepts and services baseds on the official **[Microsoft AZ-305 Study Guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305)** and its criteria.
 
-Additional resources and study notes maintained by me, such as the **[📘 AZ-500 Study Notes](https://marcogrimaldi29.com/az-500-study-notes/)** and more, are also available for those pursuing the Microsoft and Azure certifications at the following Landing Page:
+Additional study notes maintained by me are also available for those pursuing Microsoft and Azure certifications at the following Landing Page:
 
-👉 **[🧑‍🏫 Microsoft Study Notes: Central Hub](https://marcogrimaldi29.com/microsoft-study-notes/)**
+👉 **[🛬 Landing Page: Study Notes](https://marcogrimaldi29.com/study-notes/)**
+
+### 🔗 **Companion repos
+
+With regards to AZ-305, companion deep-dive notes on key services and topics are available at the following URLs:
+- **[🥽 AZ-305: Azure Compute Services — Deep Dive](https://marcogrimaldi29.com/az-305-compute/)**
+- **[🥽 AZ-305: Azure Messaging Services — Deep Dive](https://marcogrimaldi29.com/az-305-messaging/)**
+- **[🥽 AZ-305: Data & Analytics Services — Deep Dive](https://marcogrimaldi29.com/az-305-data-analytics/)**
+- **[🥽 AZ-305: Migration, HA & BCDR — Deep Dive](https://marcogrimaldi29.com/az-305-bcdr/)**
+- **[📘 AZ-104 Study Notes](https://marcogrimaldi29.com/az-104-study-notes/)**
 
 ---
 
@@ -173,20 +178,20 @@ These notes are maintained by **[Marco Grimaldi](https://www.linkedin.com/in/mar
 
 📍 **Find more content at [🌐 marcogrimaldi29.com](https://marcogrimaldi29.com)**
 
-> The website is continuously updated and based on my personal study notes and experiences. If you have any feedback, suggestions, or corrections, feel free to [reach out](https://marcogrimaldi29.com/contact/)**!
+> The website is continuously updated and based on my personal study notes and experiences. If you have any feedback, suggestions, or corrections, feel free to [reach out](https://marcogrimaldi29.com/contact/)!
 
 ---
 
 ## 📈 Analytics
 
-This site uses [Umami](https://umami.is/) for privacy-friendly analytics.
+This site uses **[Umami](https://umami.is/)** for privacy-friendly analytics.
 
 ---
 
 ## ©️ Credits & Acknowledgements
 
-The [Just the Docs](https://github.com/just-the-docs/just-the-docs) theme is used for a clean, documentation-style layout. Licensed under [MIT](https://opensource.org/license/MIT).
+The **[Just the Docs](https://github.com/just-the-docs/just-the-docs)** theme is used for a clean, documentation-style layout. Licensed under [MIT](https://opensource.org/license/MIT).
 
-Created with the help of AI. Model used: [Claude Sonnet 4.6](https://www.anthropic.com/news/claude-sonnet-4-6). The content has been reviewed and edited by the author for accuracy and clarity, but may contain errors. Always verify against the latest [Microsoft documentation](https://learn.microsoft.com/en-us/azure/).
+Created with the help of AI. Model used: **[Claude Sonnet 4.6](https://www.anthropic.com/news/claude-sonnet-4-6)**. The content has been reviewed and edited by the author for accuracy and clarity, but may contain errors. Always verify against the latest [Microsoft documentation](https://learn.microsoft.com/en-us/azure/).
 
 > *Not affiliated with or endorsed by Microsoft.*
