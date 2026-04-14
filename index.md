@@ -162,7 +162,7 @@ Additional study notes maintained by me are also available for those pursuing Mi
 
 👉 **[🛬 Landing Page: Study Notes](https://marcogrimaldi29.com/study-notes/)**
 
-### 🔗 **Companion repos
+### 🔗 Companion repos
 
 With regards to AZ-305, companion deep-dive notes on key services and topics are available at the following URLs:
 - **[🥽 AZ-305: Azure Compute Services — Deep Dive](https://marcogrimaldi29.com/az-305-compute/)**
