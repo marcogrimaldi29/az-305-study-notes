@@ -40,6 +40,7 @@ mermaid: true
 ## 📊 Domain Weights
 
 ```mermaid
+%%{init: {"theme":"dark","themeVariables":{"primaryTextColor":"#ffffff","secondaryTextColor":"#e8eaed","pie1":"#1a73e8","pie2":"#1ab8e8","pie3":"#34a853","pie4":"#eadb35"}}}%%
 pie title AZ-305 — Official Exam Domain Weights
     " Design Infrastructure Solutions (30–35%)" : 32
     " Design Identity, Governance & Monitoring (25–30%)" : 25
