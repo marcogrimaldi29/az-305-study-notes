@@ -181,6 +181,8 @@ These notes are maintained by **[Marco Grimaldi](https://www.linkedin.com/in/mar
 
 > The website is continuously updated and based on my personal study notes and experiences. If you have any feedback, suggestions, or corrections, feel free to [reach out](https://marcogrimaldi29.com/contact/)!
 
+> ⭐ **Found these notes helpful?** Consider giving the [GitHub repo](https://github.com/marcogrimaldi29/az-305-study-notes) a star — it helps others discover these resources and keeps the motivation going!
+
 ---
 
 ## 📈 Analytics
