@@ -3,7 +3,7 @@
 
 [![Deploy to GitHub Pages](https://github.com/marcogrimaldi29/az-305-study-notes/actions/workflows/pages.yml/badge.svg)](https://github.com/marcogrimaldi29/az-305-study-notes/actions/workflows/pages.yml)
 [![GitHub](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen?logo=github)](https://github.com/marcogrimaldi29/az-305-study-notes)
-[![Personal Hub of Marco Grimaldi](https://img.shields.io/badge/Blog-marcogrimaldi29.com-blue?logo=rss)](https://marcogrimaldi29.com)
+[![marcogrimaldi29.com](https://img.shields.io/badge/Blog-marcogrimaldi29.com-blue?logo=rss)](https://marcogrimaldi29.com)
 
 > - 🎯 **Goal:** Earn the Microsoft Certified: Azure Solutions Architect Expert badge
 > - 📅 **Notes Version:** 2026
@@ -141,7 +141,7 @@ Additional study notes maintained by me are also available for those pursuing Mi
 
 Maintained by **[Marco Grimaldi](https://www.linkedin.com/in/marco-grimaldi29/)** — Cloud Consultant, Language Trainer & Lifelong Learner.
 
-🏠 Find more certification guides, study tips, and tech content at **[🌐 marcogrimaldi29.com](https://marcogrimaldi29.com)**
+Find more certification guides, study tips, and tech content at **[🏠 marcogrimaldi29.com](https://marcogrimaldi29.com)**
 
 The site is continuously updated and based on my personal study notes and experiences. If you have any feedback, suggestions, or corrections, feel free to [reach out](https://marcogrimaldi29.com/contact/)!
 
