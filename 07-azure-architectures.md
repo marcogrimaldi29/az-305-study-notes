@@ -477,7 +477,7 @@ graph TD
 | Requirement | Service Choice | Why |
 |-------------|---------------|-----|
 | Cardholder data isolation (PCI DSS) | **Private Endpoints** on all PaaS | Eliminates public endpoint; traffic stays on MSFT backbone |
-| Encryption key ownership | **Key Vault Managed HSM** (FIPS 140-2 L3) | HSM-backed; customer controls full key lifecycle |
+| Encryption key ownership | **Key Vault Managed HSM** (FIPS 140-3 L3) | HSM-backed; customer controls full key lifecycle |
 | Physical host isolation for audit | **Azure Dedicated Host** | Dedicated hardware; no shared tenancy — satisfies strict PCI audits |
 | 99.99% uptime for core banking | **SQL DB Business Critical** + **Availability Zones** | Zone-redundant; built-in Always On replicas |
 | Immutable audit trail | **Azure Monitor** immutable storage + **Log Analytics** | Tamper-evident log retention; Sentinel for SIEM |

@@ -94,17 +94,19 @@ graph LR
 | Keys (software-protected) | ✅ | ✅ |
 | **Keys (HSM-protected)** | ❌ | ✅ |
 | Certificates | ✅ | ✅ |
-| Auto-renewal | ✅ | ✅ |
-| FIPS 140-2 Level 2 | ✅ | ✅ |
-| **FIPS 140-2 Level 3 (HSM)** | ❌ | ✅ |
+| Certificate auto-renewal | ✅ | ✅ |
+| Software-protected keys — FIPS 140-2 Level 1 | ✅ | ✅ |
+| **HSM-protected keys — FIPS 140-3 Level 3** | ❌ | ✅ |
 | SLA | **99.9%** | **99.9%** |
+
+> New Premium HSM keys and key versions are created on HSM Platform 2, which is FIPS 140-3 Level 3 validated. Key versions created earlier on HSM Platform 1 remain FIPS 140-2 Level 2, and a key's `hsmPlatform` attribute tells you which platform it's on. For single-tenant HSMs (Managed HSM, Azure Cloud HSM), see [01 — Azure Key Vault — Choosing a Key Store](/az-305-study-notes/01-identity-governance-monitoring/#-azure-key-vault--choosing-a-key-store).
 
 > **Exam Caveats ⚠️:**
 > - Applications should use **Managed Identity** to access Key Vault — never store credentials
 > - **CMK (Customer-Managed Keys)** in Key Vault gives you control over encryption keys for Azure services
-> - Key Vault **Soft Delete** is enabled by default (90-day recovery window) and cannot be disabled
-> - Key Vault **Purge Protection** prevents immediate permanent deletion (must wait 90 days)
-> - Key Vault **Premium tier** is required for HSM-protected keys and FIPS 140-2 Level 3 compliance (hardware-backed keys with highest security level)
+> - Key Vault **Soft Delete** is always on and can't be disabled. Deleted vaults and objects stay recoverable for **7–90 days** (default 90), and you can set that retention period only when you create the vault
+> - Key Vault **Purge Protection** is optional, but once it's enabled it can't be turned off. Nothing can be permanently deleted until the retention period ends
+> - Key Vault **Premium tier** is required for HSM-protected keys (FIPS 140-3 Level 3). When the requirement is a single-tenant HSM or a customer-controlled root of trust, use **Managed HSM** instead
 
 ---
 

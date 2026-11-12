@@ -111,10 +111,10 @@ az-305-study-notes/
 | File | Topics Covered |
 |------|---------------|
 | [📘 00 — Azure Prerequisites](./00-azure-prerequisites.md) | Regions, AZs, VNets, storage, identity basics, SLAs |
-| [🔐 01 — Identity, Governance & Monitoring](./01-identity-governance-monitoring.md) | Entra ID, RBAC, PIM, Azure Policy, Monitor, Sentinel |
+| [🔐 01 — Identity, Governance & Monitoring](./01-identity-governance-monitoring.md) | Entra ID, RBAC, Key Vault, on-premises access, PIM, Azure Policy, Monitor, Sentinel |
 | [🗄️ 02 — Data Storage Solutions](./02-data-storage-solutions.md) | SQL family, Cosmos DB, Blob, ADLS Gen2, Synapse, ADF |
 | [🔄 03 — Business Continuity](./03-business-continuity.md) | HA, DR, SLA math, Azure Backup, ASR, geo-replication |
-| [🏗️ 04 — Infrastructure Solutions](./04-infrastructure-solutions.md) | Compute, App Architecture, Networking, Migrations |
+| [🏗️ 04 — Infrastructure Solutions](./04-infrastructure-solutions.md) | Compute, App Architecture, App Configuration, IaC & CI/CD, Networking, Migrations |
 | [🏛️ 05 — Well-Architected & CAF](./05-well-architected-framework.md) | WAF 5 pillars, CAF lifecycle, Landing Zones |
 | [⚡ 06 — Quick Reference Cheatsheet](./06-quick-reference-cheatsheet.md) | Key numbers, decision tables, exam traps, final checklist |
 

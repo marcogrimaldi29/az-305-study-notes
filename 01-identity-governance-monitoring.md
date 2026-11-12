@@ -2,7 +2,7 @@
 layout: default
 title: "01 — Identity, Governance & Monitoring"
 nav_order: 3
-description: "Design identity, governance and monitoring solutions: Entra ID, Hybrid Identity, MFA, Conditional Access, Identity Protection, RBAC, Managed Identities, PIM, Access Reviews, Entitlement Management, Lifecycle Workflows, Azure Policy, Management Groups, Azure Monitor, Sentinel. AZ-305 Domain 1 (25–30%)."
+description: "Design identity, governance and monitoring solutions: Entra ID, Hybrid Identity, MFA, Conditional Access, Identity Protection, RBAC, Managed Identities, Key Vault, Managed HSM, application proxy, Private Access, Azure Arc, PIM, Access Reviews, Entitlement Management, Lifecycle Workflows, Azure Policy, Management Groups, Azure Monitor, Sentinel. AZ-305 Domain 1 (25–30%)."
 permalink: /01-identity-governance-monitoring/
 mermaid: true
 ---
@@ -31,6 +31,11 @@ mindmap
       Azure RBAC
       Managed Identities
       External Identities B2B/B2C
+      Key Vault & Managed HSM
+      On-premises Access
+        Application Proxy
+        Private Access
+        Azure Arc
     1.3 Identity Governance
       PIM – Just-in-Time
         Eligible vs Active
@@ -230,7 +235,7 @@ flowchart TD
 | Network Contributor | Manage VNets, NSGs, route tables — no VM access |
 | Virtual Machine Contributor | Manage VMs — no VNet or storage access |
 | Storage Blob Data Contributor | Read/write/delete Blob containers and data |
-| Key Vault Administrator | Manage Key Vault and all objects (P1 operations) |
+| Key Vault Administrator | All data-plane operations on keys, secrets and certificates (can't assign roles) |
 | Key Vault Secrets Officer | Manage secrets only (not keys or certs) |
 | SQL DB Contributor | Manage SQL databases — not security policies |
 | Monitoring Contributor | Read all monitoring data, edit monitoring settings |
@@ -266,6 +271,147 @@ graph LR
 > - Managed Identities can authenticate to **any service that supports Entra ID authentication**
 > - Use **system-assigned** for simple single-resource scenarios
 > - Use **user-assigned** when multiple resources need the same permissions or when the identity must survive resource deletion
+
+### 🔑 Azure Key Vault — Choosing a Key Store
+
+> 📋 **Study guide skill:** *Recommend a solution to manage secrets, certificates, and keys.* The Standard vs Premium tier basics are in [05 — Azure Key Vault Tiers](/az-305-study-notes/05-well-architected-framework/#azure-key-vault--tiers). This section covers the design decisions built on top of them.
+
+```mermaid
+flowchart TD
+    START([What do you need to store?]) --> Q1{Secrets or\ncertificates?}
+    Q1 -->|Yes| Q2{Also need\nHSM-protected keys?}
+    Q2 -->|No| KVS["🔑 Key Vault Standard\nSecrets, certificates,\nsoftware-protected keys"]
+    Q2 -->|Yes| KVP["🔐 Key Vault Premium\n+ HSM-backed keys\n(multitenant HSMs)"]
+    Q1 -->|"No — keys only"| Q3{Single tenant or\ncustomer-owned\nroot of trust required?}
+    Q3 -->|No| KVP
+    Q3 -->|Yes| Q4{Who uses\nthe keys?}
+    Q4 -->|"Azure PaaS services\n(CMK, SQL TDE)"| MHSM["🏛️ Key Vault Managed HSM\nSingle-tenant, keys only\nCustomer security domain"]
+    Q4 -->|"Your own apps on VMs\n(PKCS#35;11, CNG, JCE)"| CHSM["🖥️ Azure Cloud HSM\nIaaS only\nNo PaaS / CMK integration"]
+```
+
+**Key store comparison:**
+
+| Feature | Key Vault Standard | Key Vault Premium | Managed HSM | Azure Cloud HSM |
+|---------|-------------------|-------------------|-------------|-----------------|
+| Tenancy | Multitenant | Multitenant | **Single-tenant** | **Single-tenant** |
+| Stores | Secrets, certificates, software keys | Standard + **HSM-backed keys** | **HSM keys only** — no secrets or certificates | Keys used through HSM APIs — not a secret store |
+| FIPS validation | FIPS 140-2 Level 1 | **FIPS 140-3 Level 3** (HSM keys) | **FIPS 140-3 Level 3** | **FIPS 140-3 Level 3** |
+| Root of trust | Microsoft | Microsoft | **Customer** (security domain) | **Customer** |
+| Data-plane access control | Azure RBAC or access policies | Azure RBAC or access policies | **Managed HSM local RBAC** | HSM users you administer |
+| Customer-managed keys for Azure PaaS | ✅ | ✅ | ✅ | ❌ (IaaS only) |
+| Billing | Per operation | Per operation + monthly charge per HSM key | Fixed hourly rate | Fixed hourly rate |
+
+> Premium HSM keys are FIPS 140-3 Level 3 when they're created on Microsoft's current HSM platform. Keys created on the older platform are FIPS 140-2 Level 2. For industry key-ownership requirements, such as Managed HSM with Customer Lockbox, see [07 — 7.6 Security & Identity Patterns](/az-305-study-notes/07-azure-architectures/#-76-security--identity-patterns).
+
+> **Exam Caveats ⚠️:**
+> - **Managed HSM stores keys only.** If the scenario also needs secrets or certificates, pair it with a Key Vault for those
+> - **Azure Dedicated HSM is retiring.** It takes no new customers, and existing ones are supported until **July 31, 2028**. Its successor for IaaS and PKCS#11 workloads is **Azure Cloud HSM**. For customer-managed keys on Azure PaaS services, pick **Managed HSM**
+> - **Azure Cloud HSM doesn't integrate with Azure PaaS.** It can't hold customer-managed keys for Storage, SQL or Disk Encryption
+> - **If you lose the Managed HSM security domain, you lose every key in it** permanently. Microsoft can't recover it
+> - Key Vault **Premium** uses shared, Microsoft-operated HSMs. Choose Managed HSM when the requirement says *single tenant*, *key sovereignty* or *customer-controlled root of trust*
+
+### 🗝️ Key Vault — Access Control, Recovery & Rotation
+
+**Access control — Azure RBAC vs access policies:**
+
+| Dimension | Azure RBAC *(recommended)* | Vault access policies *(legacy)* |
+|-----------|---------------------------|----------------------------------|
+| Default for new vaults | ✅ In the portal, and with API version **2026-02-01** or later | Only if you set `enableRbacAuthorization` to `false` |
+| Scope | Management group → subscription → resource group → vault → individual key, secret or certificate | Whole vault, per object type |
+| Who can grant data access | Only **Owner** or **User Access Administrator** (role-assignment write) | Anyone with `vaults/write`, **Contributor** included, can edit the policies and grant themselves access |
+| PIM just-in-time access | ✅ | ❌ |
+| Deny assignments | ✅ | ❌ |
+
+**Key Vault roles to know (Azure RBAC model):**
+
+| Role | What It Allows | Typical Holder |
+|------|---------------|---------------|
+| **Key Vault Administrator** | All data-plane operations on keys, secrets and certificates. Can't assign roles | Vault administrators |
+| **Key Vault Secrets User** | Read secret contents | An app's managed identity |
+| **Key Vault Secrets Officer** | Manage secrets (not keys or certificates) | Secret owners |
+| **Key Vault Crypto Service Encryption User** | Read key metadata, wrap and unwrap keys | The identity a service such as Storage or SQL uses for a customer-managed key |
+| **Key Vault Certificates Officer** | Manage the certificate lifecycle | PKI team |
+| **Key Vault Reader** | Read metadata only, never secret values | Auditors |
+| **Key Vault Contributor** | **Control plane only**: manage the vault resource, with no access to keys, secrets or certificates | Platform team |
+
+**Recovery — soft delete vs purge protection:**
+
+| Feature | Soft Delete | Purge Protection |
+|---------|------------|-----------------|
+| Default | **Always on**, can't be disabled | **Off**, opt in |
+| What it does | Keeps a deleted vault or object recoverable for the retention period | Blocks **purging** (permanent deletion) until the retention period ends, for everyone, Microsoft included |
+| Retention | **7–90 days** (default 90), set **only when the vault is created** | Same interval as soft delete |
+| Can it be turned off? | ❌ | ❌ Irreversible once enabled |
+| Required for | — | Most customer-managed key integrations, such as Azure Storage |
+
+**Rotation by object type:**
+
+| Object | Built-in Rotation? | How It Works |
+|--------|-------------------|-------------|
+| **Keys** | ✅ Rotation policy | Creates a new key version on a schedule (7 days minimum) or on demand, with an optional near-expiry Event Grid event. Services that use the **versionless key URI** pick up the new version automatically |
+| **Certificates** | ✅ Auto-renewal | Renews at a set percentage of lifetime or number of days before expiry, through an integrated CA (**DigiCert**, **GlobalSign**) or as self-signed. Event Grid raises `CertificateNearExpiry` 30 days before expiry |
+| **Secrets** | ❌ Not built in | Event Grid raises `SecretNearExpiry` 30 days before expiry, and an **Azure Function** creates the new value and updates the target service (single- or dual-credential pattern) |
+
+> **Exam Caveats ⚠️:**
+> - **Azure RBAC is the recommended model.** From API version 2026-02-01 it's also the default for new vaults. Access policies are still supported, but they're legacy. All control-plane API versions older than 2026-02-01 retire on **February 27, 2027**
+> - **Contributor or Key Vault Contributor doesn't grant access to secrets** under Azure RBAC. Data access needs a data-plane role such as Key Vault Secrets User
+> - Managed HSM controls access to keys with its own **local RBAC** (for example, Managed HSM Crypto User). Azure RBAC covers only its control plane
+> - **Purge protection is one-way.** While it's on, a deleted vault's name stays reserved until the retention period ends
+> - The best secret to rotate is **no secret at all**. Use managed identities and Entra ID authentication wherever the target service supports them
+
+### 🔗 Key Vault — Managed Identities & Key Vault References
+
+Apps shouldn't hold credentials for Key Vault itself. They authenticate with a [managed identity](/az-305-study-notes/01-identity-governance-monitoring/#managed-identities--deep-dive) and get a data-plane role on the vault.
+
+```mermaid
+flowchart LR
+    APP["🌐 App Service / Functions\n(managed identity)"] -->|"1️⃣ App setting holds\n@Microsoft.KeyVault(SecretUri=…)"| PLAT["⚙️ App Service platform\nresolves the reference"]
+    PLAT -->|"2️⃣ Token for the\nmanaged identity"| ENTRA["🪪 Microsoft Entra ID"]
+    PLAT -->|"3️⃣ Get secret\n(Key Vault Secrets User)"| KV["🔑 Key Vault"]
+    PLAT -->|"4️⃣ Value injected as an\nenvironment variable"| APP
+```
+
+| Hosting | Pattern | Notes |
+|---------|---------|-------|
+| **App Service, Functions, Logic Apps (Standard)** | **Key Vault reference** in an app setting: `@Microsoft.KeyVault(SecretUri=https://<vault>.vault.azure.net/secrets/<name>/)` | No code change. A versionless reference picks up a rotated secret within **24 hours**, or straight away on restart or any configuration change |
+| **AKS** | **Azure Key Vault provider for Secrets Store CSI Driver** | Mounts secrets into pods as files. Authenticates with Microsoft Entra Workload ID or a managed identity |
+| **Any code (VMs, containers)** | Azure SDK with `DefaultAzureCredential` | Uses the managed identity in Azure and your developer credentials locally |
+| **Many apps sharing configuration** | **App Configuration Key Vault reference** | See [04 — Azure App Configuration](/az-305-study-notes/04-infrastructure-solutions/#-azure-app-configuration--configuration-management) |
+
+> **Exam Caveats ⚠️:**
+> - Use a **user-assigned identity** (set `keyVaultReferenceIdentity`) when the app needs a secret at creation time, before a system-assigned identity exists
+> - If the vault sits behind a firewall or private endpoint, give the app **VNet integration**. Don't allow-list the app's outbound IP addresses
+> - When a reference can't be resolved, the app receives the literal `@Microsoft.KeyVault(...)` string. Check the reference status in the portal
+> - Pinning a version in the reference (`.../secrets/<name>/<version>`) **stops the app picking up rotated secrets**
+
+### 🏢 Authorizing Access to On-Premises Resources
+
+> 📋 **Study guide skill:** *Recommend a solution for authorizing access to on-premises resources.* Synchronising on-premises AD DS accounts into Entra ID is covered in [Hybrid Identity — Decision Flow](/az-305-study-notes/01-identity-governance-monitoring/#hybrid-identity--decision-flow). This section is about reaching and authorising on-premises apps and servers with those identities.
+
+```mermaid
+flowchart TD
+    START([Who needs to reach what?]) --> Q1{"Users reaching apps,\nor admins managing\nservers?"}
+    Q1 -->|"Admins managing\nservers"| ARC["🛰️ Azure Arc-enabled servers\nEntra ID sign-in over RDP / SSH\nAzure RBAC + Azure Policy"]
+    Q1 -->|"Users reaching\napps"| Q2{"Only web apps\n(HTTP / HTTPS)?"}
+    Q2 -->|Yes| APPPROXY["🌐 Microsoft Entra application proxy\nBrowser, no client\nEntra ID P1 / P2"]
+    Q2 -->|"No — RDP, SMB, SSH,\nany TCP / UDP"| PA["🔒 Microsoft Entra Private Access\nGlobal Secure Access client\nZero Trust VPN replacement"]
+```
+
+| Dimension | Entra application proxy | Entra Private Access | Azure Arc-enabled servers |
+|-----------|------------------------|----------------------|--------------------------|
+| Protects | On-premises **web apps** (HTTP/HTTPS) | **Any** private resource: FQDNs or IP ranges on any TCP/UDP port | **Admin access** to on-premises and multicloud servers |
+| User experience | Browser or My Apps, no client | **Global Secure Access client** on the device | RDP or SSH with Entra ID credentials |
+| On-premises component | **Private network connector**, outbound-only | The **same** private network connector | Azure Connected Machine agent |
+| Authorisation | Enterprise app assignment + Conditional Access | Quick Access or per-app assignment + Conditional Access | Azure RBAC: **Virtual Machine Administrator Login** or **Virtual Machine User Login** |
+| SSO to the app | Kerberos constrained delegation, header-based, SAML, password-based | Kerberos SSO across private apps | — |
+| Licence | **Entra ID P1 or P2** | **Microsoft Entra Private Access** (also in **Microsoft Entra Suite**) | Core Arc features at no extra cost. Add-on services are billed |
+
+> **Exam Caveats ⚠️:**
+> - **application proxy and Private Access share one connector**, the Microsoft Entra private network connector (formerly the application proxy connector). It makes outbound connections only, so you open no inbound firewall ports. Put at least **two connectors** in each connector group for high availability
+> - **application proxy is for remote users** and publishes web apps only. It isn't meant for users on the corporate network. For RDP, SMB or other non-HTTP protocols, the answer is **Private Access**
+> - Microsoft recommends starting with **Quick Access** to replace the VPN, then moving to **per-app access** for segmentation
+> - **Owner or Contributor on an Arc-enabled server doesn't let you sign in to it.** You need Virtual Machine Administrator Login or Virtual Machine User Login
+> - Entra ID sign-in to Arc-enabled **Windows** servers needs Windows Server 2025 (or Windows 11 24H2) and **Entra-joins** the machine, so it's not for servers joined to on-premises AD DS. **Linux** servers use SSH with the `AADSSHLoginForLinux` extension
 
 ---
 
@@ -674,7 +820,7 @@ flowchart TD
 
 | Scenario | Answer |
 |----------|--------|
-| App on Azure VM needs to call Key Vault, no credentials in code | System-assigned **Managed Identity** + KV access policy |
+| App on Azure VM needs to call Key Vault, no credentials in code | System-assigned **Managed Identity** + **Key Vault Secrets User** role (Azure RBAC) |
 | Multiple Azure Functions all need the same permissions | **User-assigned Managed Identity** shared across them |
 | Admin needs elevated access only for 2 hours with approval | **PIM** eligible role assignment (requires Entra ID P2) |
 | Enforce resource tagging across 50 subscriptions | **Azure Policy (Deny)** assigned at **Management Group** |
@@ -695,6 +841,14 @@ flowchart TD
 | New hire should get MFA enrolled before first day, auto | **Lifecycle Workflows** (Joiner) → Generate Temporary Access Pass task |
 | Disable account and remove all groups on last day automatically | **Lifecycle Workflows** (Leaver) → Disable account + Remove group memberships tasks |
 | Department head needs to certify their team's app access monthly | **Access Reviews** — reviewer = manager, monthly recurrence, self-review option |
+| SQL TDE and Storage CMKs must sit in a single-tenant HSM with a customer-controlled root of trust | **Key Vault Managed HSM** |
+| Lift-and-shift app on VMs talks to an HSM through PKCS#11 | **Azure Cloud HSM** (successor to Dedicated HSM) |
+| Nobody, admins included, may permanently delete the vault that holds CMKs | **Purge protection** (on top of soft delete, which is always on) |
+| App Service needs a DB password and must pick up rotated values without a redeploy | **Key Vault reference** (versionless) + **Managed Identity** with Key Vault Secrets User |
+| Grant an app read access to secrets without letting Contributors grant themselves access | **Azure RBAC** permission model on the vault (not access policies) |
+| Remote users need an on-premises web app with Kerberos SSO, no VPN | **Microsoft Entra application proxy** + Kerberos constrained delegation |
+| Replace the VPN for RDP and SMB access to on-premises servers | **Microsoft Entra Private Access** (Quick Access first, then per-app access) |
+| Admins sign in to on-premises servers with Entra ID accounts, controlled by Azure RBAC | **Azure Arc-enabled servers** + Virtual Machine Administrator/User Login roles |
 
 ---
 
