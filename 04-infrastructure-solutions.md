@@ -2,7 +2,7 @@
 layout: default
 title: "04 — Infrastructure Solutions"
 nav_order: 6
-description: "Design infrastructure solutions: compute (VMs, AKS, Functions, App Service), messaging (Service Bus, Event Hubs), configuration (App Configuration), automated deployment (Bicep, template specs, deployment stacks, GitHub Actions, Azure Pipelines), migrations (Azure Migrate, 6 Rs), and networking (VPN, ExpressRoute, hub-spoke). AZ-305 Domain 4 (30–35%)."
+description: "Design infrastructure solutions: compute (VMs, AKS, Functions, App Service), messaging (Service Bus, Event Hubs), configuration (App Configuration, AKS ConfigMaps), automated deployment (Bicep, template specs, deployment stacks, GitHub Actions, Azure Pipelines, GitOps with Flux, azd), migrations (Azure Migrate, 6 Rs), and networking (VPN, ExpressRoute, hub-spoke). AZ-305 Domain 4 (30–35%)."
 permalink: /04-infrastructure-solutions/
 mermaid: true
 ---
@@ -38,6 +38,7 @@ mindmap
         Bicep & Template Specs
         Deployment Stacks
         GitHub Actions & Azure Pipelines
+        GitOps Flux & azd
     Migration Solutions
       Azure Migrate
       6 Rs Strategy
@@ -338,6 +339,22 @@ flowchart TD
 > - **Free and Developer have no SLA**, so production means Standard or Premium. Geo-replication needs Standard or Premium, and **99.99%** needs Premium **with** geo-replication
 > - Access is controlled **per store**. Use separate stores when environments need different permissions, and labels when they don't
 
+### ☸️ Configuration for AKS Workloads
+
+Kubernetes has its own configuration objects. The design question is where the values come from and how they reach the pods.
+
+| Option | What It Holds | How Pods Consume It | Use When |
+|--------|--------------|--------------------|---------|
+| **ConfigMap** | Non-secret settings | Environment variables or mounted files | Settings owned by one app and deployed with its manifests |
+| **Kubernetes Secret** | Sensitive values, stored in etcd. Manifests hold them only **base64-encoded** | Environment variables or mounted files | Small, cluster-local secrets. Turn on **KMS etcd encryption** with a Key Vault key to encrypt them at rest with your own key |
+| **App Configuration Kubernetes Provider** (AKS extension) | Builds ConfigMaps and Secrets from App Configuration key-values, feature flags and **Key Vault references** | The generated ConfigMaps and Secrets, with no code change | Configuration shared across apps or clusters, with dynamic refresh and central feature flags. This is **Microsoft's recommended option** |
+| **Key Vault provider for Secrets Store CSI Driver** | Secrets, keys and certificates read straight from Key Vault | Mounted volume, optionally synced to a Secret | Secrets only, with no App Configuration involved |
+
+> **Exam Caveats ⚠️:**
+> - **A Kubernetes Secret isn't encrypted just because it's a Secret.** Its manifest holds base64, which anyone can decode. Never commit secret manifests to Git. Source the values from Key Vault through the CSI driver or the App Configuration provider instead
+> - Apps that read configuration from **environment variables need a pod restart** (a rolling update) to see changes. Apps that read **mounted files** can reload on the fly
+> - The App Configuration provider can also re-read rotated secrets from Key Vault on a schedule, but only for **versionless** Key Vault references
+
 ---
 
 ### 📜 Automated Deployment — Bicep, ARM & Terraform
@@ -392,6 +409,39 @@ flowchart TD
 > - Give the deployment identity the **least-privileged role at the narrowest scope**, for example *Website Contributor* on one app rather than Contributor on the subscription
 > - For zero-downtime app releases, deploy to a **staging slot** and **swap**. See [App Service deployment slots](#azure-app-service--deployment-slots)
 > - Both tools run the same Bicep or Terraform. Exam answers usually turn on **where the code and the team already are**
+
+### 🧭 Automated Deployment — GitOps (Flux) & Azure Developer CLI
+
+**Push vs pull deployment for Kubernetes:**
+
+```mermaid
+flowchart LR
+    subgraph PUSH["⬆️ Push — CI/CD pipeline"]
+        direction LR
+        P1["👨‍💻 Commit"] --> P2["🔨 Pipeline runs\nkubectl / helm"] --> P3["☸️ AKS\nPipeline holds\ncluster credentials"]
+    end
+    subgraph PULL["⬇️ Pull — GitOps with Flux v2"]
+        direction LR
+        G1["👨‍💻 Commit manifests,\nHelm or Kustomize"] --> G2["📂 Git repo\n= desired state"]
+        G3["🔄 Flux in the cluster\nreconciles continuously"] -->|pulls| G2
+        G3 --> G4["☸️ AKS or Arc-enabled\nKubernetes"]
+    end
+```
+
+| Dimension | CI/CD Push (GitHub Actions, Azure Pipelines) | GitOps Pull (Flux v2) | Azure Developer CLI (`azd`) |
+|-----------|---------------------------------------------|----------------------|-----------------------------|
+| Targets | Any Azure service | AKS and **Azure Arc-enabled Kubernetes** | App + infrastructure described by a template (App Service, Container Apps, Functions, AKS…) |
+| How it deploys | The pipeline runs commands against Azure or the cluster | The `microsoft.flux` cluster extension pulls from Git, a Helm repo or Blob storage and applies the changes | `azd up` provisions (Bicep or Terraform), packages and deploys in one command |
+| Credentials | The pipeline needs access to the target | **The CI system never touches the cluster**: Flux pulls from the repo | Your own sign-in. `azd pipeline config` sets up a GitHub Actions or Azure Pipelines pipeline |
+| Drift | Fixed only when the pipeline runs again | **Continuously reconciled** back to the state in Git | Fixed by re-running `azd up` or `azd provision` |
+| At scale | One pipeline per target | Hundreds of clusters. Roll out Flux configurations with **Azure Policy** | One environment per `azd env`. `azd down` removes it |
+| Best fit | General app and infrastructure delivery | Fleets of Kubernetes clusters, including on-premises and edge clusters through Arc | Getting a complete reference app running fast, plus repeatable dev/test environments |
+
+> **Exam Caveats ⚠️:**
+> - **GitOps is pull-based.** The cluster fetches its desired state, so build agents need no cluster credentials and no network path to the API server. That suits private clusters and Arc-enabled clusters on-premises
+> - **Flux reverts drift.** A manual `kubectl` change is overwritten by what's in Git, so change the repo, not the cluster
+> - Flux on AKS costs nothing extra. Microsoft also offers an **Argo CD** extension as an alternative GitOps operator
+> - An `azd` template bundles Bicep or Terraform, the app code and an `azure.yaml` file that maps the app's services to Azure resources. It wraps your existing IaC rather than replacing it
 
 ---
 
@@ -592,6 +642,9 @@ graph TD
 | Deploy a landing-zone baseline and stop anyone deleting it | **Deployment stack** with `denyDelete` deny settings |
 | Replace Azure Blueprints before it retires | **Deployment stacks** + template specs |
 | GitHub workflow must deploy to Azure with no stored secret | **OIDC** federated credential + `azure/login` |
+| AKS pods need shared settings and Key Vault secrets as ConfigMaps/Secrets, no code change | **App Configuration Kubernetes Provider** (AKS extension) |
+| Keep 200 AKS and on-premises Arc-enabled clusters in sync with Git, no cluster credentials in CI | **GitOps with Flux v2**, rolled out with Azure Policy |
+| Developers need the full app and its infrastructure running from a template in one command | **Azure Developer CLI** (`azd up`) |
 | Lift-and-shift 500 VMware VMs to Azure | **Azure Migrate (Server Migration)** |
 | Migrate 20 TB on-prem SQL Server, minimal downtime | **Azure DMS (online migration)** to SQL MI |
 | Transfer 200 TB of files to Azure, internet too slow | **Azure Data Box** (offline transfer) |

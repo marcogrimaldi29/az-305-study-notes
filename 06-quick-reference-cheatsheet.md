@@ -60,6 +60,8 @@ pie title AZ-305 Domain Weight Distribution
 | Key Vault certificate / secret near-expiry event | **30 days** before expiry |
 | App Service Key Vault reference refresh | **Every 24 hours** (immediately on restart) |
 | App Configuration request quota (Standard) | **30,000 / hour** |
+| Azure Files SMB port | **TCP 445** |
+| Azure Files identity sources per storage account | **1** |
 | Key Vault API versions older than 2026-02-01 retire | **February 27, 2027** |
 | Azure Blueprints retirement | **January 31, 2027** |
 | Azure Dedicated HSM support ends | **July 31, 2028** |
@@ -206,6 +208,7 @@ graph LR
 | App Service setting pulls a secret and picks up rotations | **Key Vault reference** (versionless) |
 | Settings shared by many apps, changeable at runtime | **Azure App Configuration** |
 | Turn a feature on or off without redeploying | **App Configuration feature flag** |
+| AKS pods consume central config and Key Vault secrets as ConfigMaps/Secrets | **App Configuration Kubernetes Provider** |
 
 ### On-Premises Access Decision
 
@@ -214,6 +217,8 @@ graph LR
 | Remote users reach an on-premises **web app** without a VPN | **Microsoft Entra application proxy** (P1/P2) |
 | Replace the VPN for **any TCP/UDP** app (RDP, SMB, SSH) | **Microsoft Entra Private Access** |
 | Admins sign in to on-premises servers with Entra ID + Azure RBAC | **Azure Arc-enabled servers** + VM Administrator/User Login roles |
+| Domain-joined users reach an Azure file share with their AD DS accounts | **Azure Files + AD DS authentication** |
+| Entra-joined or cloud-only users reach an Azure file share, no DC line of sight | **Azure Files + Microsoft Entra Kerberos** |
 
 ### Deployment Automation Decision
 
@@ -225,6 +230,8 @@ graph LR
 | Manage deployed resources as a unit and block deletion | **Deployment stack** with deny settings |
 | Replacement for Azure Blueprints | **Deployment stacks** + template specs |
 | Pipeline authenticates to Azure without a stored secret | **OIDC / workload identity federation** |
+| Many AKS / Arc-enabled clusters follow Git, no cluster credentials in CI | **GitOps with Flux v2** |
+| Provision and deploy a full app from a template in one command | **Azure Developer CLI** (`azd up`) |
 
 ---
 
@@ -328,6 +335,10 @@ mindmap
 | Secrets can live in App Configuration | Store a **Key Vault reference** there, and keep the secret in Key Vault |
 | Template specs protect what they deploy | Template specs only **store** templates. **Deployment stacks** add lifecycle and deny settings |
 | Use Azure Blueprints for new governance baselines | Blueprints **retires January 31, 2027**. Use deployment stacks |
+| A storage account can use AD DS and Entra Kerberos together | Azure Files allows **one identity source per storage account** |
+| A share-level RBAC role is enough to open files | Users also need **Windows ACLs**, and the most restrictive permission wins |
+| Kubernetes Secrets are encrypted | Manifests hold **base64** only. Source the values from Key Vault, and turn on KMS etcd encryption |
+| GitOps needs cluster credentials in the CI pipeline | Flux **pulls** from Git, so CI never touches the cluster |
 
 ---
 
@@ -350,6 +361,7 @@ mindmap
 - [ ] Soft delete vs purge protection, plus key, certificate and secret rotation
 - [ ] Key Vault references + managed identity for App Service and Functions
 - [ ] On-premises access — application proxy vs Entra Private Access vs Azure Arc
+- [ ] Azure Files SMB identity sources (AD DS vs Entra Domain Services vs Entra Kerberos), share-level roles vs Windows ACLs
 
 ### Domain 2 — Data Storage (20–25%)
 - [ ] Azure SQL DB vs SQL Managed Instance vs SQL on VM decision tree
@@ -394,6 +406,8 @@ mindmap
 - [ ] App Configuration vs app settings vs Key Vault — feature flags, snapshots, tiers
 - [ ] Template specs vs deployment stacks (Azure Blueprints is retiring)
 - [ ] GitHub Actions vs Azure Pipelines — OIDC / workload identity federation, environments
+- [ ] AKS configuration — ConfigMaps / Secrets vs App Configuration provider vs Secrets Store CSI Driver
+- [ ] GitOps (Flux v2) pull vs pipeline push, and when the Azure Developer CLI (`azd`) fits
 
 ### Domain cross-cutting
 - [ ] Well-Architected Framework — all 5 pillars and key patterns per pillar

@@ -2,7 +2,7 @@
 layout: default
 title: "01 — Identity, Governance & Monitoring"
 nav_order: 3
-description: "Design identity, governance and monitoring solutions: Entra ID, Hybrid Identity, MFA, Conditional Access, Identity Protection, RBAC, Managed Identities, Key Vault, Managed HSM, application proxy, Private Access, Azure Arc, PIM, Access Reviews, Entitlement Management, Lifecycle Workflows, Azure Policy, Management Groups, Azure Monitor, Sentinel. AZ-305 Domain 1 (25–30%)."
+description: "Design identity, governance and monitoring solutions: Entra ID, Hybrid Identity, MFA, Conditional Access, Identity Protection, RBAC, Managed Identities, Key Vault, Managed HSM, application proxy, Private Access, Azure Arc, Azure Files identity-based access, PIM, Access Reviews, Entitlement Management, Lifecycle Workflows, Azure Policy, Management Groups, Azure Monitor, Sentinel. AZ-305 Domain 1 (25–30%)."
 permalink: /01-identity-governance-monitoring/
 mermaid: true
 ---
@@ -36,6 +36,7 @@ mindmap
         Application Proxy
         Private Access
         Azure Arc
+        Azure Files SMB
     1.3 Identity Governance
       PIM – Just-in-Time
         Eligible vs Active
@@ -412,6 +413,40 @@ flowchart TD
 > - Microsoft recommends starting with **Quick Access** to replace the VPN, then moving to **per-app access** for segmentation
 > - **Owner or Contributor on an Arc-enabled server doesn't let you sign in to it.** You need Virtual Machine Administrator Login or Virtual Machine User Login
 > - Entra ID sign-in to Arc-enabled **Windows** servers needs Windows Server 2025 (or Windows 11 24H2) and **Entra-joins** the machine, so it's not for servers joined to on-premises AD DS. **Linux** servers use SSH with the `AADSSHLoginForLinux` extension
+
+### 📁 Hybrid Identities & Azure Files (SMB)
+
+Exam questions also test the same skill from the other side. On-premises users, with their AD DS identities, need to reach an Azure file share that has replaced an on-premises file server. Azure Files authenticates SMB access with Kerberos, from **one** identity source per storage account.
+
+```mermaid
+flowchart TD
+    START([Who mounts the Azure file share?]) --> Q1{Clients can reach\non-premises AD DS\ndomain controllers?}
+    Q1 -->|Yes| ADDS["🏢 AD DS authentication\nDomain-join the storage account\nSynced hybrid identities"]
+    Q1 -->|No| Q2{Linux clients, or apps\nthat need a managed\nAD domain in Azure?}
+    Q2 -->|Yes| AADDS["🏛️ Microsoft Entra Domain Services\nManaged domain in Azure\nNo DCs to run yourself"]
+    Q2 -->|No| EK["☁️ Microsoft Entra Kerberos\nHybrid or cloud-only identities\nNo domain controller line of sight"]
+```
+
+| Dimension | AD DS | Microsoft Entra Domain Services | Microsoft Entra Kerberos |
+|-----------|-------|-------------------------------|-------------------------|
+| Identities | AD DS users synced to Entra ID (hybrid) | Cloud-only or hybrid | Hybrid or cloud-only |
+| Clients | Windows and Linux, domain-joined | Windows and Linux, joined to the managed domain | Entra-joined or hybrid-joined Windows (macOS in preview). **No Linux** |
+| Domain controller connectivity | ✅ Clients must reach the DCs | ✅ Clients must reach the managed domain | ❌ Not needed, because Entra ID issues the Kerberos tickets |
+| Best fit | Existing AD DS estate replacing a file server | Lift-and-shift apps that need AD in Azure without running DCs | Cloud-first clients, Azure Virtual Desktop with FSLogix, remote users |
+
+**Two authorisation layers, and the most restrictive one wins:**
+
+| Layer | Controlled By | Notes |
+|-------|--------------|-------|
+| **Share level** | Azure RBAC: Storage File Data SMB Share **Reader** / **Contributor** / **Elevated Contributor** (plus **SMB Admin** for admins), or a **default share-level permission** for all authenticated identities | The default is **None**, so nobody has access until you assign something |
+| **Directory & file level** | Windows ACLs (NTFS permissions) | Set with File Explorer or `icacls`. They're preserved when you copy data with robocopy or Azure File Sync |
+
+> **Exam Caveats ⚠️:**
+> - **One identity source per storage account.** You can't combine AD DS with Entra Kerberos on the same account
+> - **A share-level role isn't enough on its own.** Users also need Windows ACLs on the files and folders, and they get the most restrictive of the two
+> - Share-level RBAC roles are assigned to **Entra ID identities**, so AD DS users must be **synced** with Entra Connect. The exception is the **default share-level permission**, which needs no sync and is the only option for computer accounts and gMSAs
+> - With Entra Kerberos, **exclude the storage account's app from Conditional Access MFA policies**
+> - SMB uses **TCP port 445**, which many ISPs and corporate firewalls block. On-premises clients usually reach the share over VPN or ExpressRoute through a **Private Endpoint**, or through **Azure File Sync** caching the share on a local Windows Server
 
 ---
 
@@ -849,6 +884,9 @@ flowchart TD
 | Remote users need an on-premises web app with Kerberos SSO, no VPN | **Microsoft Entra application proxy** + Kerberos constrained delegation |
 | Replace the VPN for RDP and SMB access to on-premises servers | **Microsoft Entra Private Access** (Quick Access first, then per-app access) |
 | Admins sign in to on-premises servers with Entra ID accounts, controlled by Azure RBAC | **Azure Arc-enabled servers** + Virtual Machine Administrator/User Login roles |
+| Domain-joined users on-premises keep their NTFS permissions on a migrated Azure file share | **Azure Files + AD DS authentication** + share-level RBAC + Windows ACLs |
+| Entra-joined AVD session hosts need FSLogix profiles on Azure Files, with no DC line of sight | **Azure Files + Microsoft Entra Kerberos** |
+| Give every authenticated user share access without syncing identities to Entra ID | **Default share-level permission** (then Windows ACLs for detail) |
 
 ---
 
