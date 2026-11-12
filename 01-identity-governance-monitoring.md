@@ -295,7 +295,7 @@ flowchart TD
 |---------|-------------------|-------------------|-------------|-----------------|
 | Tenancy | Multitenant | Multitenant | **Single-tenant** | **Single-tenant** |
 | Stores | Secrets, certificates, software keys | Standard + **HSM-backed keys** | **HSM keys only** — no secrets or certificates | Keys used through HSM APIs — not a secret store |
-| FIPS validation | FIPS 140 Level 1 | **FIPS 140-3 Level 3** (HSM keys) | **FIPS 140-3 Level 3** | **FIPS 140-3 Level 3** |
+| FIPS validation | FIPS 140-2 Level 1 | **FIPS 140-3 Level 3** (HSM keys) | **FIPS 140-3 Level 3** | **FIPS 140-3 Level 3** |
 | Root of trust | Microsoft | Microsoft | **Customer** (security domain) | **Customer** |
 | Data-plane access control | Azure RBAC or access policies | Azure RBAC or access policies | **Managed HSM local RBAC** | HSM users you administer |
 | Customer-managed keys for Azure PaaS | ✅ | ✅ | ✅ | ❌ (IaaS only) |
