@@ -27,20 +27,20 @@
 
 ## 📊 Official Domain Breakdown
 
-> ⚠️ **Official ranges** from the Microsoft study guide (updated October 2024)
+> ⚠️ **Official ranges** from the Microsoft study guide (skills measured as of April 17, 2026)
 
 ```mermaid
 pie title Exam Domain Weights of the AZ-305 (official ranges)
     "Design Infrastructure Solutions (30–35%)" : 32
-    "Design Identity, Governance & Monitoring (25–30%)" : 25
-    "Design Data Storage Solutions (25–30%)" : 25
+    "Design Identity, Governance & Monitoring (25–30%)" : 28
+    "Design Data Storage Solutions (20–25%)" : 22
     "Design Business Continuity Solutions (15–20%)" : 18
 ```
 
 | # | Domain | Official Weight | Key Services |
 |---|--------|----------------|-------------|
 | 1 | Design Identity, Governance & Monitoring | **25–30%** | Entra ID, RBAC, PIM, Azure Policy, Monitor, Sentinel |
-| 2 | Design Data Storage Solutions | **25–30%** | Azure SQL, Cosmos DB, Blob, ADLS Gen2, Synapse |
+| 2 | Design Data Storage Solutions | **20–25%** | Azure SQL, Cosmos DB, Blob, ADLS Gen2, Synapse |
 | 3 | Design Business Continuity Solutions | **15–20%** | ASR, Azure Backup, Availability Zones, Geo-replication |
 | 4 | Design Infrastructure Solutions | **30–35%** | VMs, AKS, App Service, VNets, VPN, ExpressRoute |
 
@@ -71,7 +71,7 @@ az-305-study-notes/
 ├── README.md                             ← 📍 You are here
 ├── 00-azure-prerequisites.md             ← Core Azure architecture fundamentals
 ├── 01-identity-governance-monitoring.md  ← Domain 1 (25–30%)
-├── 02-data-storage-solutions.md          ← Domain 2 (25–30%)
+├── 02-data-storage-solutions.md          ← Domain 2 (20–25%)
 ├── 03-business-continuity.md             ← Domain 3 (15–20%)
 ├── 04-infrastructure-solutions.md        ← Domain 4 (30–35%)
 ├── 05-well-architected-framework.md      ← WAF pillars + Cloud Adoption Framework
