@@ -27,8 +27,8 @@ mermaid: true
 ```mermaid
 pie title AZ-305 Domain Weight Distribution
     " Infrastructure (30–35%)" : 32
-    " Identity & Governance (25–30%)" : 25
-    " Data Storage (25–30%)" : 25
+    " Identity & Governance (25–30%)" : 28
+    " Data Storage (20–25%)" : 22
     " Business Continuity (15–20%)" : 18
 ```
 
@@ -289,7 +289,7 @@ mindmap
 - [ ] Application Insights — workspace-based vs classic, auto vs SDK instrumentation
 - [ ] Microsoft Sentinel — SIEM vs Azure Monitor, Log Analytics dependency
 
-### Domain 2 — Data Storage (25–30%)
+### Domain 2 — Data Storage (20–25%)
 - [ ] Azure SQL DB vs SQL Managed Instance vs SQL on VM decision tree
 - [ ] SQL DB tiers: General Purpose vs Business Critical vs Hyperscale
 - [ ] Active Geo-Replication vs Auto-Failover Groups

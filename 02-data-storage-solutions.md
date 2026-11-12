@@ -2,13 +2,13 @@
 layout: default
 title: "02 — Data Storage Solutions"
 nav_order: 4
-description: "Design data storage solutions: Azure SQL, SQL Managed Instance, Cosmos DB APIs and consistency levels, Blob Storage tiers, ADLS Gen2, Synapse Analytics, ADF. AZ-305 Domain 2 (25–30%)."
+description: "Design data storage solutions: Azure SQL, SQL Managed Instance, Cosmos DB APIs and consistency levels, Blob Storage tiers, ADLS Gen2, Synapse Analytics, ADF. AZ-305 Domain 2 (20–25%)."
 permalink: /02-data-storage-solutions/
 mermaid: true
 ---
 
 # 02 — Design Data Storage Solutions
-> **Official Exam Weight: 25–30%**
+> **Official Exam Weight: 20–25%**
 > 📁 [← Back to Home](/az-305-study-notes/)
 
 ---

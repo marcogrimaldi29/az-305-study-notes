@@ -32,7 +32,7 @@ Every report fits one of the five types in the issue template:
 ## 🔎 Before You Open an Issue
 
 - **Search the existing issues**, [open and closed](https://github.com/marcogrimaldi29/az-305-study-notes/issues?q=is%3Aissue). If yours is already there, add a 👍 reaction or a comment with anything new rather than opening a duplicate.
-- **Check the date.** The notes are written against the study guide as it stood in **October 2024**, which is where the domain weights in the README come from. If the "Skills measured as of" heading in the [study guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305) shows a newer date, say so in the issue. It tells me which revision to compare against.
+- **Check the date.** The notes are written against the study guide as it stood on **April 17, 2026**, which is where the domain weights in the README come from. If the "Skills measured as of" heading in the [study guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305) shows a newer date, say so in the issue. It tells me which revision to compare against.
 - **Check the current docs.** A quick look at the [Azure documentation](https://learn.microsoft.com/en-us/azure/) or the [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/) usually confirms whether something has changed, and gives you the link the issue asks for.
 - **One problem per issue.** Separate issues are easier to track, fix and close. Several typos on the same page can go in one issue.
 - **For a site bug, hard-refresh first** (Ctrl+F5, or Cmd+Shift+R on a Mac) in case your browser is showing an older copy of the page.

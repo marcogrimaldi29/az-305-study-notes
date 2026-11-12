@@ -43,15 +43,15 @@ mermaid: true
 %%{init: {"theme":"dark","themeVariables":{"primaryTextColor":"#ffffff","secondaryTextColor":"#e8eaed","pie1":"#1a73e8","pie2":"#1ab8e8","pie3":"#34a853","pie4":"#eadb35"}}}%%
 pie title AZ-305 — Official Exam Domain Weights
     " Design Infrastructure Solutions (30–35%)" : 32
-    " Design Identity, Governance & Monitoring (25–30%)" : 25
-    " Design Data Storage Solutions (25–30%)" : 25
+    " Design Identity, Governance & Monitoring (25–30%)" : 28
+    " Design Data Storage Solutions (20–25%)" : 22
     " Design Business Continuity Solutions (15–20%)" : 18
 ```
 
 | # | Domain | Weight | Key Focus Areas |
 |---|--------|--------|----------------|
 | 1 | [Design Identity, Governance & Monitoring](./01-identity-governance-monitoring/) | **25–30%** | Entra ID, RBAC, PIM, Azure Policy, Monitor, Sentinel |
-| 2 | [Design Data Storage Solutions](./02-data-storage-solutions/) | **25–30%** | Azure SQL, Cosmos DB, Blob, ADLS Gen2, Synapse |
+| 2 | [Design Data Storage Solutions](./02-data-storage-solutions/) | **20–25%** | Azure SQL, Cosmos DB, Blob, ADLS Gen2, Synapse |
 | 3 | [Design Business Continuity Solutions](./03-business-continuity/) | **15–20%** | HA, DR, SLAs, Backup, ASR, geo-replication |
 | 4 | [Design Infrastructure Solutions](./04-infrastructure-solutions/) | **30–35%** | Compute, Networking, Migrations, App Architecture |
 
@@ -75,7 +75,7 @@ pie title AZ-305 — Official Exam Domain Weights
 
 <div style="border:1px solid #1ab8e8; border-radius:8px; padding:1rem; background:#2d2f31;">
 <h3 style="margin-top:0;">🗄️ Domain 2 — Data Storage</h3>
-<p><strong>25–30%</strong> of exam. SQL family, Cosmos DB consistency, Blob tiers, ADLS Gen2, Synapse, ADF.</p>
+<p><strong>20–25%</strong> of exam. SQL family, Cosmos DB consistency, Blob tiers, ADLS Gen2, Synapse, ADF.</p>
 <a href="./02-data-storage-solutions/" class="btn btn-outline fs-5">Read →</a>
 </div>
 
@@ -120,7 +120,7 @@ These notes are structured to follow the **official AZ-305 study guide** domain 
 flowchart LR
     PRE["📘 Prerequisites\n(fundamentals)"]
     D1["🔐 Domain 1\nIdentity & Governance\n25–30%"]
-    D2["🗄️ Domain 2\nData Storage\n25–30%"]
+    D2["🗄️ Domain 2\nData Storage\n20–25%"]
     D3["🔄 Domain 3\nBusiness Continuity\n15–20%"]
     D4["🏗️ Domain 4\nInfrastructure\n30–35%"]
     WAF["🏛️ WAF & CAF\n(cross-domain)"]
