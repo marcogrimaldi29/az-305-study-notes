@@ -55,7 +55,14 @@ pie title AZ-305 Domain Weight Distribution
 | Azure Blob max block blob size | **190.7 TB** |
 | Azure Functions Consumption timeout | **5 min (max 10 min)** |
 | Soft delete retention | **14 days** |
-| Key Vault soft delete retention | **90 days** |
+| Key Vault soft delete retention | **7–90 days** (default 90, set at creation) |
+| Key Vault key rotation minimum interval | **7 days** |
+| Key Vault certificate / secret near-expiry event | **30 days** before expiry |
+| App Service Key Vault reference refresh | **Every 24 hours** (immediately on restart) |
+| App Configuration request quota (Standard) | **30,000 / hour** |
+| Key Vault API versions older than 2026-02-01 retire | **February 27, 2027** |
+| Azure Blueprints retirement | **January 31, 2027** |
+| Azure Dedicated HSM support ends | **July 31, 2028** |
 
 ### SLA Uptime Reference Table
 
@@ -115,6 +122,9 @@ graph LR
 | **Azure Managed Redis** | HA disabled | **No SLA** | — |
 | **Azure Managed Redis** | HA enabled | **99.99%** | ~4.4 minutes |
 | **Cosmos DB** | Single region | **99.99%** | ~4.4 minutes |
+| **App Configuration** | Standard / Premium | **99.9%** | ~43 minutes |
+| **App Configuration** | Premium + geo-replication | **99.99%** | ~4.4 minutes |
+| **App Configuration** | Free / Developer | **No SLA** | — |
 
 ---
 
@@ -184,6 +194,38 @@ graph LR
 | 99.99% (SQL) | Azure SQL DB (any tier) |
 | 99.999% (DB) | **Cosmos DB multi-region write** |
 
+### Secrets, Keys & Configuration Decision
+
+| Requirement | Service |
+|------------|---------|
+| Secrets, certificates and software-protected keys | **Key Vault Standard** |
+| HSM-protected keys, multitenant is acceptable | **Key Vault Premium** |
+| Single-tenant HSM, customer-owned root of trust, PaaS CMKs | **Key Vault Managed HSM** |
+| IaaS app needs PKCS#11 or moves off an on-premises HSM | **Azure Cloud HSM** |
+| App reads secrets with no credentials in code | **Managed Identity** + **Key Vault Secrets User** role |
+| App Service setting pulls a secret and picks up rotations | **Key Vault reference** (versionless) |
+| Settings shared by many apps, changeable at runtime | **Azure App Configuration** |
+| Turn a feature on or off without redeploying | **App Configuration feature flag** |
+
+### On-Premises Access Decision
+
+| Requirement | Service |
+|------------|---------|
+| Remote users reach an on-premises **web app** without a VPN | **Microsoft Entra application proxy** (P1/P2) |
+| Replace the VPN for **any TCP/UDP** app (RDP, SMB, SSH) | **Microsoft Entra Private Access** |
+| Admins sign in to on-premises servers with Entra ID + Azure RBAC | **Azure Arc-enabled servers** + VM Administrator/User Login roles |
+
+### Deployment Automation Decision
+
+| Requirement | Service |
+|------------|---------|
+| Azure-only IaC, simplest syntax, no state file | **Bicep** |
+| Multi-cloud IaC | **Terraform** (state in a remote backend) |
+| Share approved, versioned templates across the organisation | **Template specs** |
+| Manage deployed resources as a unit and block deletion | **Deployment stack** with deny settings |
+| Replacement for Azure Blueprints | **Deployment stacks** + template specs |
+| Pipeline authenticates to Azure without a stored secret | **OIDC / workload identity federation** |
+
 ---
 
 ## 🪪 Entra ID Licence Requirements
@@ -202,6 +244,7 @@ graph LR
 | Named Locations in CA | ✅ | ✅ |
 | Device-based Conditional Access | ✅ | ✅ |
 | **MFA Registration Policy** | ❌ | ✅ |
+| Microsoft Entra Private Access | ❌ | ❌ *(separate licence, or Microsoft Entra Suite)* |
 
 ---
 
@@ -247,6 +290,10 @@ mindmap
       SQL DB has NO SQL Agent\n(use Elastic Jobs instead)
       Auto-Failover Group\nfor same-endpoint failover
       Hybrid Benefit only\nworks with vCore model
+    Security & DevOps
+      Managed HSM has NO\nsecrets or certificates
+      Purge protection\nCANNOT be disabled
+      Template specs DON'T\nmanage deployed resources
 ```
 
 **Expanded trap list:**
@@ -271,6 +318,16 @@ mindmap
 | Basic Load Balancer = production ready | **Basic LB is deprecated/retiring** — always use Standard LB |
 | Hyperscale SQL has highest SLA | Hyperscale SLA is **99.9%** — lower than General Purpose/Business Critical at 99.99% |
 | Cosmos DB Strong consistency + multi-region write | Strong consistency is **not compatible** with multi-region write |
+| Key Vault access policies are the recommended model | **Azure RBAC** is recommended, and it's the default for new vaults from API version 2026-02-01 |
+| Contributor on a key vault can read its secrets | Under Azure RBAC, control-plane roles grant **no data access**. Assign a data-plane role such as Key Vault Secrets User |
+| Managed HSM can hold secrets and certificates | Managed HSM stores **keys only** |
+| Purge protection can be switched off later | Purge protection is **irreversible** once enabled |
+| Azure Cloud HSM can hold PaaS customer-managed keys | Cloud HSM is **IaaS only**. Use **Managed HSM** for PaaS CMKs |
+| application proxy can publish RDP and SMB | application proxy publishes **web apps only**. Use **Entra Private Access** for any TCP/UDP |
+| Owner on an Arc-enabled server can sign in to it | Sign-in needs **Virtual Machine Administrator Login** or **User Login** |
+| Secrets can live in App Configuration | Store a **Key Vault reference** there, and keep the secret in Key Vault |
+| Template specs protect what they deploy | Template specs only **store** templates. **Deployment stacks** add lifecycle and deny settings |
+| Use Azure Blueprints for new governance baselines | Blueprints **retires January 31, 2027**. Use deployment stacks |
 
 ---
 
@@ -288,6 +345,11 @@ mindmap
 - [ ] Log Analytics Workspace — single vs multiple workspace decisions
 - [ ] Application Insights — workspace-based vs classic, auto vs SDK instrumentation
 - [ ] Microsoft Sentinel — SIEM vs Azure Monitor, Log Analytics dependency
+- [ ] Key Vault Standard vs Premium vs Managed HSM vs Azure Cloud HSM
+- [ ] Key Vault Azure RBAC vs access policies, and the data-plane roles
+- [ ] Soft delete vs purge protection, plus key, certificate and secret rotation
+- [ ] Key Vault references + managed identity for App Service and Functions
+- [ ] On-premises access — application proxy vs Entra Private Access vs Azure Arc
 
 ### Domain 2 — Data Storage (20–25%)
 - [ ] Azure SQL DB vs SQL Managed Instance vs SQL on VM decision tree
@@ -329,6 +391,9 @@ mindmap
 - [ ] Private Endpoints vs Service Endpoints — on-prem access requirement
 - [ ] Azure Bastion — RDP/SSH without public IPs
 - [ ] DDoS Protection tiers — Network Protection Standard for advanced analytics
+- [ ] App Configuration vs app settings vs Key Vault — feature flags, snapshots, tiers
+- [ ] Template specs vs deployment stacks (Azure Blueprints is retiring)
+- [ ] GitHub Actions vs Azure Pipelines — OIDC / workload identity federation, environments
 
 ### Domain cross-cutting
 - [ ] Well-Architected Framework — all 5 pillars and key patterns per pillar

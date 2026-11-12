@@ -2,7 +2,7 @@
 layout: default
 title: "04 — Infrastructure Solutions"
 nav_order: 6
-description: "Design infrastructure solutions: compute (VMs, AKS, Functions, App Service), messaging (Service Bus, Event Hubs), migrations (Azure Migrate, 6 Rs), and networking (VPN, ExpressRoute, hub-spoke). AZ-305 Domain 4 (30–35%)."
+description: "Design infrastructure solutions: compute (VMs, AKS, Functions, App Service), messaging (Service Bus, Event Hubs), configuration (App Configuration), automated deployment (Bicep, template specs, deployment stacks, GitHub Actions, Azure Pipelines), migrations (Azure Migrate, 6 Rs), and networking (VPN, ExpressRoute, hub-spoke). AZ-305 Domain 4 (30–35%)."
 permalink: /04-infrastructure-solutions/
 mermaid: true
 ---
@@ -33,6 +33,11 @@ mindmap
       Azure Managed Redis
       Azure CDN & Front Door
       Logic Apps
+      Azure App Configuration
+      IaC & CI/CD
+        Bicep & Template Specs
+        Deployment Stacks
+        GitHub Actions & Azure Pipelines
     Migration Solutions
       Azure Migrate
       6 Rs Strategy
@@ -278,6 +283,118 @@ Azure Managed Redis is built on **Redis Enterprise** software (not the community
 
 ---
 
+### 🧩 Azure App Configuration — Configuration Management
+
+> 📋 **Study guide skill:** *Recommend an application configuration management solution.*
+
+**Where does a setting belong?**
+
+```mermaid
+flowchart TD
+    START([New setting to store]) --> Q1{Is it a secret?\nPassword, key,\nconnection string}
+    Q1 -->|Yes| KV["🔑 Azure Key Vault\nReferenced from App Configuration\nor an App Service app setting"]
+    Q1 -->|No| Q2{Feature on/off switch\nor gradual rollout?}
+    Q2 -->|Yes| FF["🚩 App Configuration\nfeature flag"]
+    Q2 -->|No| Q3{Shared by several apps,\nor must change without\na redeploy or restart?}
+    Q3 -->|Yes| AC["🧩 Azure App Configuration\nkey-value + labels"]
+    Q3 -->|No| AS["⚙️ App Service app setting\nPer app, optionally\nslot-specific"]
+```
+
+**App settings vs App Configuration vs Key Vault:**
+
+| Dimension | App Service App Settings | Azure App Configuration | Azure Key Vault |
+|-----------|-------------------------|------------------------|-----------------|
+| Holds | Per-app environment variables | Shared key-values and **feature flags** | **Secrets**, keys, certificates |
+| Scope | One app (optionally sticky to a deployment slot) | Many apps on any host: App Service, Functions, AKS, Container Apps, VMs | Any app or Azure service |
+| Change without restart | ❌ A settings change restarts the app | ✅ Providers refresh dynamically | Key Vault references refresh within 24 hours |
+| Environments | Per app or per slot | **Labels**, or one store per environment | One vault per app per environment |
+| History & rollback | ❌ | **Revision history** + immutable **snapshots** | Object versions |
+| Right place for secrets? | Encrypted at rest, but no secret management | ❌ Store a **Key Vault reference** instead | ✅ |
+
+**Key features:**
+
+| Feature | What It Does | Why It Matters |
+|---------|-------------|---------------|
+| **Feature flags** | Switch features on or off at runtime, or target users, groups or a percentage of traffic | Separates **release** from **deployment**: switching a feature off needs no redeploy |
+| **Key Vault references** | A key-value that stores the secret's **URI**, not its value | The app resolves the secret from Key Vault with its **own identity**. App Configuration never reads the secret |
+| **Snapshots** | An immutable, named, point-in-time set of key-values | Deploy against a known-good configuration, and roll back by pointing at the previous snapshot |
+| **Labels** | Variants of the same key (`dev`, `prod`, `v2`) | One store serves several environments when they can share permissions |
+| **Geo-replication** | Read-write replicas in other regions, with provider failover between them | Regional resilience, on Standard and Premium only |
+| **App Configuration references** | `@Microsoft.AppConfiguration(Endpoint=…; Key=…)` in an App Service or Functions app setting | Existing apps read central configuration with no code change |
+
+**Tiers:**
+
+| Tier | Purpose | SLA | Request Quota | Storage | Geo-replication | Private Link | CMK |
+|------|---------|-----|--------------|---------|----------------|-------------|-----|
+| **Free** | Evaluation | None | 1,000 / day | 10 MB | ❌ | ❌ | ❌ |
+| **Developer** | Low-volume dev/test | None | 6,000 / hour | 500 MB | ❌ | ✅ | ❌ |
+| **Standard** | Production | **99.9%** (**99.95%** with geo-replication) | 30,000 / hour | 1 GB | ✅ | ✅ | ✅ |
+| **Premium** | High-volume / enterprise | **99.9%** (**99.99%** with geo-replication) | No quota | 4 GB | ✅ (one replica included) | ✅ | ✅ |
+
+> **Exam Caveats ⚠️:**
+> - **Don't put secrets in App Configuration.** Store a Key Vault reference instead. The app then needs access to **both** stores: an App Configuration data role (for example, *App Configuration Data Reader*) and a Key Vault role (*Key Vault Secrets User*)
+> - App Configuration Key Vault references aren't the same as [App Service Key Vault references](/az-305-study-notes/01-identity-governance-monitoring/#-key-vault--managed-identities--key-vault-references). For a network-restricted vault, or when the app must follow the latest secret version on its own, Microsoft recommends the App Service approach
+> - **Feature flags** change behaviour inside one deployment, while [deployment slots](#azure-app-service--deployment-slots) swap whole versions of the app. A scenario can call for either, or both
+> - **Free and Developer have no SLA**, so production means Standard or Premium. Geo-replication needs Standard or Premium, and **99.99%** needs Premium **with** geo-replication
+> - Access is controlled **per store**. Use separate stores when environments need different permissions, and labels when they don't
+
+---
+
+### 📜 Automated Deployment — Bicep, ARM & Terraform
+
+> 📋 **Study guide skill:** *Recommend an automated deployment solution for applications.* The IaC tool comparison and the CI/CD pipeline stages are in [05 — Infrastructure as Code (IaC) Comparison](/az-305-study-notes/05-well-architected-framework/#infrastructure-as-code-iac-comparison) and [05 — CI/CD Pipeline Patterns](/az-305-study-notes/05-well-architected-framework/#cicd-pipeline-patterns). This section adds the design decisions built on them.
+
+```mermaid
+flowchart TD
+    START([Automate an Azure deployment]) --> Q1{Other clouds too, or\nthe team already\nruns Terraform?}
+    Q1 -->|Yes| TF["🟪 Terraform\nHCL, multi-cloud\nState file in a remote backend"]
+    Q1 -->|"No — Azure only"| BICEP["💪 Bicep (or ARM JSON)\nCompiles to ARM JSON\nNo state file"]
+    BICEP --> Q2{Share approved,\nversioned templates\nacross teams?}
+    Q2 -->|Yes| TS["📚 Template specs\n(or a Bicep module registry)"]
+    Q2 -->|No| Q3
+    TS --> Q3{Manage the deployed\nresources as one unit\nand protect them?}
+    Q3 -->|Yes| STACK["🧱 Deployment stack\nDeny settings + clean-up\nof removed resources"]
+    Q3 -->|No| DEPLOY["🚀 Standard deployment\nfrom a pipeline"]
+```
+
+**Template specs vs Bicep module registry vs deployment stacks:**
+
+| Dimension | Template Spec | Bicep Module Registry | Deployment Stack |
+|-----------|--------------|----------------------|-----------------|
+| Job | **Store and version** an ARM/Bicep template as an Azure resource | **Share Bicep modules** from Azure Container Registry | **Deploy and manage** a set of resources as one unit |
+| Consumed by | Portal, CLI, PowerShell, REST, pipelines, Bicep modules | Other Bicep files only | CLI, PowerShell, REST, pipelines |
+| Access control | Azure RBAC: **Template Spec Reader** can deploy without editing | Registry RBAC (`AcrPull` to consume) | Azure RBAC + **deny settings** on the managed resources |
+| Scope | Stored in a resource group, deploys to any scope | — | Resource group, subscription or management group |
+| Lifecycle | Versions only | Versions (tags) only | Create, update, delete. `actionOnUnmanage` **detaches** or **deletes** resources removed from the template |
+| Replaces from Azure Blueprints | Blueprint **definitions** | — | Blueprint **assignments** and **locks** |
+
+> ⚠️ **Azure Blueprints retires on January 31, 2027.** A phased retirement started on July 31, 2026, and you can no longer create new blueprint definitions or assignments. Microsoft's replacement is **deployment stacks** (deployment, lifecycle and deny-assignment locks) together with **template specs** or Git (storage and versioning).
+
+> **Exam Caveats ⚠️:**
+> - **Bicep and ARM need no state file**, because Azure itself is the source of truth. **Terraform** keeps a state file, so store it in a remote backend such as an Azure Storage account
+> - Run **what-if** (`az deployment group what-if`) to preview the changes before a Bicep or ARM deployment
+> - **Template specs store, deployment stacks manage.** A template spec on its own doesn't track or protect what it deployed, so use the two together
+> - Deployment stack **deny settings** (`denyDelete` or `denyWriteAndDelete`) are deny assignments. They block even Owners, unless those principals are listed in `excludedPrincipals` (up to 5)
+
+### 🔁 Automated Deployment — GitHub Actions vs Azure Pipelines
+
+| Dimension | GitHub Actions | Azure Pipelines |
+|-----------|---------------|----------------|
+| Lives in | GitHub: YAML workflows in `.github/workflows` | Azure DevOps: YAML (or classic) pipelines |
+| Source repos | GitHub | Azure Repos, GitHub, Bitbucket, other Git |
+| Authentication to Azure | `azure/login` with **OpenID Connect**, using a federated credential on an Entra app or user-assigned managed identity | **Azure Resource Manager service connection** with **workload identity federation** |
+| Approval gates | **Environments** with protection rules (required reviewers, branch limits) | **Environments** with approvals and checks |
+| Build agents | GitHub-hosted or self-hosted runners | Microsoft-hosted or self-hosted agents |
+| Best fit | Code already on GitHub, marketplace actions | Organisations already on Azure DevOps (Boards, Repos, Artifacts, Test Plans) |
+
+> **Exam Caveats ⚠️:**
+> - **Prefer OIDC and workload identity federation over client secrets.** No secret is stored in GitHub or Azure DevOps, so nothing can leak and nothing needs rotating
+> - Give the deployment identity the **least-privileged role at the narrowest scope**, for example *Website Contributor* on one app rather than Contributor on the subscription
+> - For zero-downtime app releases, deploy to a **staging slot** and **swap**. See [App Service deployment slots](#azure-app-service--deployment-slots)
+> - Both tools run the same Bicep or Terraform. Exam answers usually turn on **where the code and the team already are**
+
+---
+
 ## 🚀 4.3 Design Migration Solutions
 
 ### Migration Strategy — The 6 Rs (+ Retire)
@@ -466,6 +583,15 @@ graph TD
 | IoT telemetry ingestion at millions of events/sec | **Azure Event Hubs** |
 | Route events from blob upload to trigger a function | **Azure Event Grid** |
 | Expose internal APIs to external partners securely | **API Management Premium** (Internal VNet mode) |
+| Switch a feature off in production instantly, without redeploying | **App Configuration feature flag** |
+| Twenty microservices share settings that change at runtime | **Azure App Configuration** (+ Key Vault references for secrets) |
+| Roll back a bad configuration change to a known-good set | **App Configuration snapshot** |
+| Central app configuration must ride out a regional outage at 99.99% | **App Configuration Premium** + geo-replication |
+| Azure-only IaC with the simplest syntax and no state file | **Bicep** |
+| Teams deploy approved, versioned templates but can't edit them | **Template specs** + Template Spec Reader role |
+| Deploy a landing-zone baseline and stop anyone deleting it | **Deployment stack** with `denyDelete` deny settings |
+| Replace Azure Blueprints before it retires | **Deployment stacks** + template specs |
+| GitHub workflow must deploy to Azure with no stored secret | **OIDC** federated credential + `azure/login` |
 | Lift-and-shift 500 VMware VMs to Azure | **Azure Migrate (Server Migration)** |
 | Migrate 20 TB on-prem SQL Server, minimal downtime | **Azure DMS (online migration)** to SQL MI |
 | Transfer 200 TB of files to Azure, internet too slow | **Azure Data Box** (offline transfer) |

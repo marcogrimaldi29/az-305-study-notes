@@ -69,7 +69,7 @@ pie title AZ-305 — Official Exam Domain Weights
 
 <div style="border:1px solid #1a73e8; border-radius:8px; padding:1rem; background:#2d2f31;">
 <h3 style="margin-top:0;">🔐 Domain 1 — Identity & Governance</h3>
-<p><strong>25–30%</strong> of exam. Entra ID, RBAC, PIM, Conditional Access, Azure Policy, Azure Monitor, Sentinel.</p>
+<p><strong>25–30%</strong> of exam. Entra ID, RBAC, Key Vault, on-premises access, PIM, Conditional Access, Azure Policy, Azure Monitor, Sentinel.</p>
 <a href="./01-identity-governance-monitoring/" class="btn btn-outline fs-5">Read →</a>
 </div>
 
@@ -87,7 +87,7 @@ pie title AZ-305 — Official Exam Domain Weights
 
 <div style="border:1px solid #eadb35; border-radius:8px; padding:1rem; background:#2d2f31;">
 <h3 style="margin-top:0;">🏗️ Domain 4 — Infrastructure</h3>
-<p><strong>30–35%</strong> of exam — heaviest domain. Compute, networking, migrations, messaging, API Management.</p>
+<p><strong>30–35%</strong> of exam — heaviest domain. Compute, networking, migrations, messaging, API Management, App Configuration, IaC & CI/CD.</p>
 <a href="./04-infrastructure-solutions/" class="btn btn-outline fs-5">Read →</a>
 </div>
 
